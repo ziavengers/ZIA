@@ -30,8 +30,6 @@ class Caller
 	List		_list;
 };
 
-
-
 template < typename ReturnType >
 
 Caller< ReturnType, ReturnType(*)(), typename Traits0::Type >
@@ -39,6 +37,18 @@ bind(ReturnType(*f)())
 {
     TypeList0 l;
     return Caller< ReturnType, ReturnType(*)(), TypeList0 >(f, l);
+}
+
+template < typename ReturnType, typename X1, typename Param1 >
+
+Caller< ReturnType, ReturnType(*)(X1), TypeList1< Param1 > >
+bind(ReturnType(*f)(X1), Param1 p1)
+{
+    //typedef typename GetType< Param1 >::Type	P1;
+    //typedef TypeList1< P1 >	ListType;
+    ///ListType l(p1);
+    TypeList1< Param1 >	l(p1);
+    return Caller< ReturnType, ReturnType(*)(X1), TypeList1< Param1 > >(f, l);
 }
 
 #endif		/* !CALLER_HPP_*/

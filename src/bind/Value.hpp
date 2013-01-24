@@ -36,7 +36,6 @@ class GetType
     public:
 	GetType( const T& t) : _t(t) { }
 
-    private:
 	T	_t;
 	typedef Value< T >	Type;
 };

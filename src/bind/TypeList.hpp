@@ -39,5 +39,31 @@ struct TypeList0 : private Storage0
 	}
 };
 
+template < typename T1 >
+
+struct TypeList1 : private Storage1< T1 >
+{
+    typedef Storage1< T1 >	BaseClass;
+
+    TypeList1(T1 t1) : BaseClass(t1)
+    {
+	// useless
+    }
+
+    template < typename T >
+	
+	T&	operator[](Value< T >& n)
+	{
+	    return n.get();
+	}
+
+    template < typename ReturnType, typename Caller, typename List >
+
+	ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
+	{
+	    return caller(l.operator[](BaseClass::_t1));
+	}
+};
+
 
 #endif		/* !TYPELIST_HPP_*/
