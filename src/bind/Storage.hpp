@@ -23,7 +23,7 @@ struct Storage1 : public Storage0
 {
     Storage1(T1& t) : Storage0(), _t1(t) { }
     
-    Value< T1 >	_t1;
+    T1	_t1;
 };
 
 template < typename T1, typename T2 >

@@ -27,7 +27,7 @@ int	main()
 {
     std::string ty("JE SUIS LE PARAMETRE");
     Caller<void, void(*)(), Traits0::Type >	func1 = bind(&toto);
-    Caller< int, int(*)(std::string), TypeList1< std::string > >	func2 = bind(&withParam, ty);
+    Caller< int, int(*)(std::string), Traits1< std::string >::Type >	func2 = bind(&withParam, ty);
     func1();
     func2();
 }
