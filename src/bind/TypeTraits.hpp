@@ -11,12 +11,22 @@
 #ifndef		TYPETRAITS_HPP_
 # define	TYPETRAITS_HPP_
 
-template < >
+template < typename T >
 
-class TypeTraits
+struct TypeTraits
 {
-    public:
-	TypeTraits() { }
+    typedef T	type;
 };
+
+struct TypeList0;
+
+struct Traits0
+{
+    typedef TypeList0	Type;
+};
+
+/*
+ *	Edit this file to support more parameters
+ */
 
 #endif		/* !TYPETRAITS_HPP_*/
