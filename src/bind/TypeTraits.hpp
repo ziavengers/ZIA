@@ -16,7 +16,7 @@ template < >
 class TypeTraits
 {
     public:
-	TypeTrais() { }
+	TypeTraits() { }
 };
 
 #endif		/* !TYPETRAITS_HPP_*/
