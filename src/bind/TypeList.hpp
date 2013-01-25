@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:53:56 2013 
-// Last update Fri Jan 25 12:17:43 2013 Rivot Corentin
+// Last update Fri Jan 25 15:00:12 2013 Rivot Corentin
 */
 
 #ifndef		TYPELIST_HPP_
@@ -35,7 +35,7 @@ struct TypeList0 : private Storage0
 
   ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
   {
-    return caller();
+    return (caller)();
   }
 };
 
@@ -61,6 +61,7 @@ struct TypeList1 : private Storage1< T1 >
 
   ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
   {
+    //return (l[BaseClass::_t1].*caller)();
     return caller(l.operator[](BaseClass::_t1));
   }
 };
@@ -215,6 +216,36 @@ struct TypeList6 : private Storage6< T1, T2, T3, T4, T5, T5 >
 		  l[BaseClass::_t5],
 		  l[BaseClass::_t6]
 		  );
+  }
+};
+
+
+///////////////////////////////
+
+template < typename T1 >
+
+struct TypeListMember1 : private Storage1< T1 >
+{
+  typedef Storage1< T1 >	BaseClass;
+
+  TypeListMember1(T1 t1) : BaseClass(t1)
+  {
+    // useless
+  }
+
+  template < typename T >
+	
+  T&	operator[](Value< T >& n)
+  {
+    return n.get();
+  }
+
+  template < typename ReturnType, typename Caller, typename List >
+
+  ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
+  {
+    return (l[BaseClass::_t1].*caller)();
+    // return caller(l.operator[](BaseClass::_t1));
   }
 };
 
