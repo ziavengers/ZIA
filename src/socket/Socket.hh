@@ -2,6 +2,7 @@
 #define SOCKET_HH_
 
 #include <netinet/in.h>
+#include <sys/select.h>
 
 #include "ISocket.hh"
 
@@ -18,6 +19,24 @@ public:
 
   size_t read(void*, size_t);
   size_t write(const void*, size_t);
+
+  class Select : public ISocket::Select
+  {
+  public:
+    Select();
+    virtual ~Select();
+
+    int run();
+
+    void set(ISocket*, SET);
+    void clear(ISocket*, SET);
+    bool isSet(ISocket*, SET);
+    void zero(SET);
+
+  protected:
+    fd_set _sets[3];
+    int _biggest;
+  };
 
 protected:
   typedef int (*t_associate_func)(int, const struct sockaddr*, socklen_t);

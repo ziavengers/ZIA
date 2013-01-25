@@ -6,7 +6,7 @@
 
 #include "Socket.hh"
 
-// Ajouter vérifs & exceptions
+// Ajouter vérifs (fonctions systèmes + ptrs + dynamic_cast) & exceptions
 
 Socket::Socket()
 {
@@ -76,4 +76,49 @@ void Socket::reloadSin()
 {
   int sin_size = sizeof(_sin);
   getsockname(_fd, reinterpret_cast<struct sockaddr*>(&_sin), reinterpret_cast<socklen_t*>(&sin_size));
+}
+
+
+Socket::Select::Select() : _biggest(0)
+{
+  zero(Socket::Select::READ);
+  zero(Socket::Select::WRITE);
+  zero(Socket::Select::ERROR);
+}
+
+Socket::Select::~Select()
+{}
+
+int Socket::Select::run()
+{
+  return select(_biggest + 1,
+		&_sets[Socket::Select::READ],
+		&_sets[Socket::Select::WRITE],
+		&_sets[Socket::Select::ERROR],
+		0); // Ajouter gestion du timeout
+}
+
+void Socket::Select::set(ISocket* s_, Socket::Select::SET set)
+{
+  Socket* s = dynamic_cast<Socket*>(s_);
+  if (s->_fd > _biggest)
+    _biggest = s->_fd;
+  FD_SET(s->_fd, &_sets[set]);
+}
+
+void Socket::Select::clear(ISocket* s_, Socket::Select::SET set)
+{
+  Socket* s = dynamic_cast<Socket*>(s_);
+  FD_CLR(s->_fd, &_sets[set]);
+}
+
+bool Socket::Select::isSet(ISocket* s_, Socket::Select::SET set)
+{
+  Socket* s = dynamic_cast<Socket*>(s_);
+  return FD_ISSET(s->_fd, &_sets[set]);
+}
+
+void Socket::Select::zero(Socket::Select::SET set)
+{
+  FD_ZERO(&_sets[set]);
 }
