@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:43:28 2013 
-// Last update Fri Jan 25 12:28:43 2013 Rivot Corentin
+// Last update Fri Jan 25 12:55:25 2013 Rivot Corentin
 */
 
 #ifndef		CALLER_HPP_
@@ -47,7 +47,6 @@ bind(ReturnType(*f)(X1), Param1 p1)
   typedef typename GetType< Param1 >::Type	P1;
   typedef TypeList1< P1 >	ListType;
   ListType l(p1);
-  //TypeList1< Param1 >	l(p1);
   return Caller< ReturnType, ReturnType(*)(X1), ListType >(f, l);
 }
 
@@ -134,5 +133,88 @@ bind(Objet& v)
   TypeList0 l;
   return Caller< ReturnType, Objet, Traits0::Type >(v, l); 
 }
+
+template < typename ReturnType, typename Param1, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits1< Param1 >::Type >
+bind(Objet& v, Param1 p1)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef TypeList1< P1 >	ListType;
+  ListType l(p1);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
+template < typename ReturnType, typename Param1, typename Param2, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits2< Param1, Param2 >::Type >
+bind(Objet& v, Param1 p1, Param2 p2)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef typename GetType< Param2 >::Type	P2;
+  typedef TypeList2< P1, P2 >	ListType;
+  ListType l(p1, p2);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
+template < typename ReturnType, typename Param1, typename Param2, typename Param3, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits3< Param1, Param2, Param3 >::Type >
+bind(Objet& v, Param1 p1, Param2 p2, Param3 p3)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef typename GetType< Param2 >::Type	P2;
+  typedef typename GetType< Param3 >::Type	P3;
+  typedef TypeList3< P1, P2, P3 >	ListType;
+  ListType l(p1, p2, p3);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
+template < typename ReturnType, typename Param1, typename Param2, typename Param3, typename Param4, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits4< Param1, Param2, Param3, Param4 >::Type >
+bind(Objet& v, Param1 p1, Param2 p2, Param3 p3, Param4 p4)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef typename GetType< Param2 >::Type	P2;
+  typedef typename GetType< Param3 >::Type	P3;
+  typedef typename GetType< Param4 >::Type	P4;
+  typedef TypeList4< P1, P2, P3, P4 >	ListType;
+  ListType l(p1, p2, p3, p4);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
+
+template < typename ReturnType, typename Param1, typename Param2, typename Param3, typename Param4, typename Param5, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits5< Param1, Param2, Param3, Param4, Param5 >::Type >
+bind(Objet& v, Param1 p1, Param2 p2, Param3 p3, Param4 p4, Param5 p5)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef typename GetType< Param2 >::Type	P2;
+  typedef typename GetType< Param3 >::Type	P3;
+  typedef typename GetType< Param4 >::Type	P4;
+  typedef typename GetType< Param5 >::Type	P5;
+  typedef TypeList5< P1, P2, P3, P4, P5 >	ListType;
+  ListType l(p1, p2, p3, p4, p5);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
+template < typename ReturnType, typename Param1, typename Param2, typename Param3, typename Param4, typename Param5, typename Param6, typename Objet>
+
+Caller< ReturnType, Objet, typename Traits6< Param1, Param2, Param3, Param4, Param5, Param6 >::Type >
+bind(Objet& v, Param1 p1, Param2 p2, Param3 p3, Param4 p4, Param5 p5, Param6 p6)
+{
+  typedef typename GetType< Param1 >::Type	P1;
+  typedef typename GetType< Param2 >::Type	P2;
+  typedef typename GetType< Param3 >::Type	P3;
+  typedef typename GetType< Param4 >::Type	P4;
+  typedef typename GetType< Param5 >::Type	P5;
+  typedef typename GetType< Param6 >::Type	P6;
+  typedef TypeList6< P1, P2, P3, P4, P5, P6 >	ListType;
+  ListType l(p1, p2, p3, p4, p5, p6);
+  return Caller< ReturnType, Objet, ListType >(v, l); 
+}
+
 
 #endif		/* !CALLER_HPP_*/

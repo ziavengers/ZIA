@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 19:13:18 2013 
-** Last update Thu Jan 24 19:13:18 2013 
+// Last update Fri Jan 25 12:50:08 2013 Rivot Corentin
 */
 
 #ifndef		STORAGE_HPP_
@@ -30,7 +30,7 @@ template < typename T1, typename T2 >
 
 struct Storage2 : public Storage1< T1 >
 {
-    Storage2(T1& t1, T2 t2) : Storage1< T1 >(t1), _t2(t1) { }
+    Storage2(T1& t1, T2 t2) : Storage1< T1 >(t1), _t2(t2) { }
     
     T2	_t2;
 };
