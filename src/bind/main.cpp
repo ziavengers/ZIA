@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-** Last update Thu Jan 24 22:56:49 2013 
+// Last update Fri Jan 25 12:30:12 2013 Rivot Corentin
 */
 
 #include <string>
@@ -23,6 +23,22 @@ int	withParam(std::string st)
     return 42;
 }
 
+class Toto
+{
+    public:
+	Toto() { }
+
+	void operator()()
+	{
+	    std::cout << "Coucou, Je suis un objet callable SANS parametre" << std::endl;
+	}
+};
+
+int	add(int i, int j, int k, int p, int o, int u)
+{
+  return i + j + k + p + o + u;
+}
+
 int	main()
 {
     std::string ty("JE SUIS LE PARAMETRE");
@@ -30,5 +46,8 @@ int	main()
     Caller< int, int(*)(std::string), Traits1< std::string >::Type >	func2 = bind(&withParam, ty);
     func1();
     func2();
+    Toto t;
+    bind< void >(t)();
+    std::cout << bind(&add, 2, 3, 4, 8, 16, 32)() << std::endl;
 }
 

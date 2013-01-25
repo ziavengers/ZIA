@@ -34,9 +34,8 @@ template < typename T >
 class GetType
 {
     public:
-	GetType( const T& t) : _t(t) { }
+	GetType( const T& t) { }
 
-	T	_t;
 	typedef Value< T >	Type;
 };
 
