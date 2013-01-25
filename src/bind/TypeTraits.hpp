@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:32:36 2013 
-// Last update Fri Jan 25 12:22:00 2013 Rivot Corentin
+// Last update Fri Jan 25 15:03:13 2013 Rivot Corentin
 */
 
 #ifndef		TYPETRAITS_HPP_
@@ -112,9 +112,25 @@ struct Traits6
 };
 
 
+
+
 /*
  *
  *	Edit this file to support more parameters
  */
+///////////// 
+/// MEMBER FPTR
+
+
+template < typename T1 >
+struct TypeListMember1;
+
+template < typename T1 >
+struct TraitsMember1
+{
+  typedef typename GetType< T1 >::Type	Type_Parameter1;
+  typedef TypeListMember1< Type_Parameter1 >	Type;
+};
+
 
 #endif		/* !TYPETRAITS_HPP_*/

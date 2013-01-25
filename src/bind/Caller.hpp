@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:43:28 2013 
-// Last update Fri Jan 25 12:55:25 2013 Rivot Corentin
+// Last update Fri Jan 25 15:03:24 2013 Rivot Corentin
 */
 
 #ifndef		CALLER_HPP_
@@ -23,7 +23,7 @@ public:
   ReturnType	operator()()
   {
     TypeTraits< ReturnType >	t;
-    return _list.operator()(t, _callable, _list);
+    return (_list.operator())(t, _callable, _list);
   }
 private:
   Callable	_callable;
@@ -216,5 +216,17 @@ bind(Objet& v, Param1 p1, Param2 p2, Param3 p3, Param4 p4, Param5 p5, Param6 p6)
   return Caller< ReturnType, Objet, ListType >(v, l); 
 }
 
+
+
+template < typename ReturnType, typename Objet>
+
+Caller< ReturnType, ReturnType (Objet::*)(), typename TraitsMember1< Objet >::Type >
+bind(ReturnType (Objet::*func)(), Objet& o)
+{
+  typedef typename GetType< Objet >::Type	P1;
+  typedef TypeListMember1< P1 >	ListType;
+  ListType l(o);
+  return Caller< ReturnType, ReturnType (Objet::*)(), ListType >(func, l); 
+}
 
 #endif		/* !CALLER_HPP_*/

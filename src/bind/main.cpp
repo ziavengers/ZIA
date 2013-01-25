@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Fri Jan 25 12:55:45 2013 Rivot Corentin
+// Last update Fri Jan 25 15:01:15 2013 Rivot Corentin
 */
 
 #include <string>
@@ -47,6 +47,12 @@ class Toto
   {
     return i + j + k + o + y + u;
   }
+
+  int	add()
+  {
+    std::cout << "Coucou, je suis une fonction membre de Toto" << std::endl;
+    return 0;
+  }
 };
 
 int	add(int i, int j, int k, int p, int o)
@@ -76,6 +82,9 @@ int	main()
     Toto t;
     bind< int >(t)();
     std::cout << bind(&add, 2, 3)() << std::endl;
-    std::cout << bind< int, int, int, int, int, int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
+    std::cout << bind< int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
+    // Caller< int, int (Toto::*)(), Traits1< Toto >::Type > mfunc = bind< int >(&Toto::add, t);
+    // mfunc();
+    std::cout << bind< int >(&Toto::add, t)() << std::endl;
 }
 
