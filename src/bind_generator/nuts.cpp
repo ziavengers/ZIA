@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Fri Jan 25 16:59:03 2013 Antoine Rozo
+// Last update Fri Jan 25 22:03:51 2013 Antoine Rozo
 */
 
 #include <string>
@@ -66,6 +66,11 @@ void test(std::string t, std::string i)
   std::cout <<i << std::endl;
 }
 
+void exec(ICaller<int>& func)
+{
+  func();
+}
+
 int	main()
 {
     std::string ty("JE SUIS LE PARAMETRE");
@@ -74,6 +79,7 @@ int	main()
     Caller< int, int(*)(std::string), Traits1< std::string >::Type >	func2 = bind(&withParam, ty);
     func1();
     func2();
+    exec(func2);
     Toto t;
     bind< int >(t)();
     std::cout << bind(&add, 2, 3)() << std::endl;

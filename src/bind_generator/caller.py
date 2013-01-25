@@ -1,6 +1,13 @@
 CALLER = (
+    'template <typename ReturnType>',
+    'class ICaller',
+    '{',
+    'public:',
+    'virtual ~ICaller() {}',
+    'virtual ReturnType operator()() = 0;',
+    '};',
     'template <typename ReturnType, typename Callable, typename List>'
-    'class Caller',
+    'class Caller : public ICaller<ReturnType>',
     '{',
     'public:',
     'Caller(Callable callable, List list) : _callable(callable), _list(list) {}',

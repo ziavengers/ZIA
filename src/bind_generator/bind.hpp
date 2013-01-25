@@ -257,7 +257,14 @@ typedef typename GetType<P5>::Type Type_Param5;
 typedef typename GetType<P6>::Type Type_Param6;
 typedef TypeList6<Type_Param1, Type_Param2, Type_Param3, Type_Param4, Type_Param5, Type_Param6> Type;
 };
-template <typename ReturnType, typename Callable, typename List>class Caller
+template <typename ReturnType>
+class ICaller
+{
+public:
+virtual ~ICaller() {}
+virtual ReturnType operator()() = 0;
+};
+template <typename ReturnType, typename Callable, typename List>class Caller : public ICaller<ReturnType>
 {
 public:
 Caller(Callable callable, List list) : _callable(callable), _list(list) {}
