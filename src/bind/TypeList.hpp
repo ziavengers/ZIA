@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:53:56 2013 
-// Last update Fri Jan 25 15:00:12 2013 Rivot Corentin
+// Last update Fri Jan 25 15:06:38 2013 Rivot Corentin
 */
 
 #ifndef		TYPELIST_HPP_
@@ -245,7 +245,6 @@ struct TypeListMember1 : private Storage1< T1 >
   ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
   {
     return (l[BaseClass::_t1].*caller)();
-    // return caller(l.operator[](BaseClass::_t1));
   }
 };
 

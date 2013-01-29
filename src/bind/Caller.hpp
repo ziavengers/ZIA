@@ -5,13 +5,58 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:43:28 2013 
-// Last update Fri Jan 25 15:03:24 2013 Rivot Corentin
+// Last update Tue Jan 29 21:55:34 2013 Rivot Corentin
 */
 
 #ifndef		CALLER_HPP_
 # define	CALLER_HPP_
 
 #include "TypeList.hpp"
+
+
+class StockCallback
+{
+public:
+
+  class Herited
+  {
+  public:
+    virtual void operator()() = 0;
+    virtual ~Herited() { }
+  };
+
+  template < class I >
+  class Subterfuge : public Herited
+  {
+  public:
+    Subterfuge(I& obj) : _func(obj) { }
+    
+    void	operator()()
+    {
+      _func.operator()();
+    }
+
+  private:
+    I&	_func;
+
+  };
+
+  Herited	*_sub;
+
+
+  template < typename I >
+  StockCallback(I t)
+  {
+    _sub = new Subterfuge< I >(t);
+  }
+
+  void	operator()()
+  {
+    (*_sub)();
+  }
+
+private:
+};
 
 template < typename ReturnType, typename Callable, typename List >
 
@@ -25,7 +70,11 @@ public:
     TypeTraits< ReturnType >	t;
     return (_list.operator())(t, _callable, _list);
   }
+  
+  typedef ReturnType	Ret;
+
 private:
+
   Callable	_callable;
   List		_list;
 };
