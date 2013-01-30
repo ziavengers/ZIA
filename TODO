@@ -1,0 +1,23 @@
+TOUT LE MONDE DOIT ETRE AU POINT POUR LA PREMIERE SOUTENANCE AVEC LA RFC HTTP
+
+- Faire un namespace globale a l'API
+- Tout englober dans differents namespaces
+	=> Je vois bien des maccros pour le faire une pour begin et une pour end
+
+Ce que doit comporter l'API:
+	- Socket
+	- Thread
+	- Un systeme de Log
+	- Load / Unload de module
+	- Fournire des interfaces pour la manipulation des differents module
+		=> class IModule
+			{
+			    virtual init() = 0;
+			    /*
+			       ...
+			    */
+			}
+	- Parseur HTTP
+	
+
+A COMPLETER
