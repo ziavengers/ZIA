@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:43:28 2013 
-// Last update Tue Jan 29 21:55:34 2013 Rivot Corentin
+// Last update Tue Jan 29 23:04:26 2013 Rivot Corentin
 */
 
 #ifndef		CALLER_HPP_
@@ -35,9 +35,8 @@ public:
     {
       _func.operator()();
     }
-
   private:
-    I&	_func;
+    I	_func;
 
   };
 
@@ -50,9 +49,20 @@ public:
     _sub = new Subterfuge< I >(t);
   }
 
+  StockCallback(const StockCallback& s)
+  {
+    _sub = s._sub;
+  }
+
+  StockCallback&	operator=(const StockCallback& s)
+  {
+    this->_sub = s._sub;
+    return *this;
+  }
+
   void	operator()()
   {
-    (*_sub)();
+    _sub->operator()();
   }
 
 private:

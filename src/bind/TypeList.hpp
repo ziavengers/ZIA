@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 21:53:56 2013 
-// Last update Fri Jan 25 15:06:38 2013 Rivot Corentin
+// Last update Tue Jan 29 22:49:45 2013 Rivot Corentin
 */
 
 #ifndef		TYPELIST_HPP_
@@ -35,6 +35,7 @@ struct TypeList0 : private Storage0
 
   ReturnType	operator()(TypeTraits< ReturnType > q, Caller& caller, List& l)
   {
+    //    std::cout << &caller << std::endl;
     return (caller)();
   }
 };
