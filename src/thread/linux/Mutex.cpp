@@ -5,10 +5,18 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:18:21 2013 Rivot Corentin
-// Last update Fri Jan 25 16:18:37 2013 Rivot Corentin
+// Last update Wed Feb  6 09:53:07 2013 Rivot Corentin
 //
 
-#include "Mutex.hpp"
+#include "Mutex.hh"
+
+
+namespace zia
+{
+
+namespace thread
+{
+
 
 Mutex::Mutex()
 {
@@ -39,3 +47,6 @@ bool	Mutex::trylock()
   return false;
 }
 
+
+}
+}

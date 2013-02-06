@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:17:55 2013 Rivot Corentin
-// Last update Fri Jan 25 16:18:11 2013 Rivot Corentin
+// Last update Wed Feb  6 09:48:21 2013 Rivot Corentin
 //
 
 
@@ -13,6 +13,12 @@
 #define MUTEX_HPP_
 
 #include <pthread.h>
+
+namespace zia
+{
+
+namespace thread
+{
 
 class Mutex
 {
@@ -27,5 +33,8 @@ public:
 private:
   pthread_mutex_t	_mutex;
 };
+
+}
+}
 
 #endif
