@@ -5,55 +5,63 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Wed Dec 19 09:25:50 2012 Rivot Corentin
-// Last update Wed Dec 19 09:30:35 2012 Rivot Corentin
+// Last update Wed Feb  6 10:47:21 2013 Rivot Corentin
 //
 
 #ifndef SINGLETON_HPP_
 #define SINGLETON_HPP_
 
+#include "../thread/ScopedLock.hh"
+
 namespace zia
 {
-    namespace utils
+  namespace utils
+  {
+
+    template < typename T >
+
+    class Singleton
     {
+    public:
+      static T*	instance()
+      {
+	thread::Locker(&_mutex);
+	if (!_instance)
+	  _instance = new T;
+	return _instance;
+      }
 
-	template < typename T >
+      static void	kill()
+      {
+	thread::Locker(&_mutex);
+	if (_instance)
+	  delete _instance;
+	_instance = 0;
+      }
 
-	    class Singleton
-	    {
-		public:
-		    static T*	instance()
-		    {
-			if (!_instance)
-			    _instance = new T;
-			return _instance;
-		    }
+    protected:
+      Singleton()
+      {
+	_instance = 0;
+      }
 
-		    static void	kill()
-		    {
-			if (_instance)
-			    delete _instance;
-		    }
+      ~Singleton() { _instance = 0; }
 
-		protected:
-		    Singleton()
-		    {
-			m_instance = 0;
-		    }
+    private:
+      Singleton(const Singleton&);
+      Singleton& operator&(const Singleton&);
 
-		    ~Singleton() { }
+      static thread::Mutex	_mutex;
+      static T*	_instance;
+    };
 
-		private:
-		    Singleton(const Singleton&);
-		    ~Singleton(const Singleton&);
+    template < typename T >
+    T*	Singleton< T >::_instance = 0;
 
-		    static T*	_instance;
-	    };
+    template < typename T >
+    thread::Mutex	Singleton< T >::_mutex;
 
-	template < typename T >
-
-	    T*	Singleton< T >::_instance = 0;
-
-    }
+  }
 }
 
 #endif
