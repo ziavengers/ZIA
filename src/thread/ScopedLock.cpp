@@ -5,11 +5,16 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:19:32 2013 Rivot Corentin
-// Last update Fri Jan 25 16:19:44 2013 Rivot Corentin
+// Last update Wed Feb  6 10:45:47 2013 Rivot Corentin
 //
 
 
-#include "ScopedLock.hpp"
+#include "ScopedLock.hh"
+
+namespace zia
+{
+namespace thread
+{
 
 ScopedLock::ScopedLock()
 {
@@ -21,3 +26,16 @@ ScopedLock::~ScopedLock()
   _mutex.unlock();
 }
 
+  Locker::Locker(Mutex* m)
+  {
+    _mutex = m;
+    _mutex->lock();
+  }
+
+  Locker::~Locker()
+  {
+    _mutex->unlock();
+  }
+
+}
+}
