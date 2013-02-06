@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Wed Dec 19 09:25:50 2012 Rivot Corentin
-// Last update Wed Feb  6 10:47:21 2013 Rivot Corentin
+// Last update Wed Feb  6 20:34:08 2013 Rivot Corentin
 //
 
 #ifndef SINGLETON_HPP_
@@ -25,7 +25,7 @@ namespace zia
     public:
       static T*	instance()
       {
-	thread::Locker(&_mutex);
+	thread::Locker lock(&_mutex);
 	if (!_instance)
 	  _instance = new T;
 	return _instance;
@@ -33,7 +33,7 @@ namespace zia
 
       static void	kill()
       {
-	thread::Locker(&_mutex);
+	thread::Locker lock(&_mutex);
 	if (_instance)
 	  delete _instance;
 	_instance = 0;
