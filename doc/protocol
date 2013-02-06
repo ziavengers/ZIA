@@ -1,4 +1,0 @@
-CRLF = '\r'|'\n'|"\r\n"
-LWS = Linear white space (caractère séparateur BNF) = [CRLF](' '|'\t)*
-
-Les requetes peuvent etre recues en plusieurs messages: cf RFC §4.4 §3.6
