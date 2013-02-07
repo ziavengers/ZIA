@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Thu Feb  7 14:47:34 2013 Rivot Corentin
-// Last update Thu Feb  7 14:52:51 2013 Rivot Corentin
+// Last update Thu Feb  7 16:13:26 2013 Rivot Corentin
 //
 
 #ifndef APIEXCEPTION_HPP_
@@ -13,6 +13,8 @@
 
 #include <exception>
 #include <string>
+
+#include "Logger.hh"
 
 namespace zia
 {
@@ -24,9 +26,10 @@ namespace utils
   public:
     APIException(const std::string& s) : _msg(s) { }
     
-    virtual ~APIException() throw() ;
+    virtual ~APIException() throw() { }
 
     const char *	what() const throw() {
+      LOG_ERROR(_msg);
       return _msg.c_str();
     }
 

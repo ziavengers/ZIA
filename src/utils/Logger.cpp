@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Tue Feb 05 18:53:49 2013 
-// Last update Wed Feb  6 21:41:29 2013 Rivot Corentin
+// Last update Thu Feb  7 17:11:03 2013 Rivot Corentin
 */
 
 #include <iostream>
@@ -26,6 +26,12 @@ namespace utils
   Logger::Logger() : _display(true), _sev(NORMAL), _filename("out.log"),
 		     _file(_filename.c_str(), std::ios::out | std::ios::trunc)
   {
+    _color[DEBUG] = "\033[36m";
+    _color[INFO] = "\033[33m";
+    _color[NORMAL] = "\033[0m";
+    _color[WARNING] = "\033[34m";
+    _color[ERROR] = "\033[31m";
+    _color[CRITIC] = "\033[31;1m";
     _file << "New log:" << std::endl;
   }
 
@@ -55,14 +61,19 @@ namespace utils
 
   void	Logger::log(LogLevel l, const std::string& s)
   {
-    if (_sev >= l)
-      log(s);
+    if (_sev <= l)
+      {
+	std::cout << _color[l];
+	log(s);
+      }
   }
 
   void	Logger::log(const std::string& s)
   {
     if (_display && _file.is_open())
-      std::cout << s << std::endl;
+      {	
+	std::cout << s << _color[NORMAL] << std::endl;
+      }
     if (_file.is_open())
       _file << s << std::endl;
   }
@@ -72,7 +83,6 @@ namespace utils
     log(s);
     return *this;
   }
-
 }
 }
 
