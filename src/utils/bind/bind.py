@@ -1,9 +1,6 @@
-def replace_args(s, d):
-    for k, r in d.items():
-        s = s.replace('@%s@' % k, '%s' % r)
-    return s
+from utils import loadfile, replace_args
 
-BIND_P_TYPE = open('bind_p_type.tpl.hpp').readlines()[0].replace('\n', '')
+BIND_P_TYPE = loadfile('bind_p_type.tpl.hpp')
 
 def make_bind(n):
     kwargs = {

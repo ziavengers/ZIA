@@ -1,9 +1,6 @@
-def replace_args(s, d):
-    for k, r in d.items():
-        s = s.replace('@%s@' % k, '%s' % r)
-    return s
+from utils import loadfile, replace_args
 
-TRAITS_TYPE_PARAM = open('traits_type_param.tpl.hpp').readlines()[0].replace('\n', '')
+TRAITS_TYPE_PARAM = loadfile('traits_type_param.tpl.hpp')
 
 def make_traits(n):
     kwargs = {
