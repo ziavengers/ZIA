@@ -4,8 +4,6 @@ def replace_args(s, args):
     return s
 
 def next_line(tpl, getargs, n):
-    if n < 0:
-        raise OverflowError
     with open(tpl, 'r') as f:
         lines = [l for l in f]
         for i in range(n + 1):

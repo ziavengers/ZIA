@@ -2,8 +2,8 @@ from utils import loadfile, replace_args
 
 BIND_P_TYPE = loadfile('bind_p_type.tpl.hpp')
 
-def make_bind(n):
-    kwargs = {
+def getargs(n):
+    args = {
         'n' : n,
         'X_typenames' : (', ' + ', '.join('typename X%d' % i for i in range(1, n + 1))) if n else '',
         'Param_typenames' : (', ' + ', '.join('typename Param%d' % i for i in range(1, n + 1))) if n else '',
@@ -18,4 +18,4 @@ def make_bind(n):
         'X_typenames_next' : (', ' + ', '.join('typename X%d' % i for i in range(2, n + 1))) if n > 1 else '',
         'X_params_next' : ', '.join('X%d' % i for i in range(2, n + 1))
         }
-    return kwargs
+    return args

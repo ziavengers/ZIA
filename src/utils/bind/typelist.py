@@ -1,5 +1,5 @@
-def make_typelist(n):
-    kwargs = {
+def getargs(n):
+    args = {
         'n' : n,
         'typenames' : ', '.join('typename P%d' % i for i in range(1, n + 1)),
         'templates' : ('<' + ', '.join('P%d' % i for i in range(1, n + 1)) + '>') if n else '',
@@ -8,4 +8,4 @@ def make_typelist(n):
         'list_params' : ',\n'.join('list[BaseClass::_t%d]' % i for i in range(1, n + 1)),
         'list_params_next' : ',\n'.join('list[BaseClass::_t%d]' % i for i in range(2, n + 1))
         }
-    return kwargs
+    return args

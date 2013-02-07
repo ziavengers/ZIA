@@ -1,5 +1,5 @@
-def make_storage(n):
-    kwargs = {
+def getargs(n):
+    args = {
         'n' : n,
         'n_prec' : n - 1,
         'typenames' : ', '.join('typename T%d' % i for i in range(1, n + 1)),
@@ -7,4 +7,4 @@ def make_storage(n):
         'params' : ', '.join('T%d& t%d' % (i, i) for i in range(1, n + 1)),
         'params_prec' : ', '.join('t%d' % i for i in range(1, n))
         }
-    return kwargs
+    return args
