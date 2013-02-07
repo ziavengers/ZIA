@@ -658,6 +658,49 @@ typedef TypeListMember6<P1, P2, P3, P4, P5, P6> ListType;
 ListType l(p1, p2, p3, p4, p5, p6);
 return Caller< ReturnType, ReturnType (Param1::*)(X2, X3, X4, X5, X6), ListType >(func, l);
 }
+template <typename R>
+class RStockCallback
+{
+public:
+class Herited
+{
+public:
+virtual R operator()() = 0;
+virtual ~Herited() { }
+};
+template < class I >
+class Subterfuge : public Herited
+{
+public:
+Subterfuge(I& obj) : _func(obj) { }
+R	operator()()
+{
+return _func.operator()();
+}
+private:
+I	_func;
+};
+template < typename I >
+RStockCallback(I t)
+{
+_sub = new Subterfuge< I >(t);
+}
+RStockCallback(const RStockCallback<R>& s)
+{
+_sub = s._sub;
+}
+RStockCallback&	operator=(const RStockCallback<R>& s)
+{
+this->_sub = s._sub;
+return *this;
+}
+R	operator()()
+{
+return _sub->operator()();
+}
+private:
+Herited	*_sub;
+};
 class StockCallback
 {
 public:

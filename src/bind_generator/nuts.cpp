@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Thu Feb  7 15:16:16 2013 Antoine Rozo
+// Last update Thu Feb  7 15:45:20 2013 Antoine Rozo
 */
 
 #include <string>
@@ -100,5 +100,11 @@ int	main()
     std::cout << bind< int >(t, 2, 3)() << std::endl;
     std::cout << bind(&Toto::add, t)() << std::endl;
     std::cout << bind(&Toto::add, t, 42, 21)() << std::endl;
+
+    RStockCallback<int> s3(bind(add, 1, 2));
+    std::cout << s3() << std::endl;
+
+    StockCallback s4(bind(add, 1, 2));
+    s4();
 }
 
