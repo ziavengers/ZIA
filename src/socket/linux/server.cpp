@@ -5,33 +5,33 @@
 
 int main(int ac, char** av)
 {
-  ISocket* s = new Socket();
+  zia::network::ISocket* s = new Socket();
   s->bind(atoi(av[1]));
   s->listen(5);
 
-  std::list<ISocket*> clients;
-  std::list<ISocket*>::iterator it;
+  std::list< zia::network::ISocket* > clients;
+  std::list< zia::network::ISocket* >::iterator it;
   char buff[101];
 
-  ISocket::Select* select = new Socket::Select;
+  zia::network::ISocket::Select* select = new zia::network::Socket::Select;
   int error = 0;
   // Utiliser exception pour sortir ?
   while (!error)
     {
-      select->zero(ISocket::Select::READ);
-      select->set(s, ISocket::Select::READ);
+      select->zero(zia::network::ISocket::Select::READ);
+      select->set(s, zia::network::ISocket::Select::READ);
       for (it = clients.begin(); it != clients.end(); ++it)
-	select->set(*it, ISocket::Select::READ);
+	select->set(*it, zia::network::ISocket::Select::READ);
       if (select->run() != -1)
 	{
-	  if (select->isSet(s, ISocket::Select::READ))
+	  if (select->isSet(s, zia::network::ISocket::Select::READ))
 	    {
 	      ISocket* c = s->accept();
 	      clients.push_back(c);
 	    }
 	  std::list<ISocket*> toDelete;
 	  for (it = clients.begin(); it != clients.end(); ++it)
-	    if (select->isSet(*it, ISocket::Select::READ))
+	    if (select->isSet(*it, zia::network::ISocket::Select::READ))
 	      {
 		ISocket* c = *it;
 		int len = c->read(buff, 100);

@@ -6,47 +6,55 @@
 
 #include "ISocket.hh"
 
-class Socket : public ISocket
+namespace zia
 {
-public:
-  Socket();
-  virtual ~Socket();
-
-  bool connect(const std::string&, int);
-  bool bind(int);
-  bool listen(int);
-  ISocket* accept();
-
-  size_t read(void*, size_t);
-  size_t write(const void*, size_t);
-
-  class Select : public ISocket::Select
+  namespace network
   {
-  public:
-    Select();
-    virtual ~Select();
 
-    int run();
+    class Socket : public ISocket
+    {
+    public:
+      Socket();
+      virtual ~Socket();
 
-    void set(ISocket*, SET);
-    void clear(ISocket*, SET);
-    bool isSet(ISocket*, SET);
-    void zero(SET);
+      bool connect(const std::string&, int);
+      bool bind(int);
+      bool listen(int);
+      ISocket* accept();
 
-  protected:
-    fd_set _sets[3];
-    int _biggest;
-  };
+      size_t read(void*, size_t);
+      size_t write(const void*, size_t);
 
-protected:
-  typedef int (*t_associate_func)(int, const struct sockaddr*, socklen_t);
-  Socket(int, const struct sockaddr_in&);
-  bool associate(const char*, int, t_associate_func);
-  void reloadSin();
+      class Select : public ISocket::Select
+      {
+      public:
+	Select();
+	virtual ~Select();
 
-protected:
-  int _fd;
-  struct sockaddr_in _sin;
-};
+	int run();
+
+	void set(ISocket*, SET);
+	void clear(ISocket*, SET);
+	bool isSet(ISocket*, SET);
+	void zero(SET);
+
+      protected:
+	fd_set _sets[3];
+	int _biggest;
+      };
+
+    protected:
+      typedef int (*t_associate_func)(int, const struct sockaddr*, socklen_t);
+      Socket(int, const struct sockaddr_in&);
+      bool associate(const char*, int, t_associate_func);
+      void reloadSin();
+
+    protected:
+      int _fd;
+      struct sockaddr_in _sin;
+    };
+
+  }
+}
 
 #endif
