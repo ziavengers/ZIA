@@ -5,12 +5,13 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Thu Feb  7 15:45:20 2013 Antoine Rozo
+// Last update Thu Feb  7 19:28:04 2013 Antoine Rozo
 */
 
 #include <string>
 #include <iostream>
 #include "bind.hpp"
+#include "stock_callback.hpp"
 
 void	toto()
 {
