@@ -5,7 +5,7 @@
 // Login   <rozo_a@epitech.net>
 // 
 // Started on  Tue Sep 11 11:16:04 2012 Antoine Rozo
-// Last update Wed Feb  6 22:30:38 2013 Antoine Rozo
+// Last update Thu Feb  7 12:29:17 2013 Antoine Rozo
 //
 
 #include "ConsumerParser.hpp"
@@ -13,11 +13,11 @@
 ConsumerParser::ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags()
 {}
 
-ConsumerParser& ConsumerParser::operator=(const ConsumerParser& other)
-{
-  _buff = other._buff;
-  return *this;
-}
+// ConsumerParser& ConsumerParser::operator=(const ConsumerParser& other)
+// {
+//   _buff = other._buff;
+//   return *this;
+// }
 
 bool ConsumerParser::readBlock()
 {
@@ -112,3 +112,9 @@ bool ConsumerParser::readIdentifier()
     ;
   return true;
 }
+
+void ConsumerParser::save()
+{}
+
+void ConsumerParser::restore()
+{}
