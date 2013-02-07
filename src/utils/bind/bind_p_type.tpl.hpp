@@ -1,1 +1,1 @@
-typedef typename GetType<Param@i@>::Type P@i@;
+typedef typename GetType< Param@i@ >::Type P@i@;

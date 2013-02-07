@@ -1,4 +1,4 @@
-template <@typenames@> // IGNORE_0
+template < @typenames@ > // IGNORE_0
 struct Storage@n@
   : public Storage@n_prec@ @templates_prec@ // IGNORE_0
 {
