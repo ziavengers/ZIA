@@ -4,12 +4,19 @@ TRAITS = (
     '{{',
     '{type_params}',
     'typedef TypeList{n}{templates_type_params} Type;',
+    '}};',
+
+    'template <{typenames}>',
+    'struct TraitsMember{n}',
+    '{{',
+    '{type_params}',
+    'typedef TypeListMember{n}{templates_type_params} Type;',
     '}};'
     )
 
 TRAITS_TYPE_PARAM = 'typedef typename GetType<P%d>::Type Type_Param%d;'
 
-IGNORE_0 = (0, 3)
+IGNORE_0 = (0, 3, 6, 7, 8, 9, 10, 11)
 
 def make_traits(n):
     if n < 0:
