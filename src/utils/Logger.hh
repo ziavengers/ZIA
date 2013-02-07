@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Tue Feb 05 18:07:01 2013 
-// Last update Wed Feb  6 21:41:23 2013 Rivot Corentin
+// Last update Thu Feb  7 17:02:36 2013 Rivot Corentin
 */
 
 #ifndef		LOGGER_HH_
@@ -13,6 +13,7 @@
 
 #include <string>
 #include <fstream>
+#include <map>
 
 #include "Singleton.hpp"
 #include "NonCopyable.hh"
@@ -37,9 +38,9 @@ namespace zia
 
       enum LogLevel
 	{
-	  NORMAL = 0,
-	  DEBUG,
+	  DEBUG = 0,
 	  INFO,
+	  NORMAL,
 	  WARNING,
 	  ERROR,
 	  CRITIC
@@ -65,6 +66,7 @@ namespace zia
       LogLevel		_sev;
       std::string	_filename;
       std::ofstream	_file;  
+      std::map< LogLevel, std::string >		_color;
     };
 
   }
@@ -79,10 +81,10 @@ namespace zia
 #define LOG(sev, msg) \
   zia::utils::Logger::Singleton< zia::utils::Logger >::instance()->log(sev, msg); \
 
-#define LOG_DEBUG(msg) LOG(zia::utils::DEBUG, msg)
-#define LOG_INFO(msg) LOG(zia::utils::INFO, msg)
-#define LOG_WARNING(msg) LOG(zia::utils::WARNING, msg)
-#define LOG_ERROR(msg) LOG(zia::utils::ERROR, msg)
-#define LOG_CRITIC(msg) LOG(zia::utils::CRITIC, msg)
+#define LOG_DEBUG(msg) LOG(zia::utils::Logger::DEBUG, msg)
+#define LOG_INFO(msg) LOG(zia::utils::Logger::INFO, msg)
+#define LOG_WARNING(msg) LOG(zia::utils::Logger::WARNING, msg)
+#define LOG_ERROR(msg) LOG(zia::utils::Logger::ERROR, msg)
+#define LOG_CRITIC(msg) LOG(zia::utils::Logger::CRITIC, msg)
 
 #endif		/* !LOGGER_HH_*/
