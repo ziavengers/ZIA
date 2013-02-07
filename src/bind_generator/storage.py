@@ -1,18 +1,9 @@
-# Lines of "struct StorageX"
-STORAGE = (
-    'template <{typenames}>',
-    'struct Storage{n}',
-    ': public Storage{n_prec}{templates_prec}',
-    '{{',
-    'Storage{n}({params})',
-    ': Storage{n_prec}{templates_prec}({params_prec}), _t{n}(t{n})',
-    '{{}}',
-    'T{n} _t{n};',
-    '}};'
-    )
+def replace_args(s, d):
+    for k, r in d.items():
+        s = s.replace('@%s@' % k, '%s' % r)
+    return s
 
-# Lines to ignore for Storage0
-IGNORE_0 = (0, 2, 5, 7)
+STORAGE = [l.replace('\n', '') for l in open('storage.tpl.hpp')]
 
 def make_storage(n):
     if n < 0:
@@ -26,7 +17,7 @@ def make_storage(n):
         'params' : ', '.join('T%d& t%d' % (i, i) for i in range(1, n + 1)),
         'params_prec' : ', '.join('t%d' % i for i in range(1, n))
         }
-    for i, line in enumerate(STORAGE):
-        if n or (not i in IGNORE_0):
-            lines.append(line.format(**kwargs))
+    for line in STORAGE:
+        if n or not line.endswith('// IGNORE_0'):
+            lines.append(replace_args(line, kwargs))
     return lines

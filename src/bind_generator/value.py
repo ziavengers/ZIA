@@ -1,3 +1,4 @@
+"""
 VALUE = (
     'template <typename T>',
     'class Value',
@@ -22,3 +23,9 @@ VALUE = (
 
 def make_value(n = 0):
     return list(VALUE)
+"""
+
+def make_value(n = 0):
+    with open('value.hpp') as f:
+        return [l.replace('\n', '') for l in f]
+    return []

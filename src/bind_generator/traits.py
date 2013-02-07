@@ -1,22 +1,10 @@
-TRAITS = (
-    'template <{typenames}>',
-    'struct Traits{n}',
-    '{{',
-    '{type_params}',
-    'typedef TypeList{n}{templates_type_params} Type;',
-    '}};',
+def replace_args(s, d):
+    for k, r in d.items():
+        s = s.replace('@%s@' % k, '%s' % r)
+    return s
 
-    'template <{typenames}>',
-    'struct TraitsMember{n}',
-    '{{',
-    '{type_params}',
-    'typedef TypeListMember{n}{templates_type_params} Type;',
-    '}};'
-    )
-
-TRAITS_TYPE_PARAM = 'typedef typename GetType<P%d>::Type Type_Param%d;'
-
-IGNORE_0 = (0, 3, 6, 7, 8, 9, 10, 11)
+TRAITS = [l.replace('\n', '') for l in open('traits.tpl.hh')]
+TRAITS_TYPE_PARAM = open('traits_type_param.tpl.hpp').readlines()[0].replace('\n', '')
 
 def make_traits(n):
     if n < 0:
@@ -26,11 +14,11 @@ def make_traits(n):
         'n' : n,
         'typenames' : ', '.join('typename P%d' % i for i in range(1, n + 1)),
         'type_params' : '\n'.join(
-            TRAITS_TYPE_PARAM % (i, i) for i in range(1, n + 1)
+            replace_args(TRAITS_TYPE_PARAM, {'d' : i}) for i in range(1, n + 1)
             ),
         'templates_type_params' : ('<' + ', '.join('Type_Param%d' % i for i in range(1, n + 1)) + '>') if n else ''
         }
-    for i, line in enumerate(TRAITS):
-        if n or (not i in IGNORE_0):
-            lines.append(line.format(**kwargs))
+    for line in TRAITS:
+        if n or not line.endswith('// IGNORE_0'):
+            lines.append(replace_args(line, kwargs))
     return lines

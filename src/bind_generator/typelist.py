@@ -1,40 +1,9 @@
-TYPELIST = (
-    'template <{typenames}>',
-    'struct TypeList{n} : private Storage{n}{templates}',
-    '{{',
-    'typedef Storage{n}{templates} BaseClass;',
-    'TypeList{n}({params}) : BaseClass({params_names}) {{}}',
-    'template <typename T>',
-    'T& operator[](Value<T>& v)',
-    '{{',
-    'return v.get();',
-    '}}',
-    'template <typename ReturnType, typename Caller, typename List>',
-    'ReturnType operator()(TypeTraits<ReturnType>, Caller& caller, List& list)',
-    '{{',
-    'return caller({list_params});',
-    '}}',
-    '}};',
+def replace_args(s, d):
+    for k, r in d.items():
+        s = s.replace('@%s@' % k, '%s' % r)
+    return s
 
-    'template <{typenames}>',
-    'struct TypeListMember{n} : private Storage{n}{templates}',
-    '{{',
-    'typedef Storage{n}{templates} BaseClass;',
-    'TypeListMember{n}({params}) : BaseClass({params_names}) {{}}',
-    'template <typename T>',
-    'T& operator[](Value<T>& v)',
-    '{{',
-    'return v.get();',
-    '}}',
-    'template <typename ReturnType, typename Caller, typename List>',
-    'ReturnType operator()(TypeTraits<ReturnType>, Caller& caller, List& list)',
-    '{{',
-    'return (list[BaseClass::_t1].*caller)({list_params_next});',
-    '}}',
-    '}};',
-    )
-
-IGNORE_0 = tuple([0] + list(range(16, 32)))
+TYPELIST = [l.replace('\n', '') for l in open('typelist.tpl.hpp')]
 
 def make_typelist(n):
     if n < 0:
@@ -49,7 +18,7 @@ def make_typelist(n):
         'list_params' : ',\n'.join('list[BaseClass::_t%d]' % i for i in range(1, n + 1)),
         'list_params_next' : ',\n'.join('list[BaseClass::_t%d]' % i for i in range(2, n + 1))
         }
-    for i, line in enumerate(TYPELIST):
-        if n or (not i in IGNORE_0):
-            lines.append(line.format(**kwargs))
+    for line in TYPELIST:
+        if n or not line.endswith('// IGNORE_0'):
+            lines.append(replace_args(line, kwargs))
     return lines
