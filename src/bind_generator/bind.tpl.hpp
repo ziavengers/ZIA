@@ -1,9 +1,3 @@
-#include "value.hpp"
-#include "storage.hpp"
-#include "typelist.hpp"
-#include "traits.hh"
-#include "caller.hpp"
-
 template <typename ReturnType @X_typenames@ @Param_typenames@>
 Caller<ReturnType, ReturnType(*)(@X_params@), typename Traits@n@ @Param_templates@::Type>
 bind(ReturnType(*f)(@X_params@) @Param_params@)
