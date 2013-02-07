@@ -41,3 +41,17 @@ bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
   header.clear();
   return false;
 }
+
+bool ParserHttp::readCRLF()
+{
+  return (readText("\r\n") || readChar('\r') || readChar('\n'));
+}
+
+bool ParserHttp::readLWS()
+{
+  // Ajouter gestion du contexte (car si lit un CRLF mais pas d'espaces derrière, il ne s'agit pas d'un LWS, et trop de caractères auront été lus)
+  // Il faut donc ajouter une gestion de cache avec save() et restore() (on sauvegarde jusqu'à ce que tous les restore() soient clos)
+  readCRLF();
+  while (readChar(' ') || readChar('\t'))
+    ;
+}

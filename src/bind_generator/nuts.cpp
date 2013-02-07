@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Fri Jan 25 22:03:51 2013 Antoine Rozo
+// Last update Thu Feb  7 15:16:16 2013 Antoine Rozo
 */
 
 #include <string>
@@ -48,6 +48,17 @@ class Toto
   {
     return i + j + k + o + y + u;
   }
+
+  int	add()
+  {
+    std::cout << "Coucou, je suis une fonction membre de Toto" << std::endl;
+    return 0;
+  }
+  int	add(int a, int b)
+  {
+    std::cout << "Coucou, je suis une autre fonction membre de Toto" << std::endl;
+    return (a + b);
+  }
 };
 
 int	add(int i, int j, int k, int p, int o)
@@ -66,23 +77,28 @@ void test(std::string t, std::string i)
   std::cout <<i << std::endl;
 }
 
-void exec(ICaller<int>& func)
-{
-  func();
-}
-
 int	main()
 {
     std::string ty("JE SUIS LE PARAMETRE");
     std::string tt("JE SUIS LE PARAMETRE2");
     Caller<void, void(*)(), Traits0::Type >	func1 = bind(&toto);
+    
+    StockCallback s(bind(&toto));
+
+    s();
+
     Caller< int, int(*)(std::string), Traits1< std::string >::Type >	func2 = bind(&withParam, ty);
+    StockCallback s2(func2);
+    func2();
+    
     func1();
     func2();
-    exec(func2);
     Toto t;
     bind< int >(t)();
     std::cout << bind(&add, 2, 3)() << std::endl;
-    std::cout << bind< int, int, int, int, int, int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
+    std::cout << bind< int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
+    std::cout << bind< int >(t, 2, 3)() << std::endl;
+    std::cout << bind(&Toto::add, t)() << std::endl;
+    std::cout << bind(&Toto::add, t, 42, 21)() << std::endl;
 }
 

@@ -5,7 +5,7 @@
 // Login   <rozo_a@epitech.net>
 // 
 // Started on  Tue Sep 11 11:05:02 2012 Antoine Rozo
-// Last update Wed Feb  6 22:30:43 2013 Antoine Rozo
+// Last update Thu Feb  7 12:28:54 2013 Antoine Rozo
 //
 
 #ifndef CONSUMERPARSER_HPP_
@@ -18,7 +18,7 @@ class ConsumerParser
 {
 public:
   ConsumerParser(IProducterStream&);
-  ConsumerParser& operator=(const ConsumerParser&);
+  // ConsumerParser& operator=(const ConsumerParser&);
   inline bool peekChar(char c)
   {
     readBlockIfEmpty();
@@ -74,6 +74,10 @@ public:
     _tags.erase(it);
     return (out.size() > 0);
   }
+
+  void save();
+  void restore();
+
 private:
   IProducterStream& _prod;
   bool readBlock();

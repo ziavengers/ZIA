@@ -5,7 +5,7 @@
 // Login   <rozo_a@epitech.net>
 // 
 // Started on  Tue Sep 11 14:28:38 2012 Antoine Rozo
-// Last update Wed Feb  6 22:19:16 2013 Antoine Rozo
+// Last update Thu Feb  7 10:04:18 2013 Antoine Rozo
 //
 
 #ifndef PARSERHTTP_HH_
@@ -18,6 +18,8 @@ class ParserHttp : public ConsumerParser
 public:
   ParserHttp(IProducterStream&);
   bool readHttp(std::map<std::string, std::string>&);
+  bool readCRLF();
+  bool readLWS();
 };
 
 #endif
