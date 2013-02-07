@@ -5,13 +5,13 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Thu Feb  7 19:55:44 2013 Antoine Rozo
+// Last update Thu Feb  7 20:04:23 2013 Antoine Rozo
 */
 
 #include <string>
 #include <iostream>
 #include "../../bind.hpp"
-#include "../../stock_callback.hpp"
+#include "../../StockCallback.hpp"
 
 void	toto()
 {
@@ -82,30 +82,29 @@ int	main()
 {
     std::string ty("JE SUIS LE PARAMETRE");
     std::string tt("JE SUIS LE PARAMETRE2");
-    Caller<void, void(*)(), Traits0::Type >	func1 = bind(&toto);
+    zia::utils::Caller<void, void(*)(), zia::utils::Traits0::Type >	func1 = zia::utils::bind(&toto);
     
-    StockCallback s(bind(&toto));
-
+    zia::utils::StockCallback s(zia::utils::bind(&toto));
     s();
 
-    Caller< int, int(*)(std::string), Traits1< std::string >::Type >	func2 = bind(&withParam, ty);
-    StockCallback s2(func2);
+    zia::utils::Caller< int, int(*)(std::string), zia::utils::Traits1< std::string >::Type >	func2 = zia::utils::bind(&withParam, ty);
+    zia::utils::StockCallback s2(func2);
     func2();
     
     func1();
     func2();
     Toto t;
-    bind< int >(t)();
-    std::cout << bind(&add, 2, 3)() << std::endl;
-    std::cout << bind< int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
-    std::cout << bind< int >(t, 2, 3)() << std::endl;
-    std::cout << bind(&Toto::add, t)() << std::endl;
-    std::cout << bind(&Toto::add, t, 42, 21)() << std::endl;
+    zia::utils::bind< int >(t)();
+    std::cout << zia::utils::bind(&add, 2, 3)() << std::endl;
+    std::cout << zia::utils::bind< int >(t, 2, 3, 4, 9, 18, 36)() << std::endl;
+    std::cout << zia::utils::bind< int >(t, 2, 3)() << std::endl;
+    std::cout << zia::utils::bind(&Toto::add, t)() << std::endl;
+    std::cout << zia::utils::bind(&Toto::add, t, 42, 21)() << std::endl;
 
-    RStockCallback<int> s3(bind(add, 1, 2));
+    zia::utils::RStockCallback<int> s3(zia::utils::bind(add, 1, 2));
     std::cout << s3() << std::endl;
 
-    StockCallback s4(bind(add, 1, 2));
+    zia::utils::StockCallback s4(zia::utils::bind(add, 1, 2));
     s4();
 }
 

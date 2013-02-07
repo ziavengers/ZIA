@@ -39,11 +39,11 @@ int addition6(int a, int b, int c, int d, int e, int f)
 
 int main()
 {
-  std::cout << bind(addition0)() << std::endl;
-  std::cout << bind(addition1, 1)() << std::endl;
-  std::cout << bind(addition2, 1, 2)() << std::endl;
-  std::cout << bind(addition3, 1, 2, 3)() << std::endl;
-  std::cout << bind(addition4, 1, 2, 3, 4)() << std::endl;
-  std::cout << bind(addition5, 1, 2, 3, 4, 5)() << std::endl;
-  std::cout << bind(addition6, 1, 2, 3, 4, 5, 6)() << std::endl;
+  std::cout << zia::utils::bind(addition0)() << std::endl;
+  std::cout << zia::utils::bind(addition1, 1)() << std::endl;
+  std::cout << zia::utils::bind(addition2, 1, 2)() << std::endl;
+  std::cout << zia::utils::bind(addition3, 1, 2, 3)() << std::endl;
+  std::cout << zia::utils::bind(addition4, 1, 2, 3, 4)() << std::endl;
+  std::cout << zia::utils::bind(addition5, 1, 2, 3, 4, 5)() << std::endl;
+  std::cout << zia::utils::bind(addition6, 1, 2, 3, 4, 5, 6)() << std::endl;
 }

@@ -44,9 +44,9 @@ except FileExistsError:
     pass
 
 tranforms = [
-    ('storage.tpl.hpp', 'build/storage.hpp', make_storage),
-    ('typelist.tpl.hpp', 'build/typelist.hpp', make_typelist),
-    ('traits.tpl.hh', 'build/traits.hh', make_traits),
+    ('Storage.tpl.hpp', 'build/Storage.hpp', make_storage),
+    ('Typelist.tpl.hpp', 'build/Typelist.hpp', make_typelist),
+    ('Traits.tpl.hh', 'build/Traits.hh', make_traits),
     ('bind.tpl.hpp', 'build/bind.hpp', make_bind)
 ]
 for fin, fout, getargs in tranforms:

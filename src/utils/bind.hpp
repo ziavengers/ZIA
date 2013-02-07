@@ -1,11 +1,19 @@
 #ifndef BIND_HPP_
 #define BIND_HPP_
 
-#include "bind/value.hpp"
-#include "bind/build/storage.hpp"
-#include "bind/build/typelist.hpp"
-#include "bind/build/traits.hh"
-#include "bind/caller.hpp"
+namespace zia
+{
+  namespace utils
+  {
+
+#include "bind/Value.hpp"
+#include "bind/build/Storage.hpp"
+#include "bind/build/Typelist.hpp"
+#include "bind/build/Traits.hh"
+#include "bind/Caller.hpp"
 #include "bind/build/bind.hpp"
+
+  }
+}
 
 #endif
