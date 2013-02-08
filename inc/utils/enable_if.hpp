@@ -5,11 +5,12 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 17:26:08 2013 Rivot Corentin
-// Last update Fri Jan 25 17:28:08 2013 Rivot Corentin
+// Last update Fri Feb  8 15:14:25 2013 Rivot Corentin
 //
 
 #ifndef ENABLEIF_HPP_
 #define ENABLEIF_HPP_
+
 
 template < bool C, typename T=void* >
 

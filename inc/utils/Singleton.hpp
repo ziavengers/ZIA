@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Wed Dec 19 09:25:50 2012 Rivot Corentin
-// Last update Fri Feb  8 11:03:56 2013 Antoine Rozo
+// Last update Fri Feb  8 15:14:08 2013 Rivot Corentin
 //
 
 #ifndef SINGLETON_HPP_

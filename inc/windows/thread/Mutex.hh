@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:22:15 2013 Rivot Corentin
-// Last update Fri Jan 25 16:23:11 2013 Rivot Corentin
+// Last update Fri Feb  8 14:24:28 2013 Rivot Corentin
 //
 
 #ifndef MUTEX_HH_
@@ -15,19 +15,27 @@
 
 #include <Windows.h>
 
-class __declspec(dllexport) Mutex
+namespace zia
 {
-public:
-	Mutex();
-	~Mutex();
+  namespace thread
+  {
 
-	void	lock();
-	void	unlock();
-	bool	trylock();
+    class __declspec(dllexport) Mutex
+    {
+    public:
+      Mutex();
+      ~Mutex();
 
-private:
-	HANDLE	_mutex;
-};
+      void	lock();
+      void	unlock();
+      bool	trylock();
+
+    private:
+      HANDLE	_mutex;
+    };
+
+  }
+}
 
 #endif
 

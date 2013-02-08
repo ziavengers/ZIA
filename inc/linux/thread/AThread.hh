@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:01:02 2013 Rivot Corentin
-// Last update Fri Jan 25 16:11:56 2013 Rivot Corentin
+// Last update Fri Feb  8 14:27:08 2013 Rivot Corentin
 //
 
 #ifndef ATHREAD_HPP_
@@ -13,23 +13,30 @@
 
 #include <pthread.h>
 
-class AThread
+namespace zia
 {
-public:
-  void		start();
-  void*		join();
+  namespace thread
+  {
 
-  virtual void	init(void*) = 0;
-  virtual void*	run() = 0;
-  virtual void	pause() = 0;
-  virtual void	resume() = 0;
+    class AThread
+    {
+    public:
+      void		start();
+      void*		join();
 
-protected:
-  pthread_t	_thread;
+      virtual void	init(void*) = 0;
+      virtual void*	run() = 0;
+      virtual void	pause() = 0;
+      virtual void	resume() = 0;
 
-private:
-  static void*	startRoutine(void*);
-};
+    protected:
+      pthread_t	_thread;
 
+    private:
+      static void*	startRoutine(void*);
+    };
+
+  }
+}
 
 #endif
