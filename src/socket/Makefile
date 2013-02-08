@@ -1,7 +1,7 @@
 all: server client
 
-client: client.cpp Socket.cpp
-	g++ $^ -o $@ -I../../../inc/
+client: client.cpp linux/Socket.cpp
+	g++ $^ -o $@ -I../../inc/ -I../../inc/linux
 
-server: server.cpp Socket.cpp
-	g++ $^ -o $@ -I../../../inc/
+server: server.cpp linux/Socket.cpp
+	g++ $^ -o $@ -I../../inc/ -I../../inc/linux

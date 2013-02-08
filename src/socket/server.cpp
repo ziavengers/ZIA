@@ -1,7 +1,10 @@
+#define xstr(s) str(s)
+#define str(s) #s
+
 #include <stdlib.h>
 #include <list>
 #include <iostream>
-#include "socket/linux/Socket.hh"
+#include "socket/Socket.hh"
 
 int main(int ac, char** av)
 {
