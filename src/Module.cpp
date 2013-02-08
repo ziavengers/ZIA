@@ -5,10 +5,10 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Thu Feb  7 14:37:14 2013 Rivot Corentin
-// Last update Thu Feb  7 16:45:27 2013 Rivot Corentin
+// Last update Fri Feb  8 11:58:49 2013 Rivot Corentin
 //
 
-#include "Module.hh"
+#include <Module.hh>
 
 namespace zia
 {

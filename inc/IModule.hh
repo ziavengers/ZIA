@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Thu Feb  7 13:29:51 2013 Rivot Corentin
-// Last update Thu Feb  7 16:06:01 2013 Rivot Corentin
+// Last update Fri Feb  8 12:16:08 2013 Rivot Corentin
 //
 
 #ifndef IMODULE_HH_
@@ -34,6 +34,16 @@ namespace zia
 
       private:
     };
+
+    extern "C"
+    {
+      
+      /* Module must implement this function with this name! */
+      IModule*	createModule(void);            
+      
+    }
+
+
   }
 }
 
