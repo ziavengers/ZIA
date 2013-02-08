@@ -5,10 +5,10 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:21:38 2013 Rivot Corentin
-// Last update Fri Jan 25 16:22:10 2013 Rivot Corentin
+// Last update Fri Feb  8 11:00:04 2013 Antoine Rozo
 //
 
-#include "AThread.h"
+#include "inc/windows/AThread.h"
 
 void	AThread::start()
 {

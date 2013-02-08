@@ -5,12 +5,12 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Tue Feb 05 18:53:49 2013 
-// Last update Thu Feb  7 17:11:03 2013 Rivot Corentin
+// Last update Fri Feb  8 10:58:56 2013 Antoine Rozo
 */
 
 #include <iostream>
 
-#include "Logger.hh"
+#include "utils/Logger.hh"
 
 namespace zia
 {

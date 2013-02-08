@@ -8,7 +8,7 @@ namespace zia
 
 #include <map>
 #include <string>
-#include "../utils/bind.hpp"
+#include "utils/bind.hpp"
 
     class Object
     {

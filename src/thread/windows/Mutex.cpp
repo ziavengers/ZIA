@@ -5,10 +5,10 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:23:16 2013 Rivot Corentin
-// Last update Fri Jan 25 16:24:15 2013 Rivot Corentin
+// Last update Fri Feb  8 11:00:15 2013 Antoine Rozo
 //
 
-#include "Mutex.h"
+#include "inc/windows/Mutex.h"
 
 
 Mutex::Mutex(void)

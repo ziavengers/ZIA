@@ -5,11 +5,11 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:19:32 2013 Rivot Corentin
-// Last update Wed Feb  6 10:45:47 2013 Rivot Corentin
+// Last update Fri Feb  8 10:59:26 2013 Antoine Rozo
 //
 
 
-#include "ScopedLock.hh"
+#include "thread/ScopedLock.hh"
 
 namespace zia
 {

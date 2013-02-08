@@ -5,10 +5,10 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:18:21 2013 Rivot Corentin
-// Last update Wed Feb  6 09:53:07 2013 Rivot Corentin
+// Last update Fri Feb  8 10:59:42 2013 Antoine Rozo
 //
 
-#include "Mutex.hh"
+#include "thread/linux/Mutex.hh"
 
 
 namespace zia

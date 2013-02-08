@@ -1,8 +1,8 @@
 #include <exception>
 #include <iostream>
-#include "TestProducterStream.hh"
-// #include "ConsumerParser.hpp"
-#include "ParserHttp.hh"
+#include "parsing_http/TestProducterStream.hh"
+// #include "parsing_http/ConsumerParser.hpp"
+#include "parsing_http/ParserHttp.hh"
 
 #include <fstream>
 

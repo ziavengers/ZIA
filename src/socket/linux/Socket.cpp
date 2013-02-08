@@ -4,7 +4,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 
-#include "Socket.hh"
+#include "socket/linux/Socket.hh"
 
 // Ajouter vérifs (fonctions systèmes + ptrs + dynamic_cast) & exceptions
 

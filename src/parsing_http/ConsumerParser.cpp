@@ -5,10 +5,10 @@
 // Login   <rozo_a@epitech.net>
 // 
 // Started on  Tue Sep 11 11:16:04 2012 Antoine Rozo
-// Last update Thu Feb  7 12:29:17 2013 Antoine Rozo
+// Last update Fri Feb  8 10:56:35 2013 Antoine Rozo
 //
 
-#include "ConsumerParser.hpp"
+#include "parsing_http/ConsumerParser.hpp"
 
 ConsumerParser::ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags()
 {}
