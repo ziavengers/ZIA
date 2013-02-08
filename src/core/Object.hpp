@@ -1,24 +1,14 @@
-//
-// Signal.hpp for hh in /home/nuts/local/ZIA/src
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Tue Jan 29 20:22:06 2013 Rivot Corentin
-// Last update Thu Feb  7 20:38:20 2013 Antoine Rozo
-//
-
-#ifndef SIGNAL_HPP_
-#define SIGNAL_HPP_
+#ifndef OBJECT_HPP_
+#define OBJECT_HPP_
 
 namespace zia
 {
-  namespace utils
+  namespace core
   {
 
 #include <map>
 #include <string>
-#include "bind/Caller.hpp"
+#include "src/utils/bind.hpp"
 
     class Signal
     {
@@ -54,4 +44,5 @@ namespace zia
 
   }
 }
+
 #endif
