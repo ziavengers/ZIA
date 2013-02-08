@@ -5,7 +5,7 @@
 
 int main(int ac, char** av)
 {
-  zia::network::ISocket* s = new Socket();
+  zia::network::ISocket* s = new zia::network::Socket();
   s->bind(atoi(av[1]));
   s->listen(5);
 
@@ -26,14 +26,14 @@ int main(int ac, char** av)
 	{
 	  if (select->isSet(s, zia::network::ISocket::Select::READ))
 	    {
-	      ISocket* c = s->accept();
+	      zia::network::ISocket* c = s->accept();
 	      clients.push_back(c);
 	    }
-	  std::list<ISocket*> toDelete;
+	  std::list< zia::network::ISocket* > toDelete;
 	  for (it = clients.begin(); it != clients.end(); ++it)
 	    if (select->isSet(*it, zia::network::ISocket::Select::READ))
 	      {
-		ISocket* c = *it;
+		zia::network::ISocket* c = *it;
 		int len = c->read(buff, 100);
 		if (len > 0)
 		  {

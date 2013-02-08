@@ -4,7 +4,7 @@
 #include <netinet/in.h>
 #include <sys/select.h>
 
-#include "ISocket.hh"
+#include "../ISocket.hh"
 
 namespace zia
 {
