@@ -10,7 +10,7 @@ namespace zia
 #include <string>
 #include "src/utils/bind.hpp"
 
-    class Signal
+    class Object
     {
     public:
       Signal() { }
