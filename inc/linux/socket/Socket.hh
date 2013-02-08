@@ -4,14 +4,14 @@
 #include <netinet/in.h>
 #include <sys/select.h>
 
-#include "socket/ISocket.hh"
+#include "socket/ASocket.hh"
 
 namespace zia
 {
   namespace network
   {
 
-    class Socket : public ISocket
+    class Socket : public ASocket
     {
     public:
       Socket();
