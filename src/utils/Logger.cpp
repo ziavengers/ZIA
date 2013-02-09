@@ -1,13 +1,3 @@
-/*
-** Logger.cpp for  in /home/nuts/local/ZIA/src/utils
-** 
-** Made by 
-** Login   <nuts@epitech.net>
-** 
-** Started on  Tue Feb 05 18:53:49 2013 
-// Last update Fri Feb  8 10:58:56 2013 Antoine Rozo
-*/
-
 #include <iostream>
 
 #include "utils/Logger.hh"

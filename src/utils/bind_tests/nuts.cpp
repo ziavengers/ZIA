@@ -1,13 +1,3 @@
-/*
-** main.cpp for  in /home/nuts/local/ZIA/src/bind
-** 
-** Made by 
-** Login   <nuts@epitech.net>
-** 
-** Started on  Thu Jan 24 22:56:49 2013 
-// Last update Fri Feb  8 10:35:08 2013 Antoine Rozo
-*/
-
 #include <string>
 #include <iostream>
 #include "utils/bind.hpp"

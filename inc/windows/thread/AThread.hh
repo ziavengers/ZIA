@@ -1,13 +1,3 @@
-//
-// AThread.hh for hh in /home/nuts/local/ZIA/src/thread/linux
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Fri Jan 25 16:21:13 2013 Rivot Corentin
-// Last update Fri Feb  8 14:29:40 2013 Rivot Corentin
-//
-
 #ifndef ATHREAD_HPP_
 #define ATHREAD_HPP_
 

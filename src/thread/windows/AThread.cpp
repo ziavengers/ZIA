@@ -1,13 +1,3 @@
-//
-// AThread.cpp<2> for hh in /home/nuts/local/ZIA/src/thread/linux
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Fri Jan 25 16:21:38 2013 Rivot Corentin
-// Last update Fri Feb  8 11:00:04 2013 Antoine Rozo
-//
-
 #include "inc/windows/AThread.h"
 
 void	AThread::start()

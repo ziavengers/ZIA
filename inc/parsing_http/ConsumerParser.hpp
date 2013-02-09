@@ -1,13 +1,3 @@
-//
-// ConsumerParser.hpp for  in /home/rozo_a/Projects/tek3/piscine_parsing/d00
-// 
-// Made by Antoine Rozo
-// Login   <rozo_a@epitech.net>
-// 
-// Started on  Tue Sep 11 11:05:02 2012 Antoine Rozo
-// Last update Thu Feb  7 12:28:54 2013 Antoine Rozo
-//
-
 #ifndef CONSUMERPARSER_HPP_
 #define CONSUMERPARSER_HPP_
 

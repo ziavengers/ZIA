@@ -1,13 +1,3 @@
-//
-// Singleton.hpp for hh in /home/nuts/local/rtype/serveur
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Wed Dec 19 09:25:50 2012 Rivot Corentin
-// Last update Fri Feb  8 15:14:08 2013 Rivot Corentin
-//
-
 #ifndef SINGLETON_HPP_
 #define SINGLETON_HPP_
 

@@ -1,13 +1,3 @@
-//
-// APIException.hpp for hh in /home/nuts/local/ZIA/src
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Thu Feb  7 14:47:34 2013 Rivot Corentin
-// Last update Fri Feb  8 15:13:27 2013 Rivot Corentin
-//
-
 #ifndef APIEXCEPTION_HPP_
 #define APIEXCEPTION_HPP_
 

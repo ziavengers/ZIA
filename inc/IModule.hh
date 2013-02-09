@@ -1,13 +1,3 @@
-//
-// IModule.hh for hh in /home/nuts/local/ZIA/src
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Thu Feb  7 13:29:51 2013 Rivot Corentin
-// Last update Fri Feb  8 12:22:21 2013 Rivot Corentin
-//
-
 #ifndef IMODULE_HH_
 #define IMODULE_HH_
 

@@ -1,13 +1,3 @@
-/*
-** Logger.hh for  in /home/nuts/local/ZIA/src/utils
-** 
-** Made by 
-** Login   <nuts@epitech.net>
-** 
-** Started on  Tue Feb 05 18:07:01 2013 
-// Last update Fri Feb  8 15:13:38 2013 Rivot Corentin
-*/
-
 #ifndef		LOGGER_HH_
 # define	LOGGER_HH_
 

@@ -1,13 +1,3 @@
-//
-// enable_if.hpp for hh in /home/nuts/local/ZIA/src
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Fri Jan 25 17:26:08 2013 Rivot Corentin
-// Last update Fri Feb  8 15:14:25 2013 Rivot Corentin
-//
-
 #ifndef ENABLEIF_HPP_
 #define ENABLEIF_HPP_
 
