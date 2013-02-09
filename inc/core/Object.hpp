@@ -1,14 +1,14 @@
 #ifndef OBJECT_HPP_
 #define OBJECT_HPP_
 
+#include <map>
+#include <string>
+#include "utils/bind.hpp"
+
 namespace zia
 {
   namespace core
   {
-
-#include <map>
-#include <string>
-#include "utils/bind.hpp"
 
     class Object
     {

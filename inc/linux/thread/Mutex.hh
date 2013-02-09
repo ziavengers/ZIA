@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:17:55 2013 Rivot Corentin
-// Last update Wed Feb  6 09:48:21 2013 Rivot Corentin
+// Last update Fri Feb  8 14:23:54 2013 Rivot Corentin
 //
 
 
@@ -16,25 +16,24 @@
 
 namespace zia
 {
+  namespace thread
+  {
 
-namespace thread
-{
+    class Mutex
+    {
+    public:
+      Mutex();
+      ~Mutex();
 
-class Mutex
-{
-public:
-  Mutex();
-  ~Mutex();
+      void	lock();
+      void	unlock();
+      bool	trylock();
 
-  void	lock();
-  void	unlock();
-  bool	trylock();
+    private:
+      pthread_mutex_t	_mutex;
+    };
 
-private:
-  pthread_mutex_t	_mutex;
-};
-
-}
+  }
 }
 
 #endif

@@ -5,40 +5,40 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Fri Jan 25 16:19:18 2013 Rivot Corentin
-// Last update Wed Feb  6 10:45:55 2013 Rivot Corentin
+// Last update Fri Feb  8 15:13:07 2013 Rivot Corentin
 //
 
 #ifndef SCOPEDLOCK_HPP_
 #define SCOPEDLOCK_HPP_
 
-#include "linux/Mutex.hh"
+#include "thread/Mutex.hh"
 
 namespace zia
 {
-namespace thread
-{
-
-class	ScopedLock
-{
-public:
-  ScopedLock();
-  ~ScopedLock();
-
-private:
-  Mutex	_mutex;
-};
-
-  class Locker
+  namespace thread
   {
-  public:
-    explicit Locker(Mutex*);
-    ~Locker();
 
-  private:
-    Mutex	*_mutex;
-  };
+    class	ScopedLock
+    {
+    public:
+      ScopedLock();
+      ~ScopedLock();
 
-}
+    private:
+      Mutex	_mutex;
+    };
+
+    class Locker
+    {
+    public:
+      explicit Locker(Mutex*);
+      ~Locker();
+
+    private:
+      Mutex	*_mutex;
+    };
+
+  }
 }
 
 #endif

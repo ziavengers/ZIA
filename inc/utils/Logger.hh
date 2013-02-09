@@ -5,7 +5,7 @@
 ** Login   <nuts@epitech.net>
 ** 
 ** Started on  Tue Feb 05 18:07:01 2013 
-// Last update Thu Feb  7 17:02:36 2013 Rivot Corentin
+// Last update Fri Feb  8 15:13:38 2013 Rivot Corentin
 */
 
 #ifndef		LOGGER_HH_
@@ -17,15 +17,6 @@
 
 #include "Singleton.hpp"
 #include "NonCopyable.hh"
-
-/*
-
-  Work => Faire une classe File
-  Ajouter une classe File dans le Logger
-  Enregistrer toutes les infos dans le fichier de log avec la graviter du log (WARN, ERROR etc...)
-  Display ou non a l'ecran les informations
-
- */
 
 namespace zia
 {

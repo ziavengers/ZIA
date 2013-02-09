@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Thu Feb  7 14:47:34 2013 Rivot Corentin
-// Last update Thu Feb  7 16:13:26 2013 Rivot Corentin
+// Last update Fri Feb  8 15:13:27 2013 Rivot Corentin
 //
 
 #ifndef APIEXCEPTION_HPP_
