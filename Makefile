@@ -1,9 +1,11 @@
 ZIA_PATH = $(shell pwd)
 
-all: libsocket bind socket http
+all: libsocket gen_bind bind socket http
 
 libsocket:
 	$(MAKE) -C src/socket/linux/ ZIA_PATH=$(ZIA_PATH)
+
+gen_bind: inc/utils/bind/build
 
 bind:
 	$(MAKE) -C src/utils/bind_tests/ ZIA_PATH=$(ZIA_PATH)
@@ -13,3 +15,6 @@ socket:
 
 http:
 	$(MAKE) -C src/parsing_http/ ZIA_PATH=$(ZIA_PATH)
+
+inc/utils/bind/build:
+	@cd inc/utils/bind && ./generate.py 6
