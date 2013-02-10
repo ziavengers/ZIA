@@ -6,7 +6,7 @@
 
 #include "IModule.hh"
 #include "utils/Logger.hh"
-#include "utils/APIException.hpp"
+#include "utils/Exception.hpp"
 
 
 namespace zia
@@ -20,11 +20,11 @@ namespace module
     ModuleManagement();
     ~ModuleManagement();
 
-    void	loadModule(IModule*) throw (utils::APIException);
-    void	loadModule(const std::string& path) throw (utils::APIException);
+    void	loadModule(IModule*) throw (utils::Exception);
+    void	loadModule(const std::string& path) throw (utils::Exception);
 
-    void	unloadModule(IModule*) throw (utils::APIException);
-    void	unloadModule(const std::string& modName)  throw (utils::APIException);
+    void	unloadModule(IModule*) throw (utils::Exception);
+    void	unloadModule(const std::string& modName)  throw (utils::Exception);
 
   private:    
     std::list< IModule* >	_lModule;
