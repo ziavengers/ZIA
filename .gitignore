@@ -24,6 +24,7 @@ lib64
 CMakeFiles
 CMakeCache.txt
 cmake_install.cmake
+Makefile
 
 # Installer logs
 pip-log.txt
