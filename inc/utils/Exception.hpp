@@ -1,5 +1,5 @@
-#ifndef APIEXCEPTION_HPP_
-#define APIEXCEPTION_HPP_
+#ifndef EXCEPTION_HPP_
+#define EXCEPTION_HPP_
 
 #include <exception>
 #include <string>
@@ -11,12 +11,12 @@ namespace zia
 namespace utils
 {
 
-  class APIException : public std::exception
+  class Exception : public std::exception
   {
   public:
-    APIException(const std::string& s) : _msg(s) { }
+    Exception(const std::string& s) : _msg(s) { }
     
-    virtual ~APIException() throw() { }
+    virtual ~Exception() throw() { }
 
     const char *	what() const throw() {
       LOG_ERROR(_msg);
