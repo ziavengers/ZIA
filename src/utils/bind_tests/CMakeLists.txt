@@ -10,6 +10,6 @@ add_executable(
 )
 
 add_executable(
-	test
+	test_bind
 	main.cpp
 )

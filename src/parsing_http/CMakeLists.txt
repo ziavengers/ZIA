@@ -11,7 +11,7 @@ file(
 )
 
 add_executable(
-	test
+	test_http
 	${source_files}
 )
 	
