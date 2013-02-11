@@ -2,7 +2,7 @@
 
 ParserHttp::ParserHttp(IProducterStream& stream) : ConsumerParser(stream)
 {}
-#include <iostream>
+
 bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
 {
   if ((readText("GET") || readText("POST")) && readChar(' '))
@@ -12,7 +12,7 @@ bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
 	     || readChar('=') || readChar('+') || readChar(':') || readChar('-')
 	     || readRange('a', 'z') || readRange('A', 'Z') || readRange('0', '9'))
 	cont = true;
-      if (cont && readText(" http/1.1") && readChar('\n'))
+      if (cont && readTextIgnoreCase(" HTTP/1.1") && readChar('\n'))
 	{
 	  cont = true;
 	  while (!(readChar('\n') || readEOF()) && cont)

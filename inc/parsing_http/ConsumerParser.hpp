@@ -59,11 +59,16 @@ public:
   }
 
   bool readText(const std::string&);
+  bool readTextIgnoreCase(const std::string&, bool keep = true);
   bool readEOF();
   bool readUntil(char);
   bool readUntilEOF();
   bool readInteger();
   bool readIdentifier();
+
+  bool saveContext();
+  bool restoreContext();
+  bool validContext();
 
   inline bool beginCapture(std::string tag)
   {
@@ -82,10 +87,6 @@ public:
     _tags.erase(it);
     return (out.size() > 0);
   }
-
-  bool saveContext();
-  bool restoreContext();
-  bool validContext();
 
 private:
   IProducterStream& _prod;
