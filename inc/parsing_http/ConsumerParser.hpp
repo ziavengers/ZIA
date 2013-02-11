@@ -2,13 +2,37 @@
 #define CONSUMERPARSER_HPP_
 
 #include <map>
+#include <stack>
 #include "IProducterStream.hh"
 
 class ConsumerParser
 {
 public:
-  ConsumerParser(IProducterStream&);
-  // ConsumerParser& operator=(const ConsumerParser&);
+  ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags(), _cache()
+  {}
+
+private:
+  bool readBlock();
+  bool readBlockIfEmpty(size_t = 1);
+  size_t textLen(const std::string& text)
+  {
+    return text.size();
+  }
+  size_t textLen(char c)
+  {
+    return 1;
+  }
+  template < typename T >
+  void appendText(T text, bool truncBuff = true)
+  {
+    std::map< std::string, std::string >::iterator it;
+    for (it = _tags.begin(); it != _tags.end(); ++it)
+      it->second += text;
+    if (truncBuff)
+      _buff = _buff.substr(textLen(text));
+  }
+
+public:
   inline bool peekChar(char c)
   {
     readBlockIfEmpty();
@@ -18,10 +42,7 @@ public:
   {
     if (peekChar(c))
       {
-	std::map<std::string, std::string>::iterator it;
-	for (it = _tags.begin(); it != _tags.end(); ++it)
-	  it->second += c;
-	_buff = _buff.substr(1);
+	appendText(c);
 	return true;
       }
     return false;
@@ -31,10 +52,7 @@ public:
     readBlockIfEmpty();
     if(_buff[0] >= a && _buff[0] <= b)
       {
-	std::map<std::string, std::string>::iterator it;
-	for (it = _tags.begin(); it != _tags.end(); ++it)
-	  it->second += _buff[0];
-	_buff = _buff.substr(1);
+	appendText(_buff[0]);
 	return true;
       }
     return false;
@@ -65,15 +83,15 @@ public:
     return (out.size() > 0);
   }
 
-  void save();
-  void restore();
+  bool saveContext();
+  bool restoreContext();
+  bool validContext();
 
 private:
   IProducterStream& _prod;
-  bool readBlock();
-  bool readBlockIfEmpty(size_t = 1);
   std::string _buff;
-  std::map<std::string, std::string> _tags;
+  std::map< std::string, std::string > _tags;
+  std::stack< std::string > _cache;
 };
 
 #endif

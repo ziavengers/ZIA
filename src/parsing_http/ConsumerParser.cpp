@@ -1,19 +1,13 @@
 #include "parsing_http/ConsumerParser.hpp"
 
-ConsumerParser::ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags()
-{}
-
-// ConsumerParser& ConsumerParser::operator=(const ConsumerParser& other)
-// {
-//   _buff = other._buff;
-//   return *this;
-// }
-
 bool ConsumerParser::readBlock()
 {
   try
     {
-      _buff += _prod.nextString();
+      std::string s(_prod.nextString());
+      _buff += s;
+      if (_cache.size())
+      	_cache.top() += s;
       return true;
     }
   catch (...)
@@ -33,12 +27,9 @@ bool ConsumerParser::readBlockIfEmpty(size_t len)
 bool ConsumerParser::readText(const std::string& s)
 {
   readBlockIfEmpty(s.size());
-  if (_buff.find_first_of(s) == 0)
+  if (_buff.find(s) == 0)
     {
-      std::map<std::string, std::string>::iterator it;
-      for (it = _tags.begin(); it != _tags.end(); ++it)
-	it->second += s;
-      _buff = _buff.substr(s.size());
+      appendText(s);
       return true;
     }
   return false;
@@ -54,17 +45,15 @@ bool ConsumerParser::readUntil(char c)
   bool ret;
   std::string save;
 
-  while (readBlockIfEmpty() && !(ret = readChar(c)))
+  ret = false;
+  while (readBlockIfEmpty() && !ret)
     {
+      ret = peekChar(c);
       save += _buff[0];
       _buff = _buff.substr(1);
     }
   if (ret)
-    {
-      std::map<std::string, std::string>::iterator it;
-      for (it = _tags.begin(); it != _tags.end(); ++it)
-	it->second.insert(it->second.size() - 1, save);
-    }
+    appendText(save, false);
   else
     _buff = save + _buff;
   return ret;
@@ -79,9 +68,7 @@ bool ConsumerParser::readUntilEOF()
       save += _buff[0];
       _buff = _buff.substr(1);
     }
-  std::map<std::string, std::string>::iterator it;
-  for (it = _tags.begin(); it != _tags.end(); ++it)
-    it->second += save;
+  appendText(save, false);
   return true;
 }
 
@@ -103,8 +90,28 @@ bool ConsumerParser::readIdentifier()
   return true;
 }
 
-void ConsumerParser::save()
-{}
+bool ConsumerParser::saveContext()
+{
+  _cache.push(_buff);
+  return true;
+}
 
-void ConsumerParser::restore()
-{}
+bool ConsumerParser::restoreContext()
+{
+  if (!_cache.size())
+    return false;
+  _buff = _cache.top();
+  _cache.pop();
+  return true;
+}
+
+bool ConsumerParser::validContext()
+{
+  if (!_cache.size())
+    return false;
+  std::string save = _cache.top();
+  _cache.pop();
+  if (_cache.size())
+    _cache.top() += save;
+  return true;
+}
