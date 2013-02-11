@@ -1,19 +1,9 @@
-#include "thread/ScopedLock.hh"
+#include "thread/Locker.hh"
 
 namespace zia
 {
 namespace thread
 {
-
-ScopedLock::ScopedLock()
-{
-  _mutex.lock();
-}
-
-ScopedLock::~ScopedLock()
-{
-  _mutex.unlock();
-}
 
   Locker::Locker(Mutex* m)
   {

@@ -1,5 +1,5 @@
-#ifndef SCOPEDLOCK_HPP_
-#define SCOPEDLOCK_HPP_
+#ifndef LOCKER_HH_
+#define LOCKER_HH_
 
 #include "thread/Mutex.hh"
 
@@ -7,16 +7,6 @@ namespace zia
 {
   namespace thread
   {
-
-    class	ScopedLock
-    {
-    public:
-      ScopedLock();
-      ~ScopedLock();
-
-    private:
-      Mutex	_mutex;
-    };
 
     class Locker
     {
@@ -26,7 +16,7 @@ namespace zia
 
     private:
       IMutex	*_mutex;
-    };
+    };    
 
   }
 }

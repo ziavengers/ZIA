@@ -1,7 +1,7 @@
 #ifndef SINGLETON_HPP_
 #define SINGLETON_HPP_
 
-#include "thread/ScopedLock.hh"
+#include "thread/Locker.hh"
 
 namespace zia
 {
