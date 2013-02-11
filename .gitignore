@@ -20,6 +20,12 @@ develop-eggs
 lib
 lib64
 
+# CMake
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
 # Installer logs
 pip-log.txt
 

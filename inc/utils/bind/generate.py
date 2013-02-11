@@ -11,7 +11,7 @@ except:
     sys.stderr.write('Usage: %s N\n' % sys.argv[0])
     exit()
 
-from os import mkdir
+from os import mkdir, getcwd, path
 try:
     mkdir('build')
 except FileExistsError:
@@ -22,6 +22,7 @@ transforms = [
     ('Traits.tpl.hh', 'build/Traits.hh', 'traits'),
     ('bind.tpl.hpp', 'build/bind.hpp', 'bind')
 ]
+print('Generation bind for %d parameters' % N)
 for fin, fout, module in transforms:
-    print('%s -> %s' % (fin, fout))
+    print('%s -> %s' % (path.join(getcwd(), fin), path.join(getcwd(), fout)))
     tpl_to_file(fin, fout, __import__(module).getargs, N)
