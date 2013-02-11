@@ -2,17 +2,18 @@
 #define MUTEX_HPP_
 
 #include <pthread.h>
+#include "IMutex.hh"
 
 namespace zia
 {
   namespace thread
   {
 
-    class Mutex
+    class Mutex : public IMutex
     {
     public:
       Mutex();
-      ~Mutex();
+      virtual ~Mutex();
 
       void	lock();
       void	unlock();
