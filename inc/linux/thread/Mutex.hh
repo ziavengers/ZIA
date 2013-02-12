@@ -2,7 +2,7 @@
 #define MUTEX_HPP_
 
 #include <pthread.h>
-#include "IMutex.hh"
+#include "thread/IMutex.hh"
 
 namespace zia
 {
