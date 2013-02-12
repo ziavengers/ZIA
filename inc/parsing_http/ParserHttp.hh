@@ -7,7 +7,7 @@ class ParserHttp : public ConsumerParser
 {
 public:
   ParserHttp(IProducterStream&);
-  bool readHttp(std::map<std::string, std::string>&);
+  bool readHttp(std::string&, std::string&, std::map< std::string, std::string >&, std::string&);
   bool readCRLF();
   bool readLWS();
 };

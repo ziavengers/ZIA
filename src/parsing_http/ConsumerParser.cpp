@@ -26,10 +26,22 @@ bool ConsumerParser::readBlockIfEmpty(size_t len)
 }
 
 
-bool ConsumerParser::readText(const std::string& s)
+bool ConsumerParser::peekText(const std::string& s)
 {
   readBlockIfEmpty(s.size());
-  if (_buff.find(s) == 0)
+  return (_buff.find(s) == 0);
+}
+
+bool ConsumerParser::readText(const std::string& s)
+{
+  // readBlockIfEmpty(s.size());
+  // if (_buff.find(s) == 0)
+  //   {
+  //     appendText(s);
+  //     return true;
+  //   }
+  // return false;
+  if (peekText(s))
     {
       appendText(s);
       return true;
@@ -82,6 +94,32 @@ bool ConsumerParser::readUntil(char c)
       ret = peekChar(c);
       save += _buff[0];
       _buff = _buff.substr(1);
+    }
+  if (ret)
+    appendText(save, false);
+  else
+    _buff = save + _buff;
+  return ret;
+}
+
+bool ConsumerParser::readUntil(const std::string& s)
+{
+  bool ret;
+  std::string save;
+
+  ret = false;
+  while (readBlockIfEmpty() && !ret)
+    {
+      if ((ret = peekText(s)))
+	{
+	  save += s;
+	  _buff = _buff.substr(s.size());
+	}
+      else
+	{
+	  save += _buff[0];
+	  _buff = _buff.substr(1);
+	}
     }
   if (ret)
     appendText(save, false);
