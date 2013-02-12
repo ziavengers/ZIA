@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include "utils/bind.hpp"
+#include "utils/StockCallback.hpp"
 
 namespace zia
 {
@@ -17,31 +18,30 @@ namespace zia
       ~Object() {}
 
       template < typename T >
-      void connect(const std::string&, T)
-      {}
+      void connect(const std::string& s, T *func)
+      {
+	_calling[s] = new utils::StockCallback(utils::bind(func));
+      }
 
-      // void	connect(const std::string& s, T *func)
-      // {
-      // 	_calling[s] = new StockCallback(bind(func));
-      // }
+      template < typename ReturnType, typename Obj >
+      void connect(const std::string& s, ReturnType (Obj::*func)(), Obj* obj)
+      {
+	_calling[s] = new utils::StockCallback(utils::bind(func, *obj));
+      }
 
-      // template < typename T >
-
-      // void	connect(const std::string& s, int (T::*func)(), T* obj)
-      // {
-      // 	_calling[s] = new StockCallback(bind< int >(func, *obj));
-      // }  
+      template < typename ReturnType, typename Obj, typename P1 >
+      void connect(const std::string& s, ReturnType (Obj::*func)(P1), Obj* obj, P1 p)
+      {
+	_calling[s] = new utils::StockCallback(utils::bind(func, *obj, p));
+      }
   
-      // void	emit(const std::string& s)
-      // {
-      // 	(*_calling[s])();
-      // }
-
-      void emit(const std::string&)
-      {}
+      void	emit(const std::string& s)
+      {
+      	(*_calling[s])();
+      }
 
     protected:
-      std::map< std::string, StockCallback* >	_calling;
+      std::map< std::string, utils::StockCallback* >	_calling;
     };
 
   }
