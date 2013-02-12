@@ -25,6 +25,7 @@ bool ConsumerParser::readBlockIfEmpty(size_t len)
   return ret;
 }
 
+
 bool ConsumerParser::readRange(char a, char b)
 {
   readBlockIfEmpty();
@@ -34,24 +35,6 @@ bool ConsumerParser::readRange(char a, char b)
       return true;
     }
   return false;
-}
-
-size_t findIgnoreCase(const std::string& s1, const std::string& s2)
-{
-  size_t ret, retmax;
-  size_t i, j;
-
-  retmax = s1.size() - s2.size();
-  for (ret = 0; ret <= retmax; ++ret)
-    {
-      for (i = ret, j = 0;
-	   i < s1.size() && j < s2.size() && toupper(s1[i]) == toupper(s2[j]);
-	   ++i, ++j)
-	;
-      if (j == s2.size())
-	return ret;
-    }
-  return std::string::npos;
 }
 
 bool ConsumerParser::readIgnoreCase(const std::string& s, bool keep)
@@ -134,4 +117,24 @@ bool ConsumerParser::validContext()
   if (_cache.size())
     _cache.top() += save;
   return true;
+}
+
+
+
+size_t findIgnoreCase(const std::string& s1, const std::string& s2)
+{
+  size_t ret, retmax;
+  size_t i, j;
+
+  retmax = s1.size() - s2.size();
+  for (ret = 0; ret <= retmax; ++ret)
+    {
+      for (i = ret, j = 0;
+	   i < s1.size() && j < s2.size() && toupper(s1[i]) == toupper(s2[j]);
+	   ++i, ++j)
+	;
+      if (j == s2.size())
+	return ret;
+    }
+  return std::string::npos;
 }
