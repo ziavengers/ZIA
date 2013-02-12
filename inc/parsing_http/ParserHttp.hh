@@ -9,6 +9,7 @@ public:
   ParserHttp(IProducterStream&);
   bool readHttp(std::string&, std::string&, std::map< std::string, std::string >&, std::string&);
   bool readCRLF();
+  bool readUntilCRLF();
   bool readLWS();
 };
 

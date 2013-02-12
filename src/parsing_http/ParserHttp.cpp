@@ -33,7 +33,8 @@ bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::
 		  if (cont2 && endCapture("name", name) && (readLWS() || true) && read(':') && (readLWS() || true))
 		    {
 		      // Trouver comment faire un readUntil() sur plusieurs textes possibles
-		      if (beginCapture("value") && readUntil("\r\n") && endCapture("value", value))
+		      // if (beginCapture("value") && readUntil("\r\n") && endCapture("value", value))
+		      if (beginCapture("value") && readUntilCRLF() && endCapture("value", value))
 			{
 			  header[name] = value;
 			  cont = true;
@@ -57,8 +58,16 @@ bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::
 
 bool ParserHttp::readCRLF()
 {
-  // return read("\r\n");
   return (read("\r\n") || read('\r') || read('\n'));
+}
+
+bool ParserHttp::readUntilCRLF()
+{
+  std::vector< std::string > crlf(3);
+  crlf[0] = "\r\n";
+  crlf[1] = "\r";
+  crlf[2] = "\n";
+  return readUntil(crlf);
 }
 
 bool ParserHttp::readLWS()

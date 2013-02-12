@@ -25,25 +25,12 @@ bool ConsumerParser::readBlockIfEmpty(size_t len)
   return ret;
 }
 
-
-bool ConsumerParser::peek(const std::string& s)
+bool ConsumerParser::readRange(char a, char b)
 {
-  readBlockIfEmpty(s.size());
-  return (_buff.find(s) == 0);
-}
-
-bool ConsumerParser::read(const std::string& s)
-{
-  // readBlockIfEmpty(s.size());
-  // if (_buff.find(s) == 0)
-  //   {
-  //     appendText(s);
-  //     return true;
-  //   }
-  // return false;
-  if (peek(s))
+  readBlockIfEmpty();
+  if(_buff[0] >= a && _buff[0] <= b)
     {
-      appendText(s);
+      appendText(_buff[0]);
       return true;
     }
   return false;
@@ -83,50 +70,50 @@ bool ConsumerParser::readEOF()
   return !readBlockIfEmpty();
 }
 
-bool ConsumerParser::readUntil(char c)
-{
-  bool ret;
-  std::string save;
+// bool ConsumerParser::readUntil(char c)
+// {
+//   bool ret;
+//   std::string save;
 
-  ret = false;
-  while (readBlockIfEmpty() && !ret)
-    {
-      ret = peek(c);
-      save += _buff[0];
-      _buff = _buff.substr(1);
-    }
-  if (ret)
-    appendText(save, false);
-  else
-    _buff = save + _buff;
-  return ret;
-}
+//   ret = false;
+//   while (readBlockIfEmpty() && !ret)
+//     {
+//       ret = peek(c);
+//       save += _buff[0];
+//       _buff = _buff.substr(1);
+//     }
+//   if (ret)
+//     appendText(save, false);
+//   else
+//     _buff = save + _buff;
+//   return ret;
+// }
 
-bool ConsumerParser::readUntil(const std::string& s)
-{
-  bool ret;
-  std::string save;
+// bool ConsumerParser::readUntil(const std::string& s)
+// {
+//   bool ret;
+//   std::string save;
 
-  ret = false;
-  while (readBlockIfEmpty() && !ret)
-    {
-      if ((ret = peek(s)))
-	{
-	  save += s;
-	  _buff = _buff.substr(s.size());
-	}
-      else
-	{
-	  save += _buff[0];
-	  _buff = _buff.substr(1);
-	}
-    }
-  if (ret)
-    appendText(save, false);
-  else
-    _buff = save + _buff;
-  return ret;
-}
+//   ret = false;
+//   while (readBlockIfEmpty() && !ret)
+//     {
+//       if ((ret = peek(s)))
+// 	{
+// 	  save += s;
+// 	  _buff = _buff.substr(s.size());
+// 	}
+//       else
+// 	{
+// 	  save += _buff[0];
+// 	  _buff = _buff.substr(1);
+// 	}
+//     }
+//   if (ret)
+//     appendText(save, false);
+//   else
+//     _buff = save + _buff;
+//   return ret;
+// }
 
 bool ConsumerParser::readUntilEOF()
 {

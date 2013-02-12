@@ -3,6 +3,7 @@
 
 #include <map>
 #include <stack>
+#include <vector>
 #include "IProducterStream.hh"
 
 // Raccourcir les noms de méthodes
@@ -48,28 +49,61 @@ public:
     readBlockIfEmpty();
     return (_buff[0] == c);
   }
-  inline bool read(char c)
+  inline bool peek(const std::string& s)
   {
-    if (peek(c))
+    readBlockIfEmpty(s.size());
+    return (_buff.find(s) == 0);
+  }
+  template < typename T >
+  inline bool read(T text)
+  {
+    if (peek(text))
       {
-	appendText(c);
+	appendText(text);
 	return true;
       }
     return false;
   }
-  inline bool readRange(char a, char b)
+  
+  template < typename T >
+  bool readUntil(const std::vector< T >& vec)
   {
-    readBlockIfEmpty();
-    if(_buff[0] >= a && _buff[0] <= b)
+    typename std::vector< T >::const_iterator it;
+    bool ret;
+    std::string save;
+
+    ret = false;
+    while (readBlockIfEmpty() && !ret)
       {
-	appendText(_buff[0]);
-	return true;
+	for (it = vec.begin(); it != vec.end(); ++it)
+	  if ((ret = peek(*it)))
+	    break ;
+	if (ret)
+	  {
+	    save += *it;
+	    _buff = _buff.substr(textLen(*it));
+	  }
+	else
+	  {
+	    save += _buff[0];
+	    _buff = _buff.substr(1);
+	  }
       }
-    return false;
+    if (ret)
+      appendText(save, false);
+    else
+      _buff = save + _buff;
+    return ret;
+  }
+  template < typename T >
+  bool readUntil(T text)
+  {
+    typename std::vector< T > vec(1);
+    vec[0] = text;
+    return readUntil(vec);
   }
 
-  bool peek(const std::string&);
-  bool read(const std::string&);
+  bool readRange(char, char);
   bool readIgnoreCase(const std::string&, bool keep = true);
   bool readEOF();
   bool readUntil(char);
