@@ -5,7 +5,7 @@ namespace zia
 namespace thread
 {
 
-  Locker::Locker(Mutex* m)
+  Locker::Locker(IMutex* m)
   {
     _mutex = m;
     _mutex->lock();

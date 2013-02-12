@@ -43,6 +43,15 @@ namespace zia
 	  (*it)->operator()();
       }
 
+      void	disconnect(const std::string& s)
+      {
+      }
+
+      Object*	sender()
+      {
+	return this;
+      }
+
     protected:
       static std::map< std::string, std::list < utils::StockCallback* > >	_calling;
     };

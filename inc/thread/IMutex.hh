@@ -8,10 +8,10 @@ namespace zia
   namespace thread
   {
  
-    class IMutex : public NonCopyable
+    class IMutex : public utils::NonCopyable
     {
     public:
-      virtual ~Mutex() { }
+      virtual ~IMutex() { }
 
       virtual void	lock() = 0;
       virtual void	unlock() = 0;

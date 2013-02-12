@@ -1,4 +1,4 @@
-#include "thread/linux/Mutex.hh"
+#include "thread/Mutex.hh"
 
 
 namespace zia

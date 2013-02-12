@@ -3,6 +3,7 @@
 #include "parsing_http/TestProducterStream.hh"
 // #include "parsing_http/ConsumerParser.hpp"
 #include "parsing_http/ParserHttp.hh"
+#include "utils/Exception.hpp"
 
 #include <fstream>
 
