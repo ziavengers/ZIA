@@ -5,6 +5,15 @@
 #include <stack>
 #include "IProducterStream.hh"
 
+// Raccourcir les noms de méthodes :
+// - peekChar() et peekText() deviennent peek()
+// - readChar() et readText() deviennent read()
+
+// Ajouter de nouvelles fonctions prenant un tableau en param
+// Et étant valables pour l'un ou l'autre des éléments du tableau
+
+// Ajouter méthodes endAllCaptures(), restoreAllContexts(), et validAllContexts() ?
+
 class ConsumerParser
 {
 public:
@@ -58,10 +67,12 @@ public:
     return false;
   }
 
+  bool peekText(const std::string&);
   bool readText(const std::string&);
   bool readTextIgnoreCase(const std::string&, bool keep = true);
   bool readEOF();
   bool readUntil(char);
+  bool readUntil(const std::string&);
   bool readUntilEOF();
   bool readInteger();
   bool readIdentifier();

@@ -2,20 +2,26 @@
 
 ParserHttp::ParserHttp(IProducterStream& stream) : ConsumerParser(stream)
 {}
-
-bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
+#include <iostream>
+bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::string, std::string >& header, std::string& content)
 {
-  if ((readText("GET") || readText("POST")) && readChar(' '))
+  beginCapture("method");
+  if (readTextIgnoreCase("OPTIONS") || readTextIgnoreCase("GET") || readTextIgnoreCase("HEAD") || readTextIgnoreCase("POST") || readTextIgnoreCase("PUT") || readTextIgnoreCase("DELETE") || readTextIgnoreCase("TRACE") || readTextIgnoreCase("CONNECT"))
     {
+      endCapture("method", method);
+      readLWS();
       bool cont = false;
+      beginCapture("url");
       while (readChar('/') || readChar('.') || readChar('?') || readChar('%') || readChar('&')
 	     || readChar('=') || readChar('+') || readChar(':') || readChar('-')
 	     || readRange('a', 'z') || readRange('A', 'Z') || readRange('0', '9'))
 	cont = true;
-      if (cont && readTextIgnoreCase(" HTTP/1.1") && readChar('\n'))
+      endCapture("url", url);
+      readLWS();
+      if (cont && readTextIgnoreCase("HTTP/1.1") && readCRLF())
 	{
 	  cont = true;
-	  while (!(readChar('\n') || readEOF()) && cont)
+	  while (!(readCRLF() || readEOF()) && cont)
 	    {
 	      cont = false;
 	      if (beginCapture("name"))
@@ -24,9 +30,10 @@ bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
 		  bool cont2 = false;
 		  while (readChar('-') || readRange('a', 'z') || readRange('A', 'Z'))
 		    cont2 = true;
-		  if (cont2 && endCapture("name", name) && readChar(':'))
+		  if (cont2 && endCapture("name", name) && (readLWS() || true) && readChar(':') && (readLWS() || true))
 		    {
-		      if (beginCapture("value") && readUntil('\n') && endCapture("value", value))
+		      // Trouver comment faire un readUntil() sur plusieurs textes possibles
+		      if (beginCapture("value") && readUntil("\r\n") && endCapture("value", value))
 			{
 			  header[name] = value;
 			  cont = true;
@@ -34,24 +41,37 @@ bool ParserHttp::readHttp(std::map<std::string, std::string>& header)
 		    }
 		}
 	    }
-	  if (cont && readUntilEOF())
+	  if (cont
+	      && beginCapture("content")
+	      && readUntilEOF()
+	      && endCapture("content", content))
 	    return true;
 	}
     }
+  method.clear();
+  url.clear();
   header.clear();
+  content.clear();
   return false;
 }
 
 bool ParserHttp::readCRLF()
 {
+  // return readText("\r\n");
   return (readText("\r\n") || readChar('\r') || readChar('\n'));
 }
 
 bool ParserHttp::readLWS()
 {
-  // Ajouter gestion du contexte (car si lit un CRLF mais pas d'espaces derrière, il ne s'agit pas d'un LWS, et trop de caractères auront été lus)
-  // Il faut donc ajouter une gestion de cache avec save() et restore() (on sauvegarde jusqu'à ce que tous les restore() soient clos)
+  saveContext();
   readCRLF();
+  if (!(readChar(' ') || readChar('\t')))
+    {
+      restoreContext();
+      return false;
+    }
+  validContext();
   while (readChar(' ') || readChar('\t'))
     ;
+  return true;
 }
