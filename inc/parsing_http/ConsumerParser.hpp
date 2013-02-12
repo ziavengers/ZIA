@@ -6,20 +6,14 @@
 #include <vector>
 #include "IProducterStream.hh"
 
-// Raccourcir les noms de méthodes
-
-// Modifier la gestion de la casse:
-// Ajouter une méthode pour ignorer de façon globale la casse
-
-// Ajouter de nouvelles fonctions prenant un tableau en param
-// Et étant valables pour l'un ou l'autre des éléments du tableau
-
 // Ajouter méthodes endAllCaptures(), restoreAllContexts(), et validAllContexts() ?
+
+size_t findIgnoreCase(const std::string&, const std::string&);
 
 class ConsumerParser
 {
 public:
-  ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags(), _cache()
+  ConsumerParser(IProducterStream& prod) : _prod(prod), _buff(), _tags(), _cache(), _ignoreCase(false), _ignoreCaseKeepSame(true)
   {}
 
 private:
@@ -47,19 +41,22 @@ public:
   inline bool peek(char c)
   {
     readBlockIfEmpty();
-    return (_buff[0] == c);
+    return (_ignoreCase ? toupper(_buff[0]) == toupper(c) : _buff[0] == c);
   }
   inline bool peek(const std::string& s)
   {
     readBlockIfEmpty(s.size());
-    return (_buff.find(s) == 0);
+    return (_ignoreCase ? findIgnoreCase(_buff, s) == 0 : _buff.find(s) == 0);
   }
   template < typename T >
   inline bool read(T text)
   {
     if (peek(text))
       {
-	appendText(text);
+	if (_ignoreCase && _ignoreCaseKeepSame)
+	  appendText(_buff.substr(0, textLen(text)));
+	else
+	  appendText(text);
 	return true;
       }
     return false;
@@ -112,6 +109,8 @@ public:
   bool readInteger();
   bool readIdentifier();
 
+  bool ignoreCase(bool = true, bool = true);
+
   bool saveContext();
   bool restoreContext();
   bool validContext();
@@ -139,6 +138,8 @@ private:
   std::string _buff;
   std::map< std::string, std::string > _tags;
   std::stack< std::string > _cache;
+  bool _ignoreCase;
+  bool _ignoreCaseKeepSame;
 };
 
 #endif

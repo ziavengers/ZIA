@@ -56,64 +56,18 @@ size_t findIgnoreCase(const std::string& s1, const std::string& s2)
 
 bool ConsumerParser::readIgnoreCase(const std::string& s, bool keep)
 {
-  readBlockIfEmpty(s.size());
-  if (findIgnoreCase(_buff, s) == 0)
-    {
-      appendText(keep ? _buff.substr(0, s.size()) : s);
-      return true;
-    }
-  return false;
+  if (_ignoreCase)
+    return read(s);
+  ignoreCase(true, keep);
+  bool ret = read(s);
+  ignoreCase(false);
+  return ret;
 }
 
 bool ConsumerParser::readEOF()
 {
   return !readBlockIfEmpty();
 }
-
-// bool ConsumerParser::readUntil(char c)
-// {
-//   bool ret;
-//   std::string save;
-
-//   ret = false;
-//   while (readBlockIfEmpty() && !ret)
-//     {
-//       ret = peek(c);
-//       save += _buff[0];
-//       _buff = _buff.substr(1);
-//     }
-//   if (ret)
-//     appendText(save, false);
-//   else
-//     _buff = save + _buff;
-//   return ret;
-// }
-
-// bool ConsumerParser::readUntil(const std::string& s)
-// {
-//   bool ret;
-//   std::string save;
-
-//   ret = false;
-//   while (readBlockIfEmpty() && !ret)
-//     {
-//       if ((ret = peek(s)))
-// 	{
-// 	  save += s;
-// 	  _buff = _buff.substr(s.size());
-// 	}
-//       else
-// 	{
-// 	  save += _buff[0];
-// 	  _buff = _buff.substr(1);
-// 	}
-//     }
-//   if (ret)
-//     appendText(save, false);
-//   else
-//     _buff = save + _buff;
-//   return ret;
-// }
 
 bool ConsumerParser::readUntilEOF()
 {
@@ -143,6 +97,15 @@ bool ConsumerParser::readIdentifier()
     return false;
   while (readRange('0', '9') || readRange('a', 'z') || readRange('A', 'Z') || read('_'))
     ;
+  return true;
+}
+
+
+bool ConsumerParser::ignoreCase(bool ignore, bool keepSame)
+{
+  _ignoreCase = ignore;
+  if (ignore)
+    _ignoreCaseKeepSame = keepSame;
   return true;
 }
 
