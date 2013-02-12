@@ -12,3 +12,7 @@ add_library(
 	${ARCH}/AThread.cpp
 	${ARCH}/Mutex.cpp
 )
+target_link_libraries(
+	thread
+	pthread
+)
