@@ -1,25 +1,32 @@
-#include "thread/linux/AThread.hh"
+#include "thread/AThread.hh"
 
-void	AThread::start()
+namespace zia
 {
-  if (pthread_create(&_thread, 0, &AThread::startRoutine, this) != 0)
-    ;//    throw CoreException("AThread::start fail!");
+  namespace thread
+  {
+
+    void	AThread::start()
+    {
+      if (pthread_create(&_thread, 0, &AThread::startRoutine, this) != 0)
+	;//    throw CoreException("AThread::start fail!");
+    }
+
+    void*	AThread::join()
+    {
+      void*	ret;
+
+      if (pthread_join(_thread, &ret) != 0)
+	;//    throw CoreException("AThread::join fail!");
+      return ret;
+    }
+
+    void*	AThread::startRoutine(void* data)
+    {
+      AThread*	t;
+
+      t = reinterpret_cast< AThread* >(data);
+      return t->run();
+    }
+
+  }
 }
-
-void*	AThread::join()
-{
-  void*	ret;
-
-  if (pthread_join(_thread, &ret) != 0)
-    ;//    throw CoreException("AThread::join fail!");
-  return ret;
-}
-
-void*	AThread::startRoutine(void* data)
-{
-  AThread*	t;
-
-  t = reinterpret_cast< AThread* >(data);
-  return t->run();
-}
-
