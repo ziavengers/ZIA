@@ -2,9 +2,9 @@ project(testsocket)
 
 include_directories(
 	${ZIA_PATH}/inc/
-	${ZIA_PATH}/inc/linux/
+	${ZIA_PATH}/inc/${ARCH}/
 )
-link_directories(${ZIA_PATH}/lib/linux/socket/)
+link_directories(${ZIA_PATH}/lib/${ARCH}/socket/)
 
 add_executable(
 	client

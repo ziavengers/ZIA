@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.8)
 project(zia)
 
 set(ZIA_PATH ${CMAKE_SOURCE_DIR})
+set(ARCH linux)
+
 set(NB_BIND_PARAMS 6)
 
 add_subdirectory(inc/utils/bind)
