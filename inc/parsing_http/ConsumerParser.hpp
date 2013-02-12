@@ -5,9 +5,10 @@
 #include <stack>
 #include "IProducterStream.hh"
 
-// Raccourcir les noms de méthodes :
-// - peekChar() et peekText() deviennent peek()
-// - readChar() et readText() deviennent read()
+// Raccourcir les noms de méthodes
+
+// Modifier la gestion de la casse:
+// Ajouter une méthode pour ignorer de façon globale la casse
 
 // Ajouter de nouvelles fonctions prenant un tableau en param
 // Et étant valables pour l'un ou l'autre des éléments du tableau
@@ -42,14 +43,14 @@ private:
   }
 
 public:
-  inline bool peekChar(char c)
+  inline bool peek(char c)
   {
     readBlockIfEmpty();
     return (_buff[0] == c);
   }
-  inline bool readChar(char c)
+  inline bool read(char c)
   {
-    if (peekChar(c))
+    if (peek(c))
       {
 	appendText(c);
 	return true;
@@ -67,9 +68,9 @@ public:
     return false;
   }
 
-  bool peekText(const std::string&);
-  bool readText(const std::string&);
-  bool readTextIgnoreCase(const std::string&, bool keep = true);
+  bool peek(const std::string&);
+  bool read(const std::string&);
+  bool readIgnoreCase(const std::string&, bool keep = true);
   bool readEOF();
   bool readUntil(char);
   bool readUntil(const std::string&);

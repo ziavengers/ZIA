@@ -26,13 +26,13 @@ bool ConsumerParser::readBlockIfEmpty(size_t len)
 }
 
 
-bool ConsumerParser::peekText(const std::string& s)
+bool ConsumerParser::peek(const std::string& s)
 {
   readBlockIfEmpty(s.size());
   return (_buff.find(s) == 0);
 }
 
-bool ConsumerParser::readText(const std::string& s)
+bool ConsumerParser::read(const std::string& s)
 {
   // readBlockIfEmpty(s.size());
   // if (_buff.find(s) == 0)
@@ -41,7 +41,7 @@ bool ConsumerParser::readText(const std::string& s)
   //     return true;
   //   }
   // return false;
-  if (peekText(s))
+  if (peek(s))
     {
       appendText(s);
       return true;
@@ -67,7 +67,7 @@ size_t findIgnoreCase(const std::string& s1, const std::string& s2)
   return std::string::npos;
 }
 
-bool ConsumerParser::readTextIgnoreCase(const std::string& s, bool keep)
+bool ConsumerParser::readIgnoreCase(const std::string& s, bool keep)
 {
   readBlockIfEmpty(s.size());
   if (findIgnoreCase(_buff, s) == 0)
@@ -91,7 +91,7 @@ bool ConsumerParser::readUntil(char c)
   ret = false;
   while (readBlockIfEmpty() && !ret)
     {
-      ret = peekChar(c);
+      ret = peek(c);
       save += _buff[0];
       _buff = _buff.substr(1);
     }
@@ -110,7 +110,7 @@ bool ConsumerParser::readUntil(const std::string& s)
   ret = false;
   while (readBlockIfEmpty() && !ret)
     {
-      if ((ret = peekText(s)))
+      if ((ret = peek(s)))
 	{
 	  save += s;
 	  _buff = _buff.substr(s.size());
@@ -152,9 +152,9 @@ bool ConsumerParser::readInteger()
 
 bool ConsumerParser::readIdentifier()
 {
-  if (!(readRange('a', 'z') || readRange('A', 'Z') || readChar('_')))
+  if (!(readRange('a', 'z') || readRange('A', 'Z') || read('_')))
     return false;
-  while (readRange('0', '9') || readRange('a', 'z') || readRange('A', 'Z') || readChar('_'))
+  while (readRange('0', '9') || readRange('a', 'z') || readRange('A', 'Z') || read('_'))
     ;
   return true;
 }

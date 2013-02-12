@@ -6,19 +6,19 @@ ParserHttp::ParserHttp(IProducterStream& stream) : ConsumerParser(stream)
 bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::string, std::string >& header, std::string& content)
 {
   beginCapture("method");
-  if (readTextIgnoreCase("OPTIONS") || readTextIgnoreCase("GET") || readTextIgnoreCase("HEAD") || readTextIgnoreCase("POST") || readTextIgnoreCase("PUT") || readTextIgnoreCase("DELETE") || readTextIgnoreCase("TRACE") || readTextIgnoreCase("CONNECT"))
+  if (readIgnoreCase("OPTIONS") || readIgnoreCase("GET") || readIgnoreCase("HEAD") || readIgnoreCase("POST") || readIgnoreCase("PUT") || readIgnoreCase("DELETE") || readIgnoreCase("TRACE") || readIgnoreCase("CONNECT"))
     {
       endCapture("method", method);
       readLWS();
       bool cont = false;
       beginCapture("url");
-      while (readChar('/') || readChar('.') || readChar('?') || readChar('%') || readChar('&')
-	     || readChar('=') || readChar('+') || readChar(':') || readChar('-')
+      while (read('/') || read('.') || read('?') || read('%') || read('&')
+	     || read('=') || read('+') || read(':') || read('-')
 	     || readRange('a', 'z') || readRange('A', 'Z') || readRange('0', '9'))
 	cont = true;
       endCapture("url", url);
       readLWS();
-      if (cont && readTextIgnoreCase("HTTP/1.1") && readCRLF())
+      if (cont && readIgnoreCase("HTTP/1.1") && readCRLF())
 	{
 	  cont = true;
 	  while (!(readCRLF() || readEOF()) && cont)
@@ -28,9 +28,9 @@ bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::
 		{
 		  std::string name, value;
 		  bool cont2 = false;
-		  while (readChar('-') || readRange('a', 'z') || readRange('A', 'Z'))
+		  while (read('-') || readRange('a', 'z') || readRange('A', 'Z'))
 		    cont2 = true;
-		  if (cont2 && endCapture("name", name) && (readLWS() || true) && readChar(':') && (readLWS() || true))
+		  if (cont2 && endCapture("name", name) && (readLWS() || true) && read(':') && (readLWS() || true))
 		    {
 		      // Trouver comment faire un readUntil() sur plusieurs textes possibles
 		      if (beginCapture("value") && readUntil("\r\n") && endCapture("value", value))
@@ -57,21 +57,21 @@ bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::
 
 bool ParserHttp::readCRLF()
 {
-  // return readText("\r\n");
-  return (readText("\r\n") || readChar('\r') || readChar('\n'));
+  // return read("\r\n");
+  return (read("\r\n") || read('\r') || read('\n'));
 }
 
 bool ParserHttp::readLWS()
 {
   saveContext();
   readCRLF();
-  if (!(readChar(' ') || readChar('\t')))
+  if (!(read(' ') || read('\t')))
     {
       restoreContext();
       return false;
     }
   validContext();
-  while (readChar(' ') || readChar('\t'))
+  while (read(' ') || read('\t'))
     ;
   return true;
 }
