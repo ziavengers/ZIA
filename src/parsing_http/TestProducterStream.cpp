@@ -1,5 +1,5 @@
-#include <exception>
 #include "parsing_http/TestProducterStream.hh"
+#include "utils/Exception.hpp"
 
 TestProducterStream::TestProducterStream() : _strings(6), _it(_strings.begin())
 {
@@ -14,7 +14,7 @@ TestProducterStream::TestProducterStream() : _strings(6), _it(_strings.begin())
 std::string TestProducterStream::nextString()
 {
   if (_it == _strings.end())
-    throw std::exception();
+    throw zia::utils::Exception();
   std::string s = *_it;
   ++_it;
   return s;

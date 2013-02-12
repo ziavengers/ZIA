@@ -14,7 +14,7 @@ namespace utils
   class Exception : public std::exception
   {
   public:
-    Exception(const std::string& s) : _msg(s) { }
+    Exception(const std::string& s = "") : _msg(s) { }
     
     virtual ~Exception() throw() { }
 
