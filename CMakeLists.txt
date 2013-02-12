@@ -7,7 +7,8 @@ set(ARCH linux)
 set(NB_BIND_PARAMS 6)
 
 add_subdirectory(inc/utils/bind)
-add_subdirectory(src/socket/linux)
 add_subdirectory(src/socket/)
-add_subdirectory(src/utils/bind_tests)
 add_subdirectory(src/parsing_http)
+
+add_subdirectory(src/socket/test)
+add_subdirectory(src/utils/bind_tests)
