@@ -6,7 +6,11 @@ def replace_args(s, args):
 def next_line(tpl, getargs, n):
     with open(tpl, 'r') as f:
         lines = [l for l in f]
-        for i in range(n + 1):
+        r = range(n + 1)
+        if lines[0].startswith('// JUST_ONCE'):
+            lines = lines[1:]
+            r = range(n, n + 1)
+        for i in r:
             for line in lines:
                 if i or not line.replace('\n', '').endswith('// IGNORE_0'):
                     yield replace_args(line, getargs(i))

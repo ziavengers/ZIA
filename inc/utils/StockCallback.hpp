@@ -1,3 +1,6 @@
+#ifndef STOCKCALLBACK_HPP_
+#define STOCKCALLBACK_HPP_
+
 namespace zia
 {
   namespace utils
@@ -54,6 +57,7 @@ namespace zia
       {
       public:
 	virtual void operator()() = 0;
+	virtual ICaller* caller() = 0;
 	virtual ~Herited() { }
       };
       template < class I >
@@ -64,6 +68,10 @@ namespace zia
 	void	operator()()
 	{
 	  _func.operator()();
+	}
+	ICaller* caller()
+	{
+	  return &_func;
 	}
       private:
 	I	_func;
@@ -86,9 +94,15 @@ namespace zia
       {
 	_sub->operator()();
       }
+      ICaller* caller()
+      {
+	return _sub->caller();
+      }
     private:
       Herited	*_sub;
     };
 
   }
 }
+
+#endif

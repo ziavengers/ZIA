@@ -20,6 +20,7 @@ transforms = [
     ('Storage.tpl.hpp', 'build/Storage.hpp', 'storage'),
     ('Typelist.tpl.hpp', 'build/Typelist.hpp', 'typelist'),
     ('Traits.tpl.hh', 'build/Traits.hh', 'traits'),
+    ('ParamCaller.tpl.hpp', 'build/ParamCaller.hpp', 'paramcaller'),
     ('bind.tpl.hpp', 'build/bind.hpp', 'bind')
 ]
 print('Generation bind for %d parameters' % N)

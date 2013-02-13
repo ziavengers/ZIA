@@ -59,6 +59,7 @@ int	add(int i, int j, int k, int p, int o)
 
 int add(int i, int j)
 {
+  std::cout << "Addition of " << i << " and " << j << std::endl;
   return i+j;
 }
 
@@ -66,6 +67,12 @@ void test(std::string t, std::string i)
 {
   std::cout <<t << std::endl;
   std::cout <<i << std::endl;
+}
+
+void testReaffection(int i, std::string s)
+{
+  std::cout << i + 1 << std::endl;
+  std::cout << s + " !" << std::endl;
 }
 
 int	main()
@@ -78,6 +85,8 @@ int	main()
     s();
 
     zia::utils::Caller< int, int(*)(std::string), zia::utils::Traits1< std::string >::Type >	func2 = zia::utils::bind(&withParam, ty);
+    const std::string& hum("hum");
+    func2.set1(hum);
     zia::utils::StockCallback s2(func2);
     func2();
     
@@ -95,6 +104,20 @@ int	main()
     std::cout << s3() << std::endl;
 
     zia::utils::StockCallback s4(zia::utils::bind(add, 1, 2));
+    typedef zia::utils::ParamCaller< zia::utils::Traits2< int, int >::Type >* t_2int;
+    t_2int s4_ = dynamic_cast< t_2int >(s4.caller());
+    if (s4_)
+      {
+	std::cout << "EUREKA" << std::endl;
+	s4_->set1(5);
+	s4_->set2(7);
+      }
     s4();
+
+    std::string ok("ok");
+    zia::utils::Caller< void, void(*)(int, std::string), zia::utils::Traits2< int, std::string >::Type > func3 = zia::utils::bind(&testReaffection, 42, ok);
+    func3.set1(1);
+    func3.set2(hum);
+    func3();
 }
 
