@@ -1,6 +1,9 @@
 #ifndef VALUE_HPP_
 #define VALUE_HPP_
 
+namespace zia {
+  namespace utils {
+
 template <typename T>
 class Value
 {
@@ -24,5 +27,8 @@ public:
 template <typename T>
 struct TypeTraits
 {};
+
+  }
+}
 
 #endif

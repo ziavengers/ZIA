@@ -1,6 +1,8 @@
 #ifndef STOCKCALLBACK_HPP_
 #define STOCKCALLBACK_HPP_
 
+#include "bind/ICaller.hpp"
+
 namespace zia
 {
   namespace utils
