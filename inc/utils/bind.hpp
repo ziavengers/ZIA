@@ -6,6 +6,7 @@
 #include "bind/build/Typelist.hpp"
 #include "bind/build/Traits.hh"
 #include "bind/Caller.hpp"
+#include "bind/build/StockMethod.hpp"
 #include "bind/build/bind.hpp"
 
 #endif

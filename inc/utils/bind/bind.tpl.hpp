@@ -18,13 +18,13 @@ bind(Object& o @Param_params@)
   return Caller< ReturnType, Object, ListType >(o, l);
 }
 
-// Param1 == Object // IGNORE_0
-template < typename ReturnType @Param_typenames@ @X_typenames_next@ > // IGNORE_0
-Caller< ReturnType, ReturnType (Param1::*)(@X_params_next@), typename TraitsMember@n@ @Param_templates@::Type > // IGNORE_0
-bind(ReturnType (Param1::*func)(@X_params_next@) @Param_params@) // IGNORE_0
-{ // IGNORE_0
+template < typename ReturnType, typename Object @Param_typenames@ @X_typenames@ >
+Caller< ReturnType, StockMethod@n@< Object, ReturnType @X_params_@ >, typename Traits@n@ @Param_templates@::Type >
+bind(ReturnType (Object::*method)(@X_params@), Object& o @Param_params@)
+{
   @P_types@; // IGNORE_0
-  typedef TypeListMember@n@ @P_templates@ ListType; // IGNORE_0
-  ListType l@Param_params_simple@; // IGNORE_0
-  return Caller< ReturnType, ReturnType (Param1::*)(@X_params_next@), ListType >(func, l); // IGNORE_0
-} // IGNORE_0
+  typedef TypeList@n@ @P_templates@ ListType;
+  ListType l@Param_params_simple@;
+  typedef StockMethod@n@< Object, ReturnType @X_params_@ > Parent;
+  return Caller< ReturnType, Parent, ListType >(Parent(o, method), l);
+}
