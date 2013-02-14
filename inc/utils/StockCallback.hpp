@@ -8,6 +8,7 @@ namespace zia
   namespace utils
   {
 
+    // Pas mis à jour, donc ne bénéficie pas des dernières améliorations
     template <typename R>
     class RStockCallback
     {
