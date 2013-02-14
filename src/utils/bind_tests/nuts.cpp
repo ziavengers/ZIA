@@ -48,6 +48,7 @@ class Toto
   int	add(int a, int b)
   {
     std::cout << "Coucou, je suis une autre fonction membre de Toto" << std::endl;
+    std::cout << "Je prend " << a << " et " << b << " en paramètres" << std::endl;
     return (a + b);
   }
 };
@@ -119,5 +120,16 @@ int	main()
     func3.set1(1);
     func3.set2(hum);
     func3();
+
+    zia::utils::StockCallback toto_add = zia::utils::bind(&Toto::add, t, 0, 0);
+    typedef zia::utils::ParamCaller< zia::utils::TraitsMember3< Toto, int, int >::Type >* t_Toto_2int;
+    t_Toto_2int toto_add_ = dynamic_cast< t_Toto_2int >(toto_add.caller());
+    if (toto_add_)
+      {
+	// std::cout << "" << std::endl;
+	toto_add_->set2(5);
+	toto_add_->set3(15);
+      }
+    toto_add();
 }
 
