@@ -13,3 +13,8 @@ add_executable(
 	test_bind
 	main.cpp
 )
+
+add_executable(
+	object_bind
+	objects.cpp
+)
