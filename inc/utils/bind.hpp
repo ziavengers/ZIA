@@ -9,4 +9,6 @@
 #include "bind/build/StockMethod.hpp"
 #include "bind/build/bind.hpp"
 
+#include "bind/StockCallback.hpp"
+
 #endif

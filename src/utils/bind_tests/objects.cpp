@@ -3,7 +3,6 @@
 #include <map>
 #include <list>
 #include "utils/bind.hpp"
-#include "utils/StockCallback.hpp"
 
 class Object
 {

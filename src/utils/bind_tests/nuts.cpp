@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include "utils/bind.hpp"
-#include "utils/StockCallback.hpp"
 
 void	toto()
 {
