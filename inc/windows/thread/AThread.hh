@@ -1,27 +1,9 @@
 #ifndef ATHREAD_HH_
 #define ATHREAD_HH_
 
-#ifdef WIN
-
-
 #pragma once
 
 #include <windows.h>
-
-typedef HANDLE	thread_t
-
-#endif
-
-#ifdef LIN
-
-#include <pthread.h>
-
-#define __delspec()
-
-typedef pthread_t	thread_t
-
-#endif
-
 
 namespace zia
 {
