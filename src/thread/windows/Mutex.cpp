@@ -1,4 +1,4 @@
-#include "inc/windows/Mutex.h"
+#include "windows/thread/Mutex.h"
 
 
 Mutex::Mutex(void)

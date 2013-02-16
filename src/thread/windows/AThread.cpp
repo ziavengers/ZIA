@@ -1,4 +1,4 @@
-#include "inc/windows/AThread.h"
+#include "windows/thread/AThread.h"
 
 void	AThread::start()
 {
