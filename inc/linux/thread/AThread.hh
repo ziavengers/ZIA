@@ -1,5 +1,5 @@
-#ifndef ATHREAD_HPP_
-#define ATHREAD_HPP_
+#ifndef ATHREAD_HH_
+#define ATHREAD_HH_
 
 #include <pthread.h>
 

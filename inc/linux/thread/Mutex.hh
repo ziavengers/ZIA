@@ -1,5 +1,5 @@
-#ifndef MUTEX_HPP_
-#define MUTEX_HPP_
+#ifndef MUTEX_HH_
+#define MUTEX_HH_
 
 #include <pthread.h>
 #include "thread/IMutex.hh"
