@@ -120,7 +120,7 @@ int	main()
     func3.set2(hum);
     func3();
 
-    zia::utils::StockCallback toto_add = zia::utils::bind(&Toto::add, t, 0, 0);
+    zia::utils::RStockCallback< int > toto_add = zia::utils::bind(&Toto::add, t, 0, 0);
     typedef zia::utils::ParamCaller< zia::utils::Traits2< int, int >::Type >* t_2int;
     t_2int toto_add_ = dynamic_cast< t_2int >(toto_add.caller());
     if (toto_add_)
@@ -128,6 +128,6 @@ int	main()
     	toto_add_->set1(5);
     	toto_add_->set2(15);
       }
-    toto_add();
+    std::cout << "==> " << toto_add() << std::endl;
 }
 

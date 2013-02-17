@@ -6,7 +6,6 @@ namespace zia
   namespace utils
   {
 
-    // Pas mis à jour, donc ne bénéficie pas des dernières améliorations
     template <typename R>
     class RStockCallback
     {
@@ -15,6 +14,7 @@ namespace zia
       {
       public:
 	virtual R operator()() = 0;
+	virtual ICaller* caller() = 0;
 	virtual ~Herited() { }
       };
       template < class I >
@@ -25,6 +25,10 @@ namespace zia
 	R	operator()()
 	{
 	  return _func.operator()();
+	}
+	ICaller* caller()
+	{
+	  return &_func;
 	}
       private:
 	I	_func;
@@ -47,6 +51,10 @@ namespace zia
       {
 	return _sub->operator()();
       }
+      ICaller* caller()
+      {
+	return _sub->caller();
+      }
     private:
       Herited	*_sub;
     };
@@ -57,47 +65,47 @@ namespace zia
       class Herited
       {
       public:
-	virtual void operator()() = 0;
-	virtual ICaller* caller() = 0;
-	virtual ~Herited() { }
+    	virtual void operator()() = 0;
+    	virtual ICaller* caller() = 0;
+    	virtual ~Herited() { }
       };
       template < class I >
       class Subterfuge : public Herited
       {
       public:
-	Subterfuge(I& obj) : _func(obj) { }
-	void	operator()()
-	{
-	  _func.operator()();
-	}
-	ICaller* caller()
-	{
-	  return &_func;
-	}
+    	Subterfuge(I& obj) : _func(obj) { }
+    	void	operator()()
+    	{
+    	  _func.operator()();
+    	}
+    	ICaller* caller()
+    	{
+    	  return &_func;
+    	}
       private:
-	I	_func;
+    	I	_func;
       };
       template < typename I >
       StockCallback(I t)
       {
-	_sub = new Subterfuge< I >(t);
+    	_sub = new Subterfuge< I >(t);
       }
       StockCallback(const StockCallback& s)
       {
-	_sub = s._sub;
+    	_sub = s._sub;
       }
       StockCallback&	operator=(const StockCallback& s)
       {
-	this->_sub = s._sub;
-	return *this;
+    	this->_sub = s._sub;
+    	return *this;
       }
       void	operator()()
       {
-	_sub->operator()();
+    	_sub->operator()();
       }
       ICaller* caller()
       {
-	return _sub->caller();
+    	return _sub->caller();
       }
     private:
       Herited	*_sub;
