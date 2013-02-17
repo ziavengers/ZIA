@@ -14,3 +14,4 @@ add_subdirectory(src/parsing_http)
 
 add_subdirectory(src/socket/test)
 add_subdirectory(src/utils/bind_tests)
+add_subdirectory(src/utils/Object_tests)
