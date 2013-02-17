@@ -16,13 +16,21 @@ namespace zia
     {
     public:
       virtual ~Object() {}
-      void connect(const std::string& name, StockCallback slot)
+      size_t connect(const std::string& name, const StockCallback& slot)
       {
-      	_slots[name].push_back(slot);
+	_slots[name][this].push_back(s_slot(slot));
+	return _nbConnections;
       }
       #include "build/emit.hpp"
     private:
-      static std::map< std::string, std::list< StockCallback > > _slots;
+      struct s_slot
+      {
+      	s_slot(const StockCallback& c_) : id(_nbConnections++), c(c_) {}
+      	size_t id;
+      	StockCallback c;
+      };
+      static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
+      static size_t _nbConnections;
     };
 
   }
