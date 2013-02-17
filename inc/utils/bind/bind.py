@@ -1,4 +1,4 @@
-from utils import loadfile, replace_args
+from generator import loadfile, replace_args
 
 BIND_P_TYPE = loadfile('bind_p_type.tpl.hpp')
 

@@ -1,4 +1,4 @@
-from utils import loadfile, replace_args
+from generator import loadfile, replace_args
 
 PARAMCALLER_SETTERS = loadfile('paramcaller_setters.tpl.hpp')
 

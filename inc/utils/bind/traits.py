@@ -1,4 +1,4 @@
-from utils import loadfile, replace_args
+from generator import loadfile, replace_args
 
 TRAITS_TYPE_PARAM = loadfile('traits_type_param.tpl.hpp')
 

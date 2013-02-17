@@ -18,17 +18,17 @@ def next_line(tpl, getargs, n):
 def name_to_define(name):
     return ''.join(c if c.isalnum() else '_' for c in name.upper()) + '_'
 
-def tpl_to_file(tpl, filename, getargs, n):
+def tpl_to_file(tpl, filename, getargs, n, namespaces = ()):
     with open(filename, 'w') as f:
         define = name_to_define(filename)
         f.write('#ifndef %s\n' % define)
         f.write('#define %s\n' % define)
-        f.write('namespace zia {\n')
-        f.write('namespace utils {\n')
+        for namespace in namespaces:
+            f.write('namespace %s {\n' % namespace)
         for line in next_line(tpl, getargs, n):
             f.write(line)
-        f.write('}\n')
-        f.write('}\n')
+        for _ in namespaces:
+            f.write('}\n')
         f.write('#endif\n')
 
 def tpl_to_str(tpl, getargs, n = 0):

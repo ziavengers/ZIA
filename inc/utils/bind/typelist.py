@@ -1,4 +1,4 @@
-from utils import loadfile, replace_args
+from generator import loadfile, replace_args
 
 TYPELIST_SETTERS = loadfile('typelist_setters.tpl.hpp')
 
