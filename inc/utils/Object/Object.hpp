@@ -28,52 +28,27 @@ namespace zia
       {
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	for (itm = _slots.begin(); itm != _slots.end(); ++itm)
-	  itm->second.erase(this);
+	  disconnect(itm);
       }
-      // Factoriser
       void disconnect(const std::string& name, size_t id)
       {
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
-	std::map< Object*, std::list < s_slot > >::iterator ito;
-	std::list < s_slot >::iterator it;
 	itm = _slots.find(name);
 	if (itm != _slots.end())
-	  {
-	    ito = itm->second.find(this);
-	    if (ito != itm->second.end())
-	      for (it = ito->second.begin(); it != ito->second.end(); ++it)
-		if (it->id == id)
-		  {
-		    ito->second.erase(it);
-		    return ;
-		  }
-	  }
+	  disconnect(itm, id);
       }
       void disconnect(size_t id)
       {
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
-	std::map< Object*, std::list < s_slot > >::iterator ito;
-	std::list < s_slot >::iterator it;
 	for (itm = _slots.begin(); itm != _slots.end(); ++itm)
-	  {
-	    ito = itm->second.find(this);
-	    if (ito != itm->second.end())
-	      for (it = ito->second.begin(); it != ito->second.end(); ++it)
-		if (it->id == id)
-		  {
-		    ito->second.erase(it);
-		    return ;
-		  }
-	  }
+	  disconnect(itm, id);
       }
       void disconnect(const std::string& name)
       {
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	itm = _slots.find(name);
 	if (itm != _slots.end())
-	  {
-	    itm->second.erase(this);
-	  }
+	  disconnect(itm);
       }
       #include "build/emit.hpp"
     private:
@@ -85,6 +60,25 @@ namespace zia
       };
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
       static size_t _nbConnections;
+
+
+      inline void disconnect(const std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator& itm)
+      {
+	itm->second.erase(this);
+      }
+      inline void disconnect(const std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator& itm, size_t id)
+      {
+	std::map< Object*, std::list < s_slot > >::iterator ito;
+	std::list < s_slot >::iterator it;
+	ito = itm->second.find(this);
+	if (ito != itm->second.end())
+	  for (it = ito->second.begin(); it != ito->second.end(); ++it)
+	    if (it->id == id)
+	      {
+		ito->second.erase(it);
+		return ;
+	      }
+      }
     };
 
   }
