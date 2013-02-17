@@ -7,6 +7,7 @@ set(ARCH linux)
 set(NB_BIND_PARAMS 6)
 
 add_subdirectory(inc/utils/bind)
+add_subdirectory(inc/utils/Object)
 add_subdirectory(src/socket/)
 add_subdirectory(src/thread/)
 add_subdirectory(src/parsing_http)
