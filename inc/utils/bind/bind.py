@@ -16,7 +16,5 @@ def getargs(n):
             replace_args(BIND_P_TYPE, {'i' : i}) for i in range(1, n + 1)
             ),
         'P_templates' : ('< ' + ', '.join('P%d' % i for i in range(1, n + 1)) + ' >') if n else '',
-        #'X_typenames_next' : (', ' + ', '.join('typename X%d' % i for i in range(2, n + 1))) if n > 1 else '',
-        #'X_params_next' : ', '.join('X%d' % i for i in range(2, n + 1))
         }
     return args
