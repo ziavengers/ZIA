@@ -24,6 +24,7 @@ int main()
 
   myo = ctor();
   o.emit("mysig", 1, 2);
+  myo->disconnect("mysig");
   o.emit("mysig", 4, 5);
   delete myo;
 
