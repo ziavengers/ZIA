@@ -2,12 +2,12 @@
 #include <iostream>
 #include "core/Object.hpp"
 
-typedef zia::utils::Object* (*t_ctor)();
+typedef zia::core::Object* (*t_ctor)();
 
 int main()
 {
-  zia::utils::Object o;
-  zia::utils::Object* myo;
+  zia::core::Object o;
+  zia::core::Object* myo;
 
   void* handle = dlopen("./libtest.so", RTLD_LAZY);
   if (!handle)

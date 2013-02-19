@@ -10,7 +10,7 @@ void emit(const std::string& name @params@)
     for (ito = itm->second.begin(); ito != itm->second.end(); ++ito)
       for (it = ito->second.begin(); it != ito->second.end(); ++it)
 	{
-	  typedef zia::utils::ParamCaller< typename zia::utils::Traits@n@@templates@::Type > t_caller;
+	  typedef utils::ParamCaller< typename utils::Traits@n@@templates@::Type > t_caller;
 	  t_caller* caller = dynamic_cast< t_caller* >(it->c.caller());
 	  if (caller)
 	    {

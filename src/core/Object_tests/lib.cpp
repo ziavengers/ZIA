@@ -2,7 +2,7 @@
 
 #include "core/Object.hpp"
 
-class MyObject : public zia::utils::Object
+class MyObject : public zia::core::Object
 {
 public:
   MyObject()
@@ -22,7 +22,7 @@ public:
 
 extern "C"
 {
-  zia::utils::Object* createObject()
+  zia::core::Object* createObject()
   {
     return new MyObject;
   }

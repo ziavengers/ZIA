@@ -2,7 +2,7 @@
 
 namespace zia
 {
-  namespace utils
+  namespace core
   {
 
     std::map< std::string, std::map< Object*, std::list< Object::s_slot > > > Object::_slots;

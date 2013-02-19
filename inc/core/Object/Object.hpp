@@ -9,7 +9,7 @@
 
 namespace zia
 {
-  namespace utils
+  namespace core
   {
 
     class Object
@@ -19,7 +19,7 @@ namespace zia
       {
 	disconnect();
       }
-      size_t connect(const std::string& name, const StockCallback& slot)
+      size_t connect(const std::string& name, const utils::StockCallback& slot)
       {
 	_slots[name][this].push_back(s_slot(slot));
 	return _nbConnections;
@@ -54,9 +54,9 @@ namespace zia
     private:
       struct s_slot
       {
-      	s_slot(const StockCallback& c_) : id(_nbConnections++), c(c_) {}
+      	s_slot(const utils::StockCallback& c_) : id(_nbConnections++), c(c_) {}
       	size_t id;
-      	StockCallback c;
+      	utils::StockCallback c;
       };
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
       static size_t _nbConnections;
