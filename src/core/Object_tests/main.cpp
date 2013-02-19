@@ -1,6 +1,6 @@
 #include <dlfcn.h>
 #include <iostream>
-#include "utils/Object.hpp"
+#include "core/Object.hpp"
 
 typedef zia::utils::Object* (*t_ctor)();
 

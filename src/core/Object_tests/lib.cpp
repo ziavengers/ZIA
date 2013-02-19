@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "utils/Object.hpp"
+#include "core/Object.hpp"
 
 class MyObject : public zia::utils::Object
 {
