@@ -11,11 +11,11 @@ namespace zia
     class Locker
     {
     public:
-      explicit Locker(IMutex*);
+      explicit Locker(IMutex&);
       ~Locker();
 
     private:
-      IMutex	*_mutex;
+      IMutex	&_mutex;
     };    
 
   }
