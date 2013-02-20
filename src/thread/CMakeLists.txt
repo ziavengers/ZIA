@@ -11,6 +11,7 @@ add_library(
 	SHARED
 	${ARCH}/AThread.cpp
 	${ARCH}/Mutex.cpp
+	Locker.cpp
 )
 target_link_libraries(
 	thread
