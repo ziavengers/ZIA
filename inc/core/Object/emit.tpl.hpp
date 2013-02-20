@@ -1,6 +1,7 @@
 template < @typenames@ > // IGNORE_0
 void emit(const std::string& name @params@)
 {
+  thread::Locker lock(_slotsMutex);
   std::map< std::string, std::map< Object*, std::list< s_slot > > >::iterator itm;
   std::map< Object*, std::list< s_slot > >::iterator ito;
   std::list< s_slot >::iterator it;

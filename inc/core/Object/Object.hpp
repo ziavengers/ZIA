@@ -6,6 +6,8 @@
 #include <list>
 
 #include "utils/bind.hpp"
+#include "thread/Mutex.hh"
+#include "thread/Locker.hh"
 
 namespace zia
 {
@@ -21,17 +23,20 @@ namespace zia
       }
       size_t connect(const std::string& name, const utils::StockCallback& slot)
       {
+	thread::Locker lock(_slotsMutex);
 	_slots[name][this].push_back(s_slot(slot));
 	return _nbConnections;
       }
       void disconnect()
       {
+	thread::Locker lock(_slotsMutex);
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	for (itm = _slots.begin(); itm != _slots.end(); ++itm)
 	  disconnect(itm);
       }
       void disconnect(const std::string& name, size_t id)
       {
+	thread::Locker lock(_slotsMutex);
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	itm = _slots.find(name);
 	if (itm != _slots.end())
@@ -39,12 +44,14 @@ namespace zia
       }
       void disconnect(size_t id)
       {
+	thread::Locker lock(_slotsMutex);
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	for (itm = _slots.begin(); itm != _slots.end(); ++itm)
 	  disconnect(itm, id);
       }
       void disconnect(const std::string& name)
       {
+	thread::Locker lock(_slotsMutex);
 	std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator itm;
 	itm = _slots.find(name);
 	if (itm != _slots.end())
@@ -59,6 +66,7 @@ namespace zia
       	utils::StockCallback c;
       };
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
+      static thread::Mutex _slotsMutex;
       static size_t _nbConnections;
 
 

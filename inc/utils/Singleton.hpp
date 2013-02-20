@@ -15,7 +15,7 @@ namespace zia
     public:
       static T*	instance()
       {
-	thread::Locker lock(&_mutex);
+	thread::Locker lock(_mutex);
 	if (!_instance)
 	  _instance = new T;
 	return _instance;
@@ -23,7 +23,7 @@ namespace zia
 
       static void	kill()
       {
-	thread::Locker lock(&_mutex);
+	thread::Locker lock(_mutex);
 	if (_instance)
 	  delete _instance;
 	_instance = 0;
