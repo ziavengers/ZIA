@@ -4,9 +4,19 @@
 
 typedef zia::core::Object* (*t_ctor)();
 
+class AAA : public zia::core::Object
+{
+public:
+  void aaa()
+  {
+    std::cout << "aaa" << std::endl;
+    emit("mysig", 1, 1);
+  }
+};
+
 int main()
 {
-  zia::core::Object o;
+  AAA o;
   zia::core::Object* myo;
 
   void* handle = dlopen("./libtest.so", RTLD_LAZY);
@@ -23,6 +33,7 @@ int main()
     }
 
   myo = ctor();
+  o.connect("huhu", zia::utils::bind(&AAA::aaa, o));
   o.emit("mysig", 1, 2);
   myo->disconnect("mysig");
   o.emit("mysig", 4, 5);

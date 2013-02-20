@@ -17,6 +17,7 @@ public:
   void add(int a, int b)
   {
     std::cout << "Addition de " << a << " et " << b << std::endl;
+    emit("huhu");
   }
 };
 
