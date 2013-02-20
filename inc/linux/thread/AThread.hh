@@ -2,13 +2,14 @@
 #define ATHREAD_HH_
 
 #include <pthread.h>
+#include "thread/IThread.hh"
 
 namespace zia
 {
   namespace thread
   {
 
-    class AThread
+    class AThread : public IThread
     {
     public:
       void		start();

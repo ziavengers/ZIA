@@ -4,13 +4,14 @@
 #pragma once
 
 #include <windows.h>
+#include "thread/IThread.hh"
 
 namespace zia
 {
   namespace thread
   {
 
-    class __declspec(dllexport) AThread
+    class __declspec(dllexport) AThread : public IThread
     {
     public:
       void		start();
