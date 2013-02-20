@@ -9,7 +9,7 @@ namespace zia
     class IThread
     {
     public:
-      virtual void statrt() = 0;
+      virtual void start() = 0;
       virtual void* join() = 0;
 
       virtual void init(void*) = 0;
