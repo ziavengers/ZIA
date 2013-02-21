@@ -12,10 +12,7 @@ namespace zia
       virtual void start() = 0;
       virtual void* join() = 0;
 
-      virtual void init(void*) = 0;
       virtual void* run() = 0;
-      virtual void pause() = 0;
-      virtual void resume() = 0;
     };
 
   }
