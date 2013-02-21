@@ -22,10 +22,7 @@ namespace zia
       public:
 	Thread(ThreadPool&);
 	Thread(const Thread&);
-	void init(void*);
 	void* run();
-	void pause();
-	void resume();
       private:
 	ThreadPool& _pool;
       };
@@ -45,6 +42,8 @@ namespace zia
       void start();
       void push(Object*, Object*, const utils::StockCallback&);
       s_event pop();
+
+      void wait(int = 1);
 
     private:
       std::vector< Thread > _threads;

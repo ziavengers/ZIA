@@ -47,8 +47,7 @@ int main()
   // delete myo;
   // myo->deleteLater();
 
-  while (1)
-    ;
+  zia::utils::Singleton< zia::core::ThreadPool >::instance()->wait();
 
   dlclose(handle);
 }
