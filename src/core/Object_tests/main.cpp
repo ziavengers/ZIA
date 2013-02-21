@@ -1,6 +1,8 @@
 #include <dlfcn.h>
 #include <iostream>
 #include "core/Object.hpp"
+#include "core/ThreadPool.hh"
+#include "utils/Singleton.hpp"
 
 typedef zia::core::Object* (*t_ctor)();
 
@@ -9,13 +11,15 @@ class AAA : public zia::core::Object
 public:
   void aaa()
   {
-    std::cout << "aaa" << std::endl;
-    emit("mysig", 1, 1);
+    // sender()->disconnect("mysig");
+    // emit("mysig", 1, 1);
   }
 };
 
 int main()
 {
+  zia::utils::Singleton< zia::core::ThreadPool >::instance(new zia::core::ThreadPool(5));
+  zia::utils::Singleton< zia::core::ThreadPool >::instance()->start();
   AAA o;
   zia::core::Object* myo;
 
@@ -35,9 +39,12 @@ int main()
   myo = ctor();
   o.connect("huhu", zia::utils::bind(&AAA::aaa, o));
   o.emit("mysig", 1, 2);
-  myo->disconnect("mysig");
-  o.emit("mysig", 4, 5);
-  delete myo;
+  // myo->disconnect("mysig");
+  // o.emit("mysig", 4, 5);
+  // delete myo;
+
+  while (1)
+    ;
 
   dlclose(handle);
 }

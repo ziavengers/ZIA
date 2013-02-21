@@ -1,8 +1,8 @@
 #include "core/ThreadPool.hh"
 
 #include <iostream>
-#include <unistd.h>
-int iii = 0;
+#include "thread/Mutex.hh"
+#include "thread/Locker.hh"
 
 namespace zia
 {
@@ -13,24 +13,17 @@ namespace zia
     {}
     ThreadPool::Thread::Thread(const Thread& other) : _pool(other._pool)
     {}
-    void ThreadPool::Thread::init(void*)
-    {}
     void* ThreadPool::Thread::run()
     {
-      int i = iii++;
       while (1)
 	{
-	  std::cout << i << std::endl;
-	  usleep(500000);
+	  s_event e = _pool.pop();
+	  e.c();
 	}
       return 0;
     }
-    void ThreadPool::Thread::pause()
-    {}
-    void ThreadPool::Thread::resume()
-    {}
 
-    ThreadPool::ThreadPool(unsigned int nb) : _threads(nb, Thread(*this))
+    ThreadPool::ThreadPool(unsigned int nb) : _threads(nb, Thread(*this)), _events(), _eventsCond(), _eventsMutex()
     {}
     void ThreadPool::start()
     {
@@ -38,13 +31,19 @@ namespace zia
       for (it = _threads.begin(); it != _threads.end(); ++it)
 	it->start();
     }
+    void ThreadPool::push(const utils::StockCallback& c)
+    {
+      thread::Locker lock(_eventsMutex);
+      _events.push(s_event(c));
+      _eventsCond.signal();
+    }
+    ThreadPool::s_event ThreadPool::pop()
+    {
+      _eventsCond.wait();
+      thread::Locker lock(_eventsMutex);
+      s_event e = _events.front();
+      _events.pop();
+      return e;
+    }
   }
-}
-
-int main()
-{
-  zia::core::ThreadPool pool(5);
-  pool.start();
-  while (1)
-    ;
 }

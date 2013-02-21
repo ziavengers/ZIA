@@ -24,7 +24,6 @@ namespace zia
       {
 	thread::Locker lock(_mutex);
 	if (!_instance)
-	  // _instance = new T;
 	  _instance = instance;
 	return _instance;
       }

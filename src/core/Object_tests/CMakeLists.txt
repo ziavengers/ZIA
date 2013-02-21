@@ -12,6 +12,7 @@ add_executable(
 	test_Object
 	main.cpp
 	../Object.cpp
+	../ThreadPool.cpp
 )
 target_link_libraries(
 	test_Object

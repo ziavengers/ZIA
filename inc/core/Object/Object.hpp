@@ -8,6 +8,8 @@
 #include "utils/bind.hpp"
 #include "thread/Mutex.hh"
 #include "thread/Locker.hh"
+#include "utils/Singleton.hpp"
+#include "core/ThreadPool.hh"
 
 namespace zia
 {
@@ -17,6 +19,8 @@ namespace zia
     class Object
     {
     public:
+      Object() : _signalMutex()
+      {}
       virtual ~Object()
       {
 	disconnect();
@@ -59,6 +63,8 @@ namespace zia
       }
       #include "build/emit.hpp"
     private:
+      thread::Mutex _signalMutex;
+
       struct s_slot
       {
       	s_slot(const utils::StockCallback& c_) : id(_nbConnections++), c(c_) {}

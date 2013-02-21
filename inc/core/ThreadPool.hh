@@ -2,13 +2,16 @@
 #define THREADPOOL_HH_
 
 #include <vector>
+#include <queue>
 #include "thread/AThread.hh"
+#include "thread/CondVar.hh"
+#include "thread/Mutex.hh"
+#include "utils/bind.hpp"
 
 namespace zia
 {
   namespace core
   {
-
     class ThreadPool
     {
     private:
@@ -25,12 +28,24 @@ namespace zia
 	ThreadPool& _pool;
       };
 
+      struct s_event
+      {
+	s_event(const utils::StockCallback& c_): c(c_)
+	{}
+	utils::StockCallback c;
+      };
+
     public:
-      ThreadPool(unsigned int);
+      ThreadPool(unsigned int = 1);
       void start();
+      void push(const utils::StockCallback&);
+      s_event pop();
 
     private:
       std::vector< Thread > _threads;
+      std::queue< s_event > _events;
+      thread::CondVar _eventsCond;
+      thread::Mutex _eventsMutex;
     };
 
   }
