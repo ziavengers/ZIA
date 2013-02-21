@@ -20,6 +20,14 @@ namespace zia
 	  _instance = new T;
 	return _instance;
       }
+      static T*	instance(T* instance)
+      {
+	thread::Locker lock(_mutex);
+	if (!_instance)
+	  // _instance = new T;
+	  _instance = instance;
+	return _instance;
+      }
 
       static void	kill()
       {
