@@ -16,7 +16,7 @@ void emit(const std::string& name @params@)
 	  if (caller)
 	    {
 	      @setparams@
-	      zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(it->c);
+	      zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(this, ito->first, it->c);
 	    }
 	}
 }

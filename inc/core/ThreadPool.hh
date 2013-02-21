@@ -12,6 +12,8 @@ namespace zia
 {
   namespace core
   {
+    class Object;
+
     class ThreadPool
     {
     private:
@@ -30,15 +32,18 @@ namespace zia
 
       struct s_event
       {
-	s_event(const utils::StockCallback& c_): c(c_)
+	s_event(Object* s_, Object* r_, const utils::StockCallback& c_):
+	  sender(s_), receiver(r_), c(c_)
 	{}
+	Object* sender;
+	Object* receiver;
 	utils::StockCallback c;
       };
 
     public:
       ThreadPool(unsigned int = 1);
       void start();
-      void push(const utils::StockCallback&);
+      void push(Object*, Object*, const utils::StockCallback&);
       s_event pop();
 
     private:

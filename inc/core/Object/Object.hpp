@@ -19,7 +19,7 @@ namespace zia
     class Object
     {
     public:
-      Object() : _signalMutex()
+      Object() : _manageSlotMutex(), _sender(0), _toDelete(false)
       {}
       virtual ~Object()
       {
@@ -61,9 +61,36 @@ namespace zia
 	if (itm != _slots.end())
 	  disconnect(itm);
       }
+
+      void deleteLater()
+      {
+	disconnect();
+	zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(this, this, utils::bind(&Object::_delete, *this));
+      }
+
+      void manageSlot(Object* sender, utils::StockCallback& c)
+      {
+	{
+	  thread::Locker lock(_manageSlotMutex);
+	  _sender = sender;
+	  c();
+	}
+	if (_toDelete)
+	  delete this;
+      }
+
       #include "build/emit.hpp"
+
+    protected:
+      Object* sender()
+      {
+	return _sender;
+      }
+
     private:
-      thread::Mutex _signalMutex;
+      thread::Mutex _manageSlotMutex;
+      Object* _sender;
+      bool _toDelete;
 
       struct s_slot
       {
@@ -74,6 +101,16 @@ namespace zia
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
       static thread::Mutex _slotsMutex;
       static size_t _nbConnections;
+
+      // static void _delete(Object* o)
+      // {
+      //   delete o;
+      // }
+
+      void _delete()
+      {
+        _toDelete = true;
+      }
 
 
       inline void disconnect(const std::map< std::string, std::map< Object*, std::list < s_slot > > >::iterator& itm)

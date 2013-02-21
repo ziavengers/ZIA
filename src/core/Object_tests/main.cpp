@@ -11,8 +11,11 @@ class AAA : public zia::core::Object
 public:
   void aaa()
   {
-    // sender()->disconnect("mysig");
-    // emit("mysig", 1, 1);
+    sender()->disconnect("mysig");
+    // sender()
+    // sender()->deleteLater();
+    emit("mysig", 1, 1);
+    sender()->deleteLater();
   }
 };
 
@@ -42,6 +45,7 @@ int main()
   // myo->disconnect("mysig");
   // o.emit("mysig", 4, 5);
   // delete myo;
+  // myo->deleteLater();
 
   while (1)
     ;
