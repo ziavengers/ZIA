@@ -11,6 +11,8 @@ namespace zia
     public:
       virtual void start() = 0;
       virtual void* join() = 0;
+      virtual void cancel() = 0;
+
       virtual void* run() = 0;
     };
 

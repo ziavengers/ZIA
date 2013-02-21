@@ -23,6 +23,7 @@ namespace zia
 
     ThreadPool::ThreadPool(unsigned int nb) : _threads(nb, Thread(*this)), _events(), _eventsCond(), _eventsMutex()
     {}
+
     void ThreadPool::start()
     {
       std::vector< Thread >::iterator it;
