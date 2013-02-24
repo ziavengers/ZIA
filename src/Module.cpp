@@ -11,6 +11,7 @@ namespace module
 
   ModuleManagement::~ModuleManagement()
   {
+    
   }
 
   void	ModuleManagement::loadModule(IModule* m) throw (utils::Exception)
@@ -23,7 +24,22 @@ namespace module
 
   void	ModuleManagement::loadModule(const std::string& path) throw (utils::Exception)
   {
-    throw utils::Exception("ModuleManagement::loadModule : not implemented yet");
+    try
+      {
+	_lib.add(path);
+	IModule*	(*fptr)(void);
+	fptr = _lib.getFunction< IModule* (*)(void) >(path, "createModule");
+
+	_lModule.push_back(fptr());
+      }
+    catch (utils::Exception& e)
+      {
+    	throw (e);
+      }
+    catch (...)
+      {
+    	throw utils::Exception("ModuleManagement::loadModule(std::string) : Unknow error catched");
+      }
   }
 
   void	ModuleManagement::unloadModule(IModule* m) throw (utils::Exception)
@@ -43,6 +59,7 @@ namespace module
 	  {
 	    zia::log << "Unload module named " << modName;
 	    _lModule.erase(it);
+	    _lib.close(modName);
 	  }
       }
   }

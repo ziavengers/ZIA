@@ -25,7 +25,7 @@ namespace zia
       void	close(const std::string&);
 
       template < typename T >
-      T	getFunction(const std::string& s, const std::string& funcName) const throw(Exception)
+      T	getFunction(const std::string& s, const std::string& funcName) throw(Exception)
       {
 	void	*tmp = _mlib[s];
 	if (tmp == 0)
@@ -35,9 +35,8 @@ namespace zia
 	if (!fptr)
 	  throw Exception(std::string("Library::get : Impossible de charger la fonction :") + funcName + std::string(" depuis ") + s);
 	return fptr;	  
-      }
+      }      
 
-      
     private:
       std::map< std::string, void* >	_mlib;
     };

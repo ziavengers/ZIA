@@ -12,7 +12,7 @@ namespace zia
     class IModule
     {
     public:
-      ~IModule() { }
+      virtual ~IModule() { }
 
       /*
 	Module must have a name!
@@ -28,7 +28,7 @@ namespace zia
     class AModule : public Object, public IModule
     {
     public:
-      virtual ~Amodule() { }
+      virtual ~AModule() { }
 
       virtual void	name(const std::string&) = 0;
       virtual const std::string&	name() const = 0;

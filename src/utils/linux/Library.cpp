@@ -39,7 +39,7 @@ namespace zia
       if (tmp)
 	::dlclose(tmp);
       _mlib.erase(name);
-    }
+    }    
 
   }
 }
