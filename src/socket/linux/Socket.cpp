@@ -54,6 +54,7 @@ namespace zia
 
     size_t Socket::read(void* buff, size_t len)
     {
+      // lever exception dans le cas où retourne -1 et n'est pas un EAGAIN
       return ::read(_fd, buff, len);
     }
 

@@ -2,6 +2,7 @@
 #define ISOCKET_HH_
 
 #include <string>
+#include "utils/Exception.hpp"
 
 namespace zia
 {
@@ -38,6 +39,13 @@ namespace zia
 	virtual void clear(ISocket* socket, SET set) = 0;
 	virtual bool isSet(ISocket* socket, SET set) = 0;
 	virtual void zero(SET set) = 0;
+      };
+
+      class Exception : public utils::Exception
+      {
+      public:
+      	Exception(const std::string& s) : utils::Exception(s)
+      	{}
       };
     };
 
