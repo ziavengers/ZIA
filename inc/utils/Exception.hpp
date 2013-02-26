@@ -6,6 +6,12 @@
 
 #include "Logger.hh"
 
+#define CLASS_EXCEPTION(prefix) class Exception : public zia::utils::Exception \
+  { \
+public: \
+ Exception(const std::string& s) : zia::utils::Exception(prefix + s) {} \
+  }
+
 namespace zia
 {
 namespace utils

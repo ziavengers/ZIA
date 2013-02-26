@@ -39,14 +39,11 @@ namespace zia
 	virtual void clear(ISocket* socket, SET set) = 0;
 	virtual bool isSet(ISocket* socket, SET set) = 0;
 	virtual void zero(SET set) = 0;
+
+	CLASS_EXCEPTION("zia::network::ISocket::Select: ");
       };
 
-      class Exception : public utils::Exception
-      {
-      public:
-      	Exception(const std::string& s) : utils::Exception(s)
-      	{}
-      };
+      CLASS_EXCEPTION("zia::network::ISocket: ");
     };
 
   }
