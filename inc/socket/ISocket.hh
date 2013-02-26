@@ -14,13 +14,13 @@ namespace zia
     public:
       virtual ~ISocket() {}
 
-      virtual bool connect(const std::string& ip, int port) = 0;
-      virtual bool bind(int port) = 0;
-      virtual bool listen(int queueSize) = 0;
+      virtual void connect(const std::string& ip, int port) = 0;
+      virtual void bind(int port) = 0;
+      virtual void listen(int queueSize) = 0;
       virtual ISocket* accept() = 0;
 
-      virtual size_t read(void*, size_t) = 0;
-      virtual size_t write(const void*, size_t) = 0;
+      virtual ssize_t read(void*, size_t) = 0;
+      virtual ssize_t write(const void*, size_t) = 0;
 
       class Select
       {
@@ -39,8 +39,6 @@ namespace zia
 	virtual void clear(ISocket* socket, SET set) = 0;
 	virtual bool isSet(ISocket* socket, SET set) = 0;
 	virtual void zero(SET set) = 0;
-
-	CLASS_EXCEPTION("zia::network::ISocket::Select: ");
       };
 
       CLASS_EXCEPTION("zia::network::ISocket: ");

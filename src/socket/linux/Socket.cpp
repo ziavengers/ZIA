@@ -3,6 +3,7 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include "socket/Socket.hh"
 
@@ -27,20 +28,22 @@ namespace zia
       close(_fd);
     }
 
-    bool Socket::connect(const std::string& ip, int port)
+    void Socket::connect(const std::string& ip, int port)
     {
-      return associate(ip.data(), port, ::connect);
+      if (associate(ip.data(), port, ::connect))
+	errnoThrow("connect");
     }
 
-    bool Socket::bind(int port)
+    void Socket::bind(int port)
     {
-      return associate(NULL, port, ::bind);
+      if (associate(NULL, port, ::bind))
+	errnoThrow("bind");
     }
 
-    bool Socket::listen(int queueSize)
+    void Socket::listen(int queueSize)
     {
-      ::listen(_fd, queueSize);
-      return true;
+      if (::listen(_fd, queueSize))
+	errnoThrow("listen");
     }
 
     ISocket* Socket::accept()
@@ -48,19 +51,26 @@ namespace zia
       struct sockaddr_in csin;
       int sin_size = sizeof(csin);
       const int cfd = ::accept(_fd, reinterpret_cast<struct sockaddr*>(&csin), reinterpret_cast<socklen_t*>(&sin_size));
+      if (cfd < 0)
+	errnoThrow("accept");
       return new Socket(cfd, csin);
     }
 
 
-    size_t Socket::read(void* buff, size_t len)
+    ssize_t Socket::read(void* buff, size_t len)
     {
-      // lever exception dans le cas où retourne -1 et n'est pas un EAGAIN
-      return ::read(_fd, buff, len);
+      ssize_t r = ::read(_fd, buff, len);
+      if (r < 0)
+	errnoThrow("read");
+      return r;
     }
 
-    size_t Socket::write(const void* buff, size_t len)
+    ssize_t Socket::write(const void* buff, size_t len)
     {
-      return ::write(_fd, buff, len);
+      ssize_t r = ::write(_fd, buff, len);
+      if (r < 0)
+	errnoThrow("write");
+      return r;
     }
 
 
@@ -69,19 +79,26 @@ namespace zia
       reloadSin();
     }
 
-    bool Socket::associate(const char* ip, int port, Socket::t_associate_func f)
+    int Socket::associate(const char* ip, int port, Socket::t_associate_func f)
     {
       _sin.sin_port = htons(port);
       _sin.sin_addr.s_addr = (ip ? inet_addr(ip) : INADDR_ANY);
-      f(_fd, reinterpret_cast<struct sockaddr*>(&_sin), sizeof(_sin));
-      reloadSin();
-      return true;
+      int r = f(_fd, reinterpret_cast<struct sockaddr*>(&_sin), sizeof(_sin));
+      if (!r)
+	reloadSin();
+      return r;
     }
 
     void Socket::reloadSin()
     {
       int sin_size = sizeof(_sin);
       getsockname(_fd, reinterpret_cast<struct sockaddr*>(&_sin), reinterpret_cast<socklen_t*>(&sin_size));
+    }
+
+    void Socket::errnoThrow(const std::string& func) throw(Exception)
+    {
+      std::string reason(sys_errlist[errno]);
+      throw Exception(func + ": " + reason);
     }
 
 

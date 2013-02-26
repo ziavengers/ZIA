@@ -17,13 +17,13 @@ namespace zia
       Socket();
       virtual ~Socket();
 
-      bool connect(const std::string&, int);
-      bool bind(int);
-      bool listen(int);
+      void connect(const std::string&, int);
+      void bind(int);
+      void listen(int);
       ISocket* accept();
 
-      size_t read(void*, size_t);
-      size_t write(const void*, size_t);
+      ssize_t read(void*, size_t);
+      ssize_t write(const void*, size_t);
 
       class Select : public ISocket::Select
       {
@@ -46,8 +46,9 @@ namespace zia
     protected:
       typedef int (*t_associate_func)(int, const struct sockaddr*, socklen_t);
       Socket(int, const struct sockaddr_in&);
-      bool associate(const char*, int, t_associate_func);
+      int associate(const char*, int, t_associate_func);
       void reloadSin();
+      void errnoThrow(const std::string&) throw(Exception);
 
     protected:
       int _fd;
