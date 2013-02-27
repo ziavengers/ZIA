@@ -1,11 +1,27 @@
 #include <iostream>
 #include "parsing_http/TestProducterStream.hh"
 #include "parsing_http/ParserHttp.hh"
+#include "parsing_http/HttpMessage.hpp"
 
 #include <fstream>
 
 int main()
 {
+  /*
+    httpMessages
+  */
+  http::message::HttpRequest msg;
+  // http::message::equivalent to : 
+  // http::message::HttpMessage msg;
+  // or http::message::HttpReply msg;
+  msg.header["content-type"] = "text/html";
+  msg.header["key"] = "value";
+  std::cout << msg.header["content-type"] << std::endl;
+
+
+  return 0;
+
+
   TestProducterStream ps;
   ParserHttp p(ps);
   std::string method;

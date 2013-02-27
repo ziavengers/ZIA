@@ -5,46 +5,54 @@
 #include <map>
 #include <string>
 
-class HttpMessageFactory
+namespace http
 {
-
-public:
-  template < typename T >
-  static T build(const std::string rawMessage)
+  namespace message
   {
-    return new T;
-  }
-};
+    class HttpMessageFactory
+    {
+
+    public:
+      template < typename T >
+      static T build(const std::string rawMessage)
+      {
+	return new T;
+      }
+    };
 
 
-class HttpHeader : public std::map< std::string, std::string>
-{
-  ;
-};
+    class HttpHeader : public std::map< std::string, std::string>
+    {
+    public:
+      virtual ~HttpHeader() { ; }
+    };
 
-class HttpMessage
-{
-public:
-  HttpHeader header;
-  std::string message;
+    class HttpMessage 
+    {
+    public:
+      virtual ~HttpMessage() { ; }
+
+      HttpHeader header;
+      std::string message;
   
-  std::string toString(void);
+      std::string toString(void);
 
-};
+    };
 
 
-class HttpRequest : public HttpMessage
-{/*
-   requete http
-  */
-  ;
-};
+    class HttpRequest : public HttpMessage
+    {//
+     // requete http
+     //
+      ;
+    };
 
-class HttpReply : public HttpMessage
-{/*
-   reponse http
-  */ 
-  ;
-};
-
+    class HttpReply : public HttpMessage
+    {//
+     // reponse http
+     // 
+      ;
+    };
+  }
+}
 #endif /* _HTTPMESSAGE_H_ */
