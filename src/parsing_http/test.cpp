@@ -10,7 +10,7 @@ int main()
   /*
     httpMessages
   */
-  http::message::HttpRequest msg;
+  zia::http::message::HttpRequest msg;
   // http::message::equivalent to : 
   // http::message::HttpMessage msg;
   // or http::message::HttpReply msg;
