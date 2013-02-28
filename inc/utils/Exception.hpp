@@ -9,7 +9,7 @@
 #define CLASS_EXCEPTION(prefix) class Exception : public zia::utils::Exception \
   { \
 public: \
-    Exception(const std::string& s) throw() : zia::utils::Exception(prefix + s) {} \
+    Exception(const std::string& s, bool autolog = false) throw() : zia::utils::Exception(prefix + s, autolog) {} \
   }
 
 namespace zia
@@ -20,12 +20,17 @@ namespace utils
   class Exception : public std::exception
   {
   public:
-    Exception(const std::string& s = "") throw() : _msg(s) { }
+    Exception(const std::string& s = "", bool autolog = false) throw() : _msg(s) {
+      if (autolog)
+	log();
+    }
     
     virtual ~Exception() throw() { }
 
-    const char *	what() const throw() {
+    void log() const throw() {
       LOG_ERROR(_msg);
+    }
+    const char *	what() const throw() {
       return _msg.c_str();
     }
 
