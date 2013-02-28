@@ -67,6 +67,6 @@ namespace zia
 }
 
 #define registerType(T) zia::utils::TypeNames::register_< T >(#T)
-#define getType(T) zia::utils::TypeNames::get< T >()
+#define getTypeName(T) zia::utils::TypeNames::get< T >()
 
 #endif
