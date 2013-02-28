@@ -25,16 +25,16 @@ namespace zia
     class Object
     {
     public:
-      Object() : _manageSlotMutex(), _sender(0), _toDelete(false)
+      Object() : _manageSlotMutex(), _sender(0), _context("*"), _toDelete(false)
       {}
       virtual ~Object()
       {
 	disconnect();
       }
-      size_t connect(const std::string& name, const utils::StockCallback& slot)
+      size_t connect(const std::string& name, const utils::StockCallback& slot, const std::string& context = "*")
       {
 	thread::Locker lock(_slotsMutex);
-	_slots[name][this].push_back(s_slot(slot));
+	_slots[name][this].push_back(s_slot(slot, context));
 	return _nbConnections;
       }
       void disconnect()
@@ -71,14 +71,15 @@ namespace zia
       void deleteLater()
       {
 	disconnect();
-	zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(this, this, utils::bind(&Object::_delete, *this));
+	zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(this, this, "*", utils::bind(&Object::_delete, *this));
       }
 
-      void manageSlot(Object* sender, utils::StockCallback& c)
+      void manageSlot(Object* sender, const std::string& context, utils::StockCallback& c)
       {
 	{
 	  thread::Locker lock(_manageSlotMutex);
 	  _sender = sender;
+	  _context = context;
 	  c();
 	}
 	if (_toDelete)
@@ -92,17 +93,23 @@ namespace zia
       {
 	return _sender;
       }
+      const std::string& context()
+      {
+	return _context;
+      }
 
     private:
       thread::Mutex _manageSlotMutex;
       Object* _sender;
+      std::string _context;
       bool _toDelete;
 
       struct s_slot
       {
-      	s_slot(const utils::StockCallback& c_) : id(_nbConnections++), c(c_) {}
+      	s_slot(const utils::StockCallback& c_, const std::string& context_) : id(_nbConnections++), c(c_), context(context_) {}
       	size_t id;
       	utils::StockCallback c;
+	std::string context;
       };
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
       static thread::Mutex _slotsMutex;
