@@ -42,6 +42,14 @@ int main()
   myo = ctor();
   o.connect("huhu", zia::utils::bind(&AAA::aaa, o));
   o.emit("mysig", 1, 2);
+  try
+    {
+      o.emit("mysig", 1);
+    }
+  catch (std::exception& e)
+    {
+      std::cerr << e.what() << std::endl;
+    }
   // myo->disconnect("mysig");
   // o.emit("mysig", 4, 5);
   // delete myo;

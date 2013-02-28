@@ -10,11 +10,17 @@
 #include "thread/Locker.hh"
 #include "utils/Singleton.hpp"
 #include "core/ThreadPool.hh"
+#include "utils/Exception.hpp"
 
 namespace zia
 {
   namespace core
   {
+
+    namespace Signal
+    {
+      CLASS_EXCEPTION("zia::core::Signal: ");
+    }
 
     class Object
     {
@@ -101,11 +107,6 @@ namespace zia
       static std::map< std::string, std::map< Object*, std::list< s_slot > > > _slots;
       static thread::Mutex _slotsMutex;
       static size_t _nbConnections;
-
-      // static void _delete(Object* o)
-      // {
-      //   delete o;
-      // }
 
       void _delete()
       {

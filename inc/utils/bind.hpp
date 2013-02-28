@@ -1,6 +1,9 @@
 #ifndef BIND_HPP_
 #define BIND_HPP_
 
+#include <string>
+#include "utils/register.hpp"
+
 #include "bind/Value.hpp"
 #include "bind/build/Storage.hpp"
 #include "bind/build/Typelist.hpp"

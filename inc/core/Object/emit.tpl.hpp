@@ -18,5 +18,10 @@ void emit(const std::string& name @params@)
 	      @setparams@
 	      zia::utils::Singleton< zia::core::ThreadPool >::instance()->push(this, ito->first, it->c);
 	    }
+	  else
+	    {
+	      std::string types = @get_type_names@;
+	      throw Signal::Exception(std::string("Invalid slot for signal ") + name + std::string("(") + types + std::string(") not compatible with (") + it->c.caller()->paramTypeNames() + std::string(")"));
+	    }
 	}
 }

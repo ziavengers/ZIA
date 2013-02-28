@@ -13,6 +13,8 @@ add_executable(
 	main.cpp
 	../Object.cpp
 	../ThreadPool.cpp
+	../../utils/Logger.cpp
+	../../utils/register.cpp
 )
 target_link_libraries(
 	test_Object

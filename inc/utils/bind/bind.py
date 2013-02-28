@@ -16,5 +16,6 @@ def getargs(n):
             replace_args(BIND_P_TYPE, {'i' : i}) for i in range(1, n + 1)
             ),
         'P_templates' : ('< ' + ', '.join('P%d' % i for i in range(1, n + 1)) + ' >') if n else '',
+        'get_Param_type_names' : ' + std::string(", ") + '.join('std::string(getTypeName(Param%d))' % i for i in range(1, n + 1)) if n else '""'
         }
     return args
