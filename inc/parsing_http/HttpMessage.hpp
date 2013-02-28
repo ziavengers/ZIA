@@ -5,54 +5,58 @@
 #include <map>
 #include <string>
 
-namespace http
+namespace zia
 {
-  namespace message
+  namespace http
   {
-    class HttpMessageFactory
+    namespace message
     {
-
-    public:
-      template < typename T >
-      static T build(const std::string rawMessage)
+      class HttpMessageFactory
       {
-	return new T;
-      }
-    };
+
+      public:
+	template < typename T >
+	static T build(const std::string rawMessage)
+	{
+	  return new T;
+	}
+      };
 
 
-    class HttpHeader : public std::map< std::string, std::string>
-    {
-    public:
-      virtual ~HttpHeader() { ; }
-    };
+      class HttpHeader : public std::map< std::string, std::string>
+      {
+      public:
+	virtual ~HttpHeader() { ; }
+      };
 
-    class HttpMessage 
-    {
-    public:
-      virtual ~HttpMessage() { ; }
+      class HttpMessage 
+      {
+      public:
+	virtual ~HttpMessage() { ; }
 
-      HttpHeader header;
-      std::string message;
+	HttpHeader header;
+	std::string message;
   
-      std::string toString(void);
+	std::string toString(void);
 
-    };
+      };
 
 
-    class HttpRequest : public HttpMessage
-    {//
-     // requete http
-     //
-      ;
-    };
+      class HttpRequest : public HttpMessage
+      {//
+	// requete http
+	//
+	;
+      };
 
-    class HttpReply : public HttpMessage
-    {//
-     // reponse http
-     // 
-      ;
-    };
+      class HttpReply : public HttpMessage
+      {//
+	// reponse http
+	// 
+	;
+      };
+    }
   }
 }
+
 #endif /* _HTTPMESSAGE_H_ */
