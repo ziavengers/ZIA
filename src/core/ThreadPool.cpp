@@ -16,7 +16,7 @@ namespace zia
       while (1)
 	{
 	  s_event e = _pool.pop();
-	  e.receiver->manageSlot(e.sender, e.c);
+	  e.receiver->manageSlot(e.sender, e.context, e.c);
 	}
       return 0;
     }
@@ -30,10 +30,10 @@ namespace zia
       for (it = _threads.begin(); it != _threads.end(); ++it)
 	it->start();
     }
-    void ThreadPool::push(Object* sender, Object* receiver, const utils::StockCallback& c)
+    void ThreadPool::push(Object* sender, Object* receiver, const std::string& context, const utils::StockCallback& c)
     {
       thread::Locker lock(_eventsMutex);
-      _events.push(s_event(sender, receiver, c));
+      _events.push(s_event(sender, receiver, context, c));
       _eventsCond.signal();
     }
     ThreadPool::s_event ThreadPool::pop()

@@ -27,7 +27,9 @@ def getargs_emit(n):
         'typenames' : ', '.join('typename T%d' % i for i in range(1, n + 1)),
         'templates' : ('< ' + ', '.join('T%d' % i for i in range(1, n + 1)) + ' >') if n else '',
         'params' : (', ' + ', '.join('T%d t%d' % (i, i) for i in range(1, n + 1))) if n else '',
-        'setparams' : '\n'.join('caller->set%d(t%d);' % (i, i) for i in range(1, n + 1))
+        'params_names' : (', ' + ', '.join('t%d' % i for i in range(1, n + 1))) if n else '',
+        'setparams' : '\n'.join('caller->set%d(t%d);' % (i, i) for i in range(1, n + 1)),
+        'get_type_names' : ' + std::string(", ") + '.join('std::string(getTypeName(T%d))' % i for i in range(1, n + 1)) if n else '""'
         }
     return args
 

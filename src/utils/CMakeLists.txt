@@ -1,16 +1,17 @@
-project(libthread)
+project(libutils)
 
 set(LIBRARY_OUTPUT_PATH ${ZIA_LIBS_PATH}/${CMAKE_BUILD_TYPE})
 
 add_library(
-	thread
+	utils
 	SHARED
-	${ARCH}/AThread.cpp
-	${ARCH}/Mutex.cpp
-	${ARCH}/CondVar.cpp
-	Locker.cpp
+	Logger.cpp
+	register.cpp
+	${ARCH}/Library.cpp
 )
+
 target_link_libraries(
+	utils
+	dl
 	thread
-	pthread
 )

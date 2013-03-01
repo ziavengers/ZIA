@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <queue>
+#include <string>
 #include "thread/AThread.hh"
 #include "thread/CondVar.hh"
 #include "thread/Mutex.hh"
@@ -29,18 +30,19 @@ namespace zia
 
       struct s_event
       {
-	s_event(Object* s_, Object* r_, const utils::StockCallback& c_):
-	  sender(s_), receiver(r_), c(c_)
+	s_event(Object* s_, Object* r_, const std::string& context_, const utils::StockCallback& c_):
+	  sender(s_), receiver(r_), context(context_), c(c_)
 	{}
 	Object* sender;
 	Object* receiver;
+	std::string context;
 	utils::StockCallback c;
       };
 
     public:
       ThreadPool(unsigned int = 1);
       void start();
-      void push(Object*, Object*, const utils::StockCallback&);
+      void push(Object*, Object*, const std::string&, const utils::StockCallback&);
       s_event pop();
 
       void wait(int = 1);

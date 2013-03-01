@@ -112,13 +112,17 @@ namespace zia
     Socket::Select::~Select()
     {}
 
-    int Socket::Select::run()
+    void Socket::Select::run()
     {
-      return select(_biggest + 1,
+      if (select(_biggest + 1,
 		    &_sets[Socket::Select::READ],
 		    &_sets[Socket::Select::WRITE],
 		    &_sets[Socket::Select::ERROR],
-		    0); // Ajouter gestion du timeout
+		 0) < 0) // Ajouter gestion du timeout
+      {
+	std::string reason(sys_errlist[errno]);
+	throw Exception("run: " + reason);
+      }
     }
 
     void Socket::Select::set(ISocket* s_, Socket::Select::SET set)

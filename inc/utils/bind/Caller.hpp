@@ -11,7 +11,7 @@ template <typename ReturnType, typename Callable, typename List>
 class Caller : public ParamCaller< List >
 {
 public:
-  Caller(Callable callable, List list) : ParamCaller< List >(list), _callable(callable) {}
+  Caller(Callable callable, List list, const std::string& paramTypeNames = "") : ParamCaller< List >(list, paramTypeNames), _callable(callable) {}
   ReturnType operator()()
   {
     return this->_list(TypeTraits<ReturnType>(), _callable, this->_list);

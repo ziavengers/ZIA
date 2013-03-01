@@ -14,9 +14,13 @@ int main()
   /*
     httpMessages
   */
+<<<<<<< HEAD
 
   /*
     http::message::HttpRequest msg;
+=======
+  zia::http::message::HttpRequest msg;
+>>>>>>> b836ab1aaabef4ec2db985cd8d44a8871c4efa8f
   // http::message::equivalent to : 
   // http::message::HttpMessage msg;
   // or http::message::HttpReply msg;

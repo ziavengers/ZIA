@@ -31,7 +31,7 @@ namespace zia
 	Select();
 	virtual ~Select();
 
-	int run();
+	void run();
 
 	void set(ISocket*, SET);
 	void clear(ISocket*, SET);
