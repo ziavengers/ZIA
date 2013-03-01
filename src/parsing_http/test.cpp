@@ -14,7 +14,7 @@ int main()
   /*
     httpMessages
   */
-<<<<<<< HEAD
+
 
   /*
     http::message::HttpRequest msg;
@@ -39,11 +39,11 @@ int main()
 
   TestProducterStream  ps;
   
-  http::message::HttpRequest r =  http::message::HttpRequest::build(ps); 
+  zia::http::message::HttpRequest r =  zia::http::message::HttpRequest::build(ps); 
   
   std::cout << r._method << std::endl;
   std::cout << r._url << std::endl;
-  for (http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
+  for (zia::http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
     std::cout << it->first << ":" << it->second << std::endl;
   
   
