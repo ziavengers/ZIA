@@ -1,13 +1,5 @@
 project(testObject)
 
-include_directories(
-	${ZIA_PATH}/inc/
-	${ZIA_PATH}/inc/${ARCH}/
-)
-link_directories(
-	${ZIA_PATH}/lib/${ARCH}/thread/
-)
-
 add_executable(
 	test_Object
 	main.cpp

@@ -1,11 +1,5 @@
 project(testhttp)
 
-include_directories(
-	${ZIA_PATH}/inc/
-	${ZIA_PATH}/inc/${ARCH}/
-)
-link_directories(${ZIA_PATH}/lib/${ARCH}/thread/)
-
 file(
 	GLOB
 	source_files
