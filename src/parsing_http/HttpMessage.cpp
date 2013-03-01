@@ -44,7 +44,8 @@ namespace zia
 	    for (it = header.begin(); it != header.end(); ++it)
 	      message.header[it->first] = it->second;
 
-	    message._content = content;
+	    //message._content = content;
+	    message.content(content);
 	    return message;
 	  }
 	//sinon, exception

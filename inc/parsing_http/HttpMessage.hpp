@@ -26,11 +26,23 @@ namespace zia
 
       class HttpMessage 
       {
+      protected:
+	std::string _content; //TOFIX : ref 
+
       public:
 	virtual ~HttpMessage() { ; }
 	HttpHeader header;
-	std::string _content; //TOFIX : private 
 	std::string toString(void); //TO IMPL, see .cpp
+	void	content(std::string &content)
+	{
+	  this->_content = content;
+	}
+	std::string &content()
+	{
+	  return this->_content;
+	}
+	
+
       };
       
 
@@ -39,9 +51,10 @@ namespace zia
 
 
       public:
-	const std::string _method; // TOFIX : private
-	const std::string  _url;  // TOFIX : private
-	HttpRequest(const std::string &method, const std::string &url) : _method(method), _url(url){;}
+	const std::string _method; // TOFIX : ref bug
+	const std::string  _url;  // TOFIX : ---^
+	
+	HttpRequest(const std::string & method, const std::string & url) : _method(method), _url(url){;}
       
 	static HttpRequest build(IProducterStream   &stream);
       };
@@ -52,34 +65,6 @@ namespace zia
       public:
 	int _reply_code; //TOFIX : private
       };
-
-      // class HttpMessage 
-      // {
-      // public:
-      // 	virtual ~HttpMessage() { ; }
-
-      // 	HttpHeader header;
-      // 	std::string message;
-  
-      // 	std::string toString(void);
-
-      // };
-
-
-      // class HttpRequest : public HttpMessage
-      // {//
-      // 	// requete http
-      // 	//
-      // public :
-      // 	std::string _content;
-      // };
-
-      // class HttpReply : public HttpMessage
-      // {//
-      // 	// reponse http
-      // 	// 
-      // 	;
-      // };
     }
   }
 }

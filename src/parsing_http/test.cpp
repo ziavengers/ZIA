@@ -7,12 +7,8 @@
 
 
 
-
-
-int main()
+void	tests()
 {
-
-
   TestProducterStream  ps;
   
   zia::http::message::HttpRequest r =  zia::http::message::HttpRequest::build(ps); 
@@ -21,6 +17,14 @@ int main()
   std::cout << r._url << std::endl;
   for (zia::http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
     std::cout << it->first << ":" << it->second << std::endl;
+  std::cout << "content : " << r.content() << std::endl;
+ 
+}
+
+int main()
+{
+  tests();
+
   
   return 0;
 }
