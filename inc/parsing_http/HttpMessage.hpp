@@ -14,70 +14,32 @@ namespace http
 {
   namespace message
   {
-    class HttpMessageFactory
-    {
-
-    public:
-      // // // static HttpRequest build(IProducterStream   &stream)
-      // // // { // parsing request processing, entry function.
-      // // // 	HttpRequest message;
-
-      // // // 	ParserHttp p(stream);
-      // // // 	std::string method;
-      // // // 	std::string url;
-      // // // 	std::map< std::string, std::string > header;
-      // // // 	std::map< std::string, std::string >::iterator it;
-      // // // 	std::string content;
-      // // // 	if (p.readHttp(method, url, header, content))
-      // // // 	  {
-      // // // 	    std::cout << "{" << method << "}" << std::endl;
-      // // // 	    message.method = method;
-      // // // 	    std::cout << "{" << url << "}" << std::endl;
-      // // // 	    message.url = method;
-      // // // 	    for (it = header.begin(); it != header.end(); ++it)
-      // // // 	      std::cout << "-> " << it->first << " : " << it->second;
-      // // // 	    std::cout << "{" << content << "}" << std::endl;
-      // // // 	  }
-	
-      // // // 	T f;
-	
-	
-      // // // 	return f; // empty request
-      // // // }
-      
-      ;
-    };
 
 
     class HttpHeader : public std::map< std::string, std::string>
     {
-      // surcharger [] pour le get et le set
     public:
       virtual ~HttpHeader() { ; }
     };
+
 
     class HttpMessage 
     {
     public:
       virtual ~HttpMessage() { ; }
-
       HttpHeader header;
-      std::string message;
-  
-      std::string toString(void);
-
+      std::string _content; //TOFIX : private 
+      std::string toString(void); //TO IMPL, see .cpp
     };
 
 
     class HttpRequest : public HttpMessage
-    {//
-     // requete http
-     //
+    {// http request modelisation
+
 
     public:
-      const std::string _method; // ref + const
-      const std::string  _url;    // ref + const
-
+      const std::string _method; // TOFIX : private
+      const std::string  _url;  // TOFIX : private
       HttpRequest(const std::string &method, const std::string &url) : _method(method), _url(url){;}
       
       static HttpRequest build(IProducterStream   &stream)
@@ -89,32 +51,29 @@ namespace http
       	std::map< std::string, std::string > header;
       	std::map< std::string, std::string >::iterator it;
       	std::string content;
-      	if (p.readHttp(method, url, header, content))
-      	  {
-      	    HttpRequest message(method, url);
 	
+	HttpRequest message(method, url);
+
+      	if (p.readHttp(method, url, header, content))
+      	  {	
       	    for (it = header.begin(); it != header.end(); ++it)
       	      message.header[it->first] = it->second;
 
-      	    // std::cout << "-> " << it->first << " : " << it->second;
-      	    // std::cout << "{" << content << "}" << std::endl;
+	    message._content = content;
 	    return message;
       	  }
       	//sinon, exception
 	
-	
 	HttpRequest t("bidon", "bidon");
-      	return t;//message;
-      
+      	return t;      
       }
     };
 
     class HttpReply : public HttpMessage
-    {//
-     // reponse http
-     //
-      int reply_code;
-      ;
+    {// http reply modelisation
+
+    public:
+      int _reply_code; //TOFIX : private
     };
   }
 }

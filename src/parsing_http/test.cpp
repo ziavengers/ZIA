@@ -41,7 +41,8 @@ int main()
   std::cout << r._url << std::endl;
   for (http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
     std::cout << it->first << ":" << it->second << std::endl;
-
+  
+  
   //delete ps;
   
   return 0;
