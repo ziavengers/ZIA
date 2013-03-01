@@ -20,6 +20,8 @@ add_subdirectory(inc/core/Object)
 
 add_subdirectory(src/socket/)
 add_subdirectory(src/thread/)
+add_subdirectory(src/utils/)
+add_subdirectory(src/core/)
 
 add_subdirectory(src/parsing_http)
 add_subdirectory(src/socket/test)

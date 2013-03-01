@@ -17,13 +17,14 @@ namespace zia
       network::Socket::Select select;
       char buff[101];
       bool error = false; // Remplacer par exceptions
+      std::list< network::ISocket* >::iterator it;
       while (!error)
 	{
 	  select.zero(network::ISocket::Select::READ);
 	  select.set(&_server, network::ISocket::Select::READ);
 	  for (it = _clients.begin(); it != _clients.end(); ++it)
 	    select.set(*it, network::ISocket::Select::READ);
-	  if (select->run() != -1)
+	  if (select.run() != -1)
 	    {
 	      if (select.isSet(&_server, network::ISocket::Select::READ))
 		_clients.push_back(_server.accept());
@@ -41,7 +42,7 @@ namespace zia
 		    else
 		      toDelete.push_back(c);
 		  }
-	      for (it = toDelete.begin(); it != todelete.end(); ++it)
+	      for (it = toDelete.begin(); it != toDelete.end(); ++it)
 		{
 		  _clients.remove(*it);
 		  delete *it;

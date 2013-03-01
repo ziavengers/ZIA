@@ -1,6 +1,10 @@
 #ifndef SERVER_HH_
 #define SERVER_HH_
 
+#include <list>
+
+#include "socket/Socket.hh"
+
 namespace zia
 {
   namespace core
