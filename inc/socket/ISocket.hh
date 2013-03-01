@@ -33,12 +33,14 @@ namespace zia
 	  };
 	virtual ~Select() {}
 
-	virtual int run() = 0;
+	virtual void run() = 0;
 
 	virtual void set(ISocket* socket, SET set) = 0;
 	virtual void clear(ISocket* socket, SET set) = 0;
 	virtual bool isSet(ISocket* socket, SET set) = 0;
 	virtual void zero(SET set) = 0;
+
+	CLASS_EXCEPTION("zia::network::ISocket::Select: ");
       };
 
       CLASS_EXCEPTION("zia::network::ISocket: ");

@@ -16,3 +16,12 @@ target_link_libraries(
 	utils
 	socket
 )
+
+add_executable(
+	test_serv
+	test_serv.cpp
+)
+target_link_libraries(
+	test_serv
+	core
+)
