@@ -1,14 +1,48 @@
 #include "core/Server.hh"
 #include "thread/Locker.hh"
-#include <algorithm>
-#include <iostream>
 
 namespace zia
 {
   namespace core
   {
 
-    Server::Server(int port, int queueSize) : Object(), _server(), _clients()// , _toDelete(), _toDeleteMutex()
+    Server::SocketStream::SocketStream(network::ISocket* socket) : _socket(socket), _mutex(), _strings()
+    {}
+    void Server::SocketStream::read()
+    {
+      if (_socket)
+	{
+	  ssize_t len;
+	  char buff[_readSize + 1];
+	  if (!(len = _socket->read(buff, _readSize)))
+	    {
+	      delete _socket;
+	      _socket = 0;
+	    }
+	  else
+	    {
+	      thread::Locker lock(_mutex);
+	      buff[len] = 0;
+	      _strings.push(std::string(buff));
+	    }
+	}
+    }
+    std::string Server::SocketStream::nextString()
+    {
+      if (!_socket)
+	throw Exception("end of stream");
+      thread::Locker lock(_mutex);
+      std::string s = _strings.front();
+      _strings.pop();
+      return s;
+    }
+    network::ISocket* Server::SocketStream::socket()
+    {
+      return _socket;
+    }
+
+
+    Server::Server(int port, int queueSize) : Object(), _server(), _clients()
     {
       _server.bind(port);
       _server.listen(queueSize);
@@ -17,54 +51,38 @@ namespace zia
     void Server::run()
     {
       network::Socket::Select select;
-      char buff[101];
-      std::list< network::ISocket* >::iterator it;
-
-      // connect("socket_close", utils::bind(&Server::deleteClient, *this, static_cast< network::Socket::ISocket* >(0)));
+      std::list< SocketStream* >::iterator it;
 
       try
 	{
 	  while (1)
 	    {
-	      // {
-	      // 	thread::Locker lock(_toDeleteMutex);
-	      // 	for (it = _toDelete.begin(); it != _toDelete.end(); ++it)
-	      // 	  {
-	      // 	    _clients.remove(*it);
-	      // 	    // delete *it;
-	      // 	  }
-	      // 	_toDelete.clear();
-	      // }
-
 	      select.zero(network::ISocket::Select::READ);
 	      select.set(&_server, network::ISocket::Select::READ);
+
+      	      std::list< SocketStream* > toDelete;
 	      for (it = _clients.begin(); it != _clients.end(); ++it)
-		select.set(*it, network::ISocket::Select::READ);
+		{
+		  network::ISocket* s = (*it)->socket();
+		  if (s)
+		    select.set(s, network::ISocket::Select::READ);
+		  else
+		    toDelete.push_back(*it);
+		}
 	      select.run();
 
       	      if (select.isSet(&_server, network::ISocket::Select::READ))
-      		_clients.push_back(_server.accept());
+      		_clients.push_back(new SocketStream(_server.accept()));
 
-      	      std::list< zia::network::ISocket* > toDelete;
       	      for (it = _clients.begin(); it != _clients.end(); ++it)
-      		if (select.isSet(*it, network::ISocket::Select::READ))
+      		if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::READ))
       		  {
-		    // std::cout << "!!!" << std::endl;
-      		    network::ISocket* c = *it;
-      		    int len = c->read(buff, 100);
-      		    if (len > 0)
-      		      {
-      		    	buff[len] = 0;
-      		    	std::cout << buff;
-      		      }
-      		    else
-      		      toDelete.push_back(c);
-		    // emit("socket_readable", *it);
+		    (*it)->read();
+		    (*it)->emit("SocketStream::readable");
       		  }
 
       	      for (it = toDelete.begin(); it != toDelete.end(); ++it)
       	      	{
-		  // std::cout << "???" << std::endl;
       	      	  _clients.remove(*it);
       	      	  delete *it;
       	      	}
@@ -75,16 +93,6 @@ namespace zia
 	  e.log();
 	}
     }
-
-    // void Server::deleteClient(network::ISocket* c)
-    // {
-    //   thread::Locker lock(_toDeleteMutex);
-    //   std::list< network::ISocket* >::iterator it = std::find(_toDelete.begin(), _toDelete.end(), c);
-    //   if (it == _toDelete.end())
-    // 	return ;
-    //   _toDelete.push_back(c);
-    //   std::cout << "???" << std::endl;
-    // }
 
   }
 }
