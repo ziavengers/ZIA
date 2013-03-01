@@ -43,31 +43,7 @@ namespace zia
 	const std::string  _url;  // TOFIX : private
 	HttpRequest(const std::string &method, const std::string &url) : _method(method), _url(url){;}
       
-	static HttpRequest build(IProducterStream   &stream)
-	{ // parsing request processing, entry function.
-
-	  ParserHttp p(stream);
-	  std::string method;
-	  std::string url;
-	  std::map< std::string, std::string > header;
-	  std::map< std::string, std::string >::iterator it;
-	  std::string content;
-	
-	  HttpRequest message(method, url);
-
-	  if (p.readHttp(method, url, header, content))
-	    {	
-	      for (it = header.begin(); it != header.end(); ++it)
-		message.header[it->first] = it->second;
-
-	      message._content = content;
-	      return message;
-	    }
-	  //sinon, exception
-	
-	  HttpRequest t("bidon", "bidon");
-	  return t;      
-	}
+	static HttpRequest build(IProducterStream   &stream);
       };
       
       class HttpReply : public HttpMessage

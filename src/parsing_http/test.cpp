@@ -11,30 +11,6 @@
 
 int main()
 {
-  /*
-    httpMessages
-  */
-
-
-  /*
-    http::message::HttpRequest msg;
-=======
-  zia::http::message::HttpRequest msg;
->>>>>>> b836ab1aaabef4ec2db985cd8d44a8871c4efa8f
-  // http::message::equivalent to : 
-  // http::message::HttpMessage msg;
-  // or http::message::HttpReply msg;
-  msg.header["content-type"] = "text/html";
-  msg.header["key"] = "value";
-  std::cout << msg.header["content-type"] << std::endl;
-
-  
-  // parsing request :
-
-  std::string test_request = "";
-  http::message::HttpRequest request;
-  request =  http::message::HttpMessageFactory::build < http::message::HttpRequest >(test_request);
-  */
 
 
   TestProducterStream  ps;
@@ -46,25 +22,5 @@ int main()
   for (zia::http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
     std::cout << it->first << ":" << it->second << std::endl;
   
-  
-  //delete ps;
-  
   return 0;
-
-
-  // TestProducterStream ps;
-  // ParserHttp p(ps);
-  // std::string method;
-  // std::string url;
-  // std::map< std::string, std::string > header;
-  // std::map< std::string, std::string >::iterator it;
-  // std::string content;
-  // if (p.readHttp(method, url, header, content))
-  //   {
-  //     std::cout << "{" << method << "}" << std::endl;
-  //     std::cout << "{" << url << "}" << std::endl;
-  //     for (it = header.begin(); it != header.end(); ++it)
-  // 	std::cout << "-> " << it->first << " : " << it->second;
-  //     std::cout << "{" << content << "}" << std::endl;
-  //   }
 }
