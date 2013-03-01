@@ -5,23 +5,18 @@
 #include <map>
 #include <string>
 
+
+#include "parsing_http/IProducterStream.hh"
+#include "parsing_http/ParserHttp.hh"
+
+#include <iostream> //only for debug
+
 namespace zia
 {
   namespace http
   {
     namespace message
     {
-      class HttpMessageFactory
-      {
-
-      public:
-	template < typename T >
-	static T build(const std::string rawMessage)
-	{
-	  return new T;
-	}
-      };
-
 
       class HttpHeader : public std::map< std::string, std::string>
       {
@@ -31,32 +26,48 @@ namespace zia
 
       class HttpMessage 
       {
+      protected:
+	std::string _content; //TOFIX : ref 
+
       public:
 	virtual ~HttpMessage() { ; }
-
 	HttpHeader header;
-	std::string message;
-  
-	std::string toString(void);
+	std::string toString(void); //TO IMPL, see .cpp
+	void	content(std::string &content)
+	{
+	  this->_content = content;
+	}
+	std::string &content()
+	{
+	  return this->_content;
+	}
+	
 
       };
-
+      
 
       class HttpRequest : public HttpMessage
-      {//
-	// requete http
-	//
-	;
-      };
+      {// http request modelisation
 
+
+      public:
+	const std::string _method; // TOFIX : ref bug
+	const std::string  _url;  // TOFIX : ---^
+	
+	HttpRequest(const std::string & method, const std::string & url) : _method(method), _url(url){;}
+      
+	static HttpRequest build(IProducterStream   &stream);
+      };
+      
       class HttpReply : public HttpMessage
-      {//
-	// reponse http
-	// 
-	;
+      {// http reply modelisation
+	
+      public:
+	int _reply_code; //TOFIX : private
       };
     }
   }
 }
+
 
 #endif /* _HTTPMESSAGE_H_ */

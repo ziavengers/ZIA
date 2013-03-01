@@ -5,36 +5,26 @@
 
 #include <fstream>
 
+
+
+void	tests()
+{
+  TestProducterStream  ps;
+  
+  zia::http::message::HttpRequest r =  zia::http::message::HttpRequest::build(ps); 
+  
+  std::cout << r._method << std::endl;
+  std::cout << r._url << std::endl;
+  for (zia::http::message::HttpHeader::iterator it = r.header.begin(); it != r.header.end(); ++it)
+    std::cout << it->first << ":" << it->second << std::endl;
+  std::cout << "content : " << r.content() << std::endl;
+ 
+}
+
 int main()
 {
-  /*
-    httpMessages
-  */
-  zia::http::message::HttpRequest msg;
-  // http::message::equivalent to : 
-  // http::message::HttpMessage msg;
-  // or http::message::HttpReply msg;
-  msg.header["content-type"] = "text/html";
-  msg.header["key"] = "value";
-  std::cout << msg.header["content-type"] << std::endl;
+  tests();
 
-
+  
   return 0;
-
-
-  TestProducterStream ps;
-  ParserHttp p(ps);
-  std::string method;
-  std::string url;
-  std::map< std::string, std::string > header;
-  std::map< std::string, std::string >::iterator it;
-  std::string content;
-  if (p.readHttp(method, url, header, content))
-    {
-      std::cout << "{" << method << "}" << std::endl;
-      std::cout << "{" << url << "}" << std::endl;
-      for (it = header.begin(); it != header.end(); ++it)
-	std::cout << "-> " << it->first << " : " << it->second;
-      std::cout << "{" << content << "}" << std::endl;
-    }
 }
