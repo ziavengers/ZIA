@@ -3,14 +3,14 @@ project(zia)
 
 set(ZIA_PATH ${CMAKE_SOURCE_DIR})
 set(ARCH linux)
+set(ZIA_LIBS_PATH ${ZIA_PATH}/lib/${ARCH})
 
 include_directories(
 	${ZIA_PATH}/inc/
 	${ZIA_PATH}/inc/${ARCH}/
 )
 link_directories(
-	${ZIA_PATH}/lib/
-	${ZIA_PATH}/lib/${ARCH}/
+	${ZIA_LIBS_PATH}
 )
 
 set(NB_BIND_PARAMS 6)
