@@ -42,14 +42,14 @@ namespace zia
     }
 
 
-    Server::Server(int port, int queueSize) : Object(), _server(), _clients()
-    {
-      _server.bind(port);
-      _server.listen(queueSize);
-    }
+    Server::Server(int port, int queueSize) : Object(), _port(port), _queueSize(queueSize), _server(), _clients()
+    {}
 
     void Server::run()
     {
+      _server.bind(_port);
+      _server.listen(_queueSize);
+
       network::Socket::Select select;
       std::list< SocketStream* >::iterator it;
 

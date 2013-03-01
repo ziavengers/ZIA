@@ -22,23 +22,12 @@ public:
   }
 };
 
-#include "core/ThreadPool.hh"
-#include "utils/Singleton.hpp"
+#include "core/Zia.hh"
 
 int main()
 {
-  try
-    {
-      zia::utils::Singleton< zia::core::ThreadPool >::instance(new zia::core::ThreadPool(5));
-      zia::utils::Singleton< zia::core::ThreadPool >::instance()->start();
-
-      Toto t;
-      t.connect("SocketStream::readable", zia::utils::bind(&Toto::slot, t));
-      zia::core::Server s(4343, 5);
-      s.run();
-    }
-  catch (zia::utils::Exception& e)
-    {
-      e.log();
-    }
+  zia::core::Zia zia(4343, 5, 5);
+  Toto t;
+  t.connect("SocketStream::readable", zia::utils::bind(&Toto::slot, t));
+  zia.run();
 }

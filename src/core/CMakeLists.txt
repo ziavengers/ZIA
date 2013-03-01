@@ -18,10 +18,10 @@ target_link_libraries(
 )
 
 add_executable(
-	test_serv
-	test_serv.cpp
+	test_zia
+	test_zia.cpp
 )
 target_link_libraries(
-	test_serv
+	test_zia
 	core
 )

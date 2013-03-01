@@ -34,6 +34,8 @@ namespace zia
       Server(int, int);
       void run();
     private:
+      int _port;
+      int _queueSize;
       network::Socket _server;
       std::list< SocketStream* > _clients;
     };
