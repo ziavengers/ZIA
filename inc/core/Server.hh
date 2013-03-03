@@ -21,13 +21,17 @@ namespace zia
       {
       public:
 	SocketStream(network::ISocket*);
-	void read();
+	void readBuff();
+	void writeBuff();
 	std::string nextString();
+	void write(const std::string&);
 	network::ISocket* socket();
       private:
 	network::ISocket* _socket;
-	thread::Mutex _mutex;
 	std::queue< std::string > _strings;
+	std::string _buffWrite;
+	thread::Mutex _readMutex;
+	thread::Mutex _writeMutex;
 	static const int _readSize = 256;
       };
 

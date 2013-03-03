@@ -13,6 +13,7 @@ public:
 	try
 	  {
 	    std::cout << stream->nextString();
+	    stream->write("merci\n");
 	  }
 	catch (IProducterStream::Exception& e)
 	  {
