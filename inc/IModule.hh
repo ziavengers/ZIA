@@ -25,7 +25,7 @@ namespace zia
 
     };
 
-    class AModule : public Object, public IModule
+    class AModule : public IModule, public zia::core::Object
     {
     public:
       virtual ~AModule() { }
@@ -34,6 +34,12 @@ namespace zia
       virtual const std::string&	name() const = 0;
 
       virtual void	version(int major, int minor) = 0;
+
+    protected:
+      std::string	_name;
+      int		_major;
+      int		_minor;
+
     };
 
     extern "C"
