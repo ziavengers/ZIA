@@ -1,5 +1,5 @@
 #include <locale>
-#include "parsing_http/ConsumerParser.hpp"
+#include "utils/parsing/ConsumerParser.hpp"
 
 bool ConsumerParser::readBlock()
 {

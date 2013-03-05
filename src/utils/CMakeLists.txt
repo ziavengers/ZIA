@@ -8,6 +8,7 @@ add_library(
 	Logger.cpp
 	register.cpp
 	${ARCH}/Library.cpp
+	parsing/ConsumerParser.cpp
 )
 
 target_link_libraries(

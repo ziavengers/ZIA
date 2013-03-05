@@ -2,7 +2,7 @@
 #define TESTPRODUCTERSTREAM_HH_
 
 #include <vector>
-#include "IProducterStream.hh"
+#include "utils/parsing/IProducterStream.hh"
 
 class TestProducterStream : public IProducterStream
 {

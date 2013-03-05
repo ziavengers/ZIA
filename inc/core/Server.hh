@@ -7,7 +7,7 @@
 #include "core/Object.hpp"
 #include "socket/Socket.hh"
 #include "thread/Mutex.hh"
-#include "parsing_http/IProducterStream.hh"
+#include "utils/parsing/IProducterStream.hh"
 
 namespace zia
 {
