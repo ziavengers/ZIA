@@ -1,4 +1,18 @@
 #include <core/module/Module.hh>
+#include <core/Object.hpp>
+
+#include <utils/bind.hpp>
+
+#include <iostream>
+
+#include <exception>
+
+class Toto : public zia::core::Object
+{
+public:
+  Toto() {
+  }
+};
 
 int	main(int ac, char **av)
 {
@@ -6,6 +20,8 @@ int	main(int ac, char **av)
 
   zia::core::module::ModuleManagement mg;
 
+zia::utils::Singleton< zia::core::ThreadPool >::instance(new zia::core::ThreadPool);
+zia::utils::Singleton< zia::core::ThreadPool >::instance()->start();
   /*
     loading module from is path
    */
@@ -15,8 +31,12 @@ int	main(int ac, char **av)
   else
     mg.loadModule("../../../test/libNutsModule.so");
 
+
+  Toto t;
+  t.emit("test");
+while(1);
   /* 
-     unload it frim his name
+     unload it from his name
    */
   mg.unloadModule("NutsModule");
   return 0;
