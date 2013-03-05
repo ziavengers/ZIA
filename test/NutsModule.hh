@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Mon Mar  4 16:44:17 2013 Rivot Corentin
-// Last update Mon Mar  4 16:56:06 2013 Rivot Corentin
+// Last update Tue Mar  5 10:42:40 2013 Rivot Corentin
 //
 
 #ifndef NUTSMODULE_HH_
@@ -19,7 +19,7 @@
 class	NutsModule : public zia::module::AModule
 {
 public:
-  NutsModule() { }
+  NutsModule() { _name = "NutsModule"; }
   ~NutsModule() { }
   
   void	name(const std::string& name) { _name = name; }

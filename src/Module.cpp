@@ -29,8 +29,8 @@ namespace module
 	_lib.add(path);
 	IModule*	(*fptr)(void);
 	fptr = _lib.getFunction< IModule* (*)(void) >(path, "createModule");
-
 	_lModule.push_back(fptr());
+	LOG_INFO(std::string("Load module named : ") + path);
       }
     catch (utils::Exception& e)
       {
@@ -57,9 +57,10 @@ namespace module
       {
 	if ((*it)->name() == modName)
 	  {
-	    zia::log << "Unload module named " << modName;
+	    LOG_INFO(std::string("Unload module named : ") + modName);
 	    _lModule.erase(it);
 	    _lib.close(modName);
+	    break;
 	  }
       }
   }
