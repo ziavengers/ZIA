@@ -1,7 +1,7 @@
 #ifndef PARSERHTTP_HH_
 #define PARSERHTTP_HH_
 
-#include "ConsumerParser.hpp"
+#include "utils/parsing/ConsumerParser.hpp"
 
 class ParserHttp : public ConsumerParser
 {
