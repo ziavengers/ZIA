@@ -27,3 +27,8 @@ add_subdirectory(src/core/)
 add_subdirectory(src/parsing_http)
 add_subdirectory(src/utils/bind_tests)
 add_subdirectory(src/core/Object_tests)
+
+
+add_subdirectory(test/)
+
+

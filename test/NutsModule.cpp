@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Mon Mar  4 16:43:38 2013 Rivot Corentin
-// Last update Tue Mar  5 10:29:10 2013 Rivot Corentin
+// Last update Tue Mar  5 11:26:56 2013 Rivot Corentin
 //
 
 #include "NutsModule.hh"
@@ -13,10 +13,10 @@
 extern "C"
 {
 
-zia::module::IModule*	createModule(void)
-{
-  return new NutsModule;
-}
+  zia::core::module::IModule*	createModule(void)
+  {
+    return new NutsModule;
+  }
 
 }
 

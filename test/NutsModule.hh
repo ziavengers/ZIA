@@ -5,18 +5,18 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Mon Mar  4 16:44:17 2013 Rivot Corentin
-// Last update Tue Mar  5 10:42:40 2013 Rivot Corentin
+// Last update Tue Mar  5 11:26:41 2013 Rivot Corentin
 //
 
 #ifndef NUTSMODULE_HH_
 #define NUTSMODULE_HH_
 
 
-#include "IModule.hh"
+#include <core/module/IModule.hh>
 
 #include <iostream>
 
-class	NutsModule : public zia::module::AModule
+class	NutsModule : public zia::core::module::AModule
 {
 public:
   NutsModule() { _name = "NutsModule"; }

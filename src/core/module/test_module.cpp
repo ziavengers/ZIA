@@ -13,7 +13,7 @@ int	main(int ac, char **av)
   if (ac > 2)
     mg.loadModule(av[1]);
   else
-    mg.loadModule("../test/libNutsModule.so");
+    mg.loadModule("../../../test/libNutsModule.so");
 
   /* 
      unload it frim his name
