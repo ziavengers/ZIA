@@ -1,10 +1,10 @@
-#include <Module.hh>
+#include <core/module/Module.hh>
 
 int	main(int ac, char **av)
 {
   zia::log.severity(zia::utils::Logger::DEBUG);
 
-  zia::module::ModuleManagement mg;
+  zia::core::module::ModuleManagement mg;
 
   /*
     loading module from is path
