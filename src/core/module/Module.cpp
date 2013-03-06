@@ -26,15 +26,17 @@ namespace zia
 	_lModule.push_back(m);
       }
 
-      void	ModuleManagement::loadModule(const std::string& path) throw (utils::Exception)
+      void	ModuleManagement::loadModule(const std::string& path, const std::string& name) throw (utils::Exception)
       {
 	try
 	  {
-	    _lib.add(path);
+	    if (name.empty())
+	      _lib.add(path);
+	    else
+	      _lib.add(path, name);
 	    IModule*	(*fptr)(void);
 	    fptr = _lib.getFunction< IModule* (*)(void) >(path, "createModule");
 	    IModule* ty = fptr();
-	    //	    LOG_DEBUG(ty->name());
 	    _lModule.push_back(ty);
 	    LOG_INFO(std::string("Load module named : ") + path);
 	  }
