@@ -1,35 +1,47 @@
 #include "utils/ini/ReadIni.hh"
 #include <iostream>
 
-char escapedLetter(char c)
-{
-  switch (c)
-    {
-    case 'a':
-      return '\a';
-    case 'b':
-      return '\b';
-    case 't':
-      return '\t';
-    case 'n':
-      return '\n';
-    case 'v':
-      return '\v';
-    case 'f':
-      return '\f';
-    case 'r':
-      return '\r';
-    default:
-      return c;
-    }
-}
-
 namespace zia
 {
   namespace utils
   {
     namespace ini
     {
+
+      char escapedLetter(char c)
+      {
+	switch (c)
+	  {
+	  case 'a':
+	    return '\a';
+	  case 'b':
+	    return '\b';
+	  case 't':
+	    return '\t';
+	  case 'n':
+	    return '\n';
+	  case 'v':
+	    return '\v';
+	  case 'f':
+	    return '\f';
+	  case 'r':
+	    return '\r';
+	  default:
+	    return c;
+	  }
+      }
+
+      void appendReplacingEscapedLetter(std::string& dest, const std::string& src)
+      {
+	if (dest.size())
+	  {
+	    dest.append(1, escapedLetter(src[0]));
+	    dest.append(src, 1, src.size() - 1);
+	  }
+	else
+	  dest.append(src);
+      }
+
 
       ReadIni::ReadIni(parsing::IProducterStream& prod) : parsing::ConsumerParser(prod)
       {}
@@ -74,6 +86,46 @@ namespace zia
 	return true;
       }
 
+      bool ReadIni::readWord(std::string& word)
+      {
+	std::vector< char > ends(3);
+	ends[0] = ' ';
+	ends[1] = '\t';
+	ends[2] = '\n';
+	return (beginCapture("word") && (readUntil(ends, false) || readUntilEOF()) && endCapture("word", word));
+      }
+      bool ReadIni::readString(std::string& string)
+      {
+	std::string tmp;
+	string = "";
+	saveContext();
+	if (read('"'))
+	  {
+	    beginCapture("string");
+	    while (!peek('"'))
+	      {
+		if (peek('\\'))
+		  {
+		    endCapture("string", tmp);
+		    appendReplacingEscapedLetter(string, tmp);
+		    read('\\');
+		    beginCapture("string");
+		  }
+		if (!readRange(' ', '~'))
+		  break ;
+	      }
+	    endCapture("string", tmp);
+	    appendReplacingEscapedLetter(string, tmp);
+	    if (read('"'))
+	      {
+		validContext();
+		return true;
+	      }
+	  }
+	restoreContext();
+	return false;
+      }
+
       bool ReadIni::readSection(std::string& name)
       {
 	saveContext();
@@ -90,36 +142,9 @@ namespace zia
       {
 	std::string tmp;
 	value = "";
-	saveContext();
-	if (read('"'))
-	  {
-	    beginCapture("value");
-	    while (!peek('"'))
-	      {
-		if (peek('\\'))
-		  {
-		    endCapture("value", tmp);
-		    if (value.size())
-		      tmp[0] = escapedLetter(tmp[0]);
-		    value += tmp;
-		    read('\\');
-		    beginCapture("value");
-		  }
-		if (!readRange(' ', '~'))
-		  break ;
-	      }
-	    endCapture("value", tmp);
-	    if (value.size())
-	      tmp[0] = escapedLetter(tmp[0]);
-	    value += tmp;
-	    if (read('"'))
-	      {
-		validContext();
-		return true;
-	      }
-	  }
-	restoreContext();
-	if (beginCapture("value") && readIdentifier() && endCapture("value", value))
+	if (readString(value))
+	  return true;
+	else if (readWord(value))
 	  return true;
 	return false;
       }

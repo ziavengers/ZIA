@@ -23,6 +23,9 @@ namespace zia
 	bool readSpaces();
 	bool readComment();
 
+	bool readWord(std::string&);
+	bool readString(std::string&);
+
 	bool readSection(std::string&);
 	bool readValue(std::string& value);
 	
