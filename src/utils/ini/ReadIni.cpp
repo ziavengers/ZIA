@@ -129,11 +129,8 @@ namespace zia
 	std::string sectionName;
 	std::string key;
 	std::string value;
+	std::string cmd;
 	std::vector< std::string > ends(4);
-	ends[0] = " ";
-	ends[1] = "#";
-	ends[2] = ";";
-	ends[3] = "\n";
 	if (readComment() || read('\n'))
 	  return true;
 	readSpaces();
@@ -157,6 +154,12 @@ namespace zia
 		validContext();
 		return true;
 	      }
+	  }
+	restoreContext();
+	if (saveContext() && beginCapture("cmd") && readIdentifier() && endCapture("cmd", cmd) && ignore(readSpaces()) && read(':'))
+	  {
+	    Ini::Section::Instruction instr(cmd);
+	    ini[_section].addInstruction(instr);
 	  }
 	restoreContext();
 	return false;

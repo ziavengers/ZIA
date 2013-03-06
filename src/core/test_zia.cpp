@@ -39,6 +39,9 @@ int main()
       std::map< std::string, std::string >::const_iterator it2;
       for (it2 = it->second.vars().begin(); it2 != it->second.vars().end(); ++it2)
 	std::cout << it2->first << " = " << it2->second << std::endl;
+      std::list< zia::utils::ini::Ini::Section::Instruction >::const_iterator it3;
+      for (it3 = it->second.instructions().begin(); it3 != it->second.instructions().end(); ++it3)
+	std::cout << it3->instr() << ":" << std::endl;
       std::cout << std::endl;
     }
   std::cout << "END" << std::endl;
