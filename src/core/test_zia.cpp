@@ -15,7 +15,7 @@ public:
 	    std::cout << stream->nextString();
 	    stream->write("merci\n");
 	  }
-	catch (IProducterStream::Exception& e)
+	catch (zia::utils::parsing::IProducterStream::Exception& e)
 	  {
 	    std::cerr << "\033[32m" << "Déconnexion" << "\033[0m" << std::endl;
 	  }

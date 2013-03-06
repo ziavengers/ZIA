@@ -17,7 +17,7 @@ namespace zia
     class Server : public Object
     {
     public:
-      class SocketStream : public IProducterStream, public Object
+      class SocketStream : public utils::parsing::IProducterStream, public Object
       {
       public:
 	SocketStream(network::ISocket*);

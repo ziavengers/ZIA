@@ -24,7 +24,7 @@ namespace zia
 	return std::string("not implemented bastard");
       }
 
-      HttpRequest HttpRequest::build(IProducterStream   &stream)
+      HttpRequest HttpRequest::build(zia::utils::parsing::IProducterStream   &stream)
       { // parsing request processing, entry function.
 
 	ParserHttp p(stream);

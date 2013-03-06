@@ -4,13 +4,24 @@
 #include <string>
 #include "utils/Exception.hpp"
 
-class IProducterStream
+namespace zia
 {
- public:
-  virtual ~IProducterStream() {}
-  virtual std::string nextString() = 0;
+  namespace utils
+  {
+    namespace parsing
+    {
 
-  CLASS_EXCEPTION("IProducerStream: ");
-};
+      class IProducterStream
+      {
+      public:
+	virtual ~IProducterStream() {}
+	virtual std::string nextString() = 0;
+	
+	CLASS_EXCEPTION("zia::utils::parsing::IProducerStream: ");
+      };
+
+    }
+  }
+}
 
 #endif

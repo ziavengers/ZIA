@@ -4,7 +4,7 @@
 #include <vector>
 #include "utils/parsing/IProducterStream.hh"
 
-class TestProducterStream : public IProducterStream
+class TestProducterStream : public zia::utils::parsing::IProducterStream
 {
 public:
   TestProducterStream();

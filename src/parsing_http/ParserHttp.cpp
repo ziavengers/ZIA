@@ -1,6 +1,6 @@
 #include "parsing_http/ParserHttp.hh"
 
-ParserHttp::ParserHttp(IProducterStream& stream) : ConsumerParser(stream)
+ParserHttp::ParserHttp(zia::utils::parsing::IProducterStream& stream) : ConsumerParser(stream)
 {}
 #include <iostream>
 bool ParserHttp::readHttp(std::string& method, std::string& url, std::map< std::string, std::string >& header, std::string& content)

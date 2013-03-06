@@ -56,7 +56,7 @@ namespace zia
 	
 	HttpRequest(const std::string & method, const std::string & url) : _method(method), _url(url){;}
       
-	static HttpRequest build(IProducterStream   &stream);
+	static HttpRequest build(zia::utils::parsing::IProducterStream   &stream);
       };
       
       class HttpReply : public HttpMessage
