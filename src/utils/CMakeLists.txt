@@ -9,6 +9,7 @@ add_library(
 	register.cpp
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp
+	parsing/FileStream.cpp
 )
 
 target_link_libraries(
