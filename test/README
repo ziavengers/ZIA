@@ -1,6 +1,0 @@
-Juste une petite note pour montrer comment on tente de compiler ceci:
-
-$ g++ NutsModule.cpp -I../inc/ -I../inc/linux
-
-Il y a un probleme d'include avec la threadpool.
-Lorsque le probleme sera resolut, supprimer ce readme

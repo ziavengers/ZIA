@@ -6,6 +6,10 @@
 
 namespace zia
 {
+
+namespace core
+{
+
   namespace module
   {
 
@@ -50,7 +54,7 @@ namespace zia
       
     }
 
-
+  }
   }
 }
 
