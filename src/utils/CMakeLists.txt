@@ -9,6 +9,9 @@ add_library(
 	register.cpp
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp
+	parsing/FileStream.cpp
+	ini/Ini.cpp
+	ini/ReadIni.cpp
 )
 
 target_link_libraries(
