@@ -22,8 +22,12 @@ namespace zia
 	bool readSpace();
 	bool readSpaces();
 	bool readComment();
+
 	bool readSection(std::string&);
+	bool readValue(std::string& value);
+	
 	bool readLine(Ini&);
+
 	std::string _section;
       };
 

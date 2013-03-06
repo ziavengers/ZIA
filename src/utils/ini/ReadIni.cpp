@@ -1,6 +1,29 @@
 #include "utils/ini/ReadIni.hh"
 #include <iostream>
 
+char escapedLetter(char c)
+{
+  switch (c)
+    {
+    case 'a':
+      return '\a';
+    case 'b':
+      return '\b';
+    case 't':
+      return '\t';
+    case 'n':
+      return '\n';
+    case 'v':
+      return '\v';
+    case 'f':
+      return '\f';
+    case 'r':
+      return '\r';
+    default:
+      return c;
+    }
+}
+
 namespace zia
 {
   namespace utils
@@ -54,13 +77,50 @@ namespace zia
       bool ReadIni::readSection(std::string& name)
       {
 	saveContext();
-	readSpaces();
 	if (read('[') && beginCapture("sectionName") && readIdentifier() && endCapture("sectionName", name) && read(']'))
 	  {
 	    validContext();
 	    return true;
 	  }
 	restoreContext();
+	return false;
+      }
+
+      bool ReadIni::readValue(std::string& value)
+      {
+	std::string tmp;
+	value = "";
+	saveContext();
+	if (read('"'))
+	  {
+	    beginCapture("value");
+	    while (!peek('"'))
+	      {
+		if (peek('\\'))
+		  {
+		    endCapture("value", tmp);
+		    if (value.size())
+		      tmp[0] = escapedLetter(tmp[0]);
+		    value += tmp;
+		    read('\\');
+		    beginCapture("value");
+		  }
+		if (!readRange(' ', '~'))
+		  break ;
+	      }
+	    endCapture("value", tmp);
+	    if (value.size())
+	      tmp[0] = escapedLetter(tmp[0]);
+	    value += tmp;
+	    if (read('"'))
+	      {
+		validContext();
+		return true;
+	      }
+	  }
+	restoreContext();
+	if (beginCapture("value") && readIdentifier() && endCapture("value", value))
+	  return true;
 	return false;
       }
 
@@ -86,9 +146,9 @@ namespace zia
 		_section = sectionName;
 		return true;
 	      }
-	    restoreContext();
 	  }
-	else if (saveContext() && beginCapture("key") && readIdentifier() && endCapture("key", key) && ignore(readSpaces()) && read('=') && ignore(readSpaces()) && beginCapture("value") && (readUntil(ends, false) || readUntilEOF()) && endCapture("value", value))
+	restoreContext();
+	if (saveContext() && beginCapture("key") && readIdentifier() && endCapture("key", key) && ignore(readSpaces()) && read('=') && ignore(readSpaces()) && readValue(value))
 	  {
 	    readSpaces();
 	    if (read('\n') || readEOF() || readComment())
@@ -97,8 +157,8 @@ namespace zia
 		validContext();
 		return true;
 	      }
-	    restoreContext();
 	  }
+	restoreContext();
 	return false;
       }
 
