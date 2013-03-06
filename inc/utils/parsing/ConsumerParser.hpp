@@ -44,7 +44,7 @@ namespace zia
 	    _buff = _buff.substr(textLen(text));
 	}
 
-      public:
+      protected:
 	inline bool ignore(bool)
 	{
 	  return true;
