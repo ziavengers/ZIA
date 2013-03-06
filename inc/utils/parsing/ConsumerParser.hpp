@@ -45,6 +45,11 @@ namespace zia
 	}
 
       public:
+	inline bool ignore(bool)
+	{
+	  return true;
+	}
+
 	inline bool peek(char c)
 	{
 	  readBlockIfEmpty();
@@ -70,7 +75,7 @@ namespace zia
 	}
   
 	template < typename T >
-	bool readUntil(const std::vector< T >& vec)
+	bool readUntil(const std::vector< T >& vec, bool contains = true)
 	{
 	  typename std::vector< T >::const_iterator it;
 	  bool ret;
@@ -84,8 +89,11 @@ namespace zia
 		  break ;
 	      if (ret)
 		{
-		  save += *it;
-		  _buff = _buff.substr(textLen(*it));
+		  if (contains)
+		    {
+		      save += *it;
+		      _buff = _buff.substr(textLen(*it));
+		    }
 		}
 	      else
 		{
@@ -100,11 +108,11 @@ namespace zia
 	  return ret;
 	}
 	template < typename T >
-	bool readUntil(T text)
+	bool readUntil(T text, bool contains = true)
 	{
 	  typename std::vector< T > vec(1);
 	  vec[0] = text;
-	  return readUntil(vec);
+	  return readUntil(vec, contains);
 	}
 
 	bool readRange(char, char);

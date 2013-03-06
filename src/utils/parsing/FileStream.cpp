@@ -13,6 +13,11 @@ namespace zia
 	  throw Exception("bad file");
       }
 
+      FileStream::~FileStream()
+      {
+	_f.close();
+      }
+
       std::string FileStream::nextString()
       {
 	if (_f.eof())

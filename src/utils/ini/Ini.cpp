@@ -7,7 +7,7 @@ namespace zia
     namespace ini
     {
 
-      Ini::Section::Instruction::Instruction(const std::string& instr, const std::string& input, const std::string& output) : _instr(instr), _input(input), _output(output), _args(), _kwargs()
+      Ini::Section::Instruction::Instruction(const std::string& instr) : _instr(instr), _args(), _kwargs()
       {}
       const std::list< std::string >& Ini::Section::Instruction::args() const
       {
@@ -33,22 +33,6 @@ namespace zia
       {
 	return _instr;
       }
-      const std::string& Ini::Section::Instruction::input() const
-      {
-	return _input;
-      }
-      const std::string& Ini::Section::Instruction::output() const
-      {
-	return _output;
-      }
-      void Ini::Section::Instruction::input(const std::string& input)
-      {
-	_input = input;
-      }
-      void Ini::Section::Instruction::output(const std::string& output)
-      {
-	_output = output;
-      }
 
       const std::list< Ini::Section::Instruction >& Ini::Section::instructions() const
       {
@@ -58,9 +42,9 @@ namespace zia
       {
 	return _vars;
       }
-      void Ini::Section::addInstruction(const std::string& instr, const std::string& input, const std::string& output)
+      void Ini::Section::addInstruction(const Ini::Section::Instruction& instr)
       {
-	_instructions.push_back(Instruction(instr, input, output));
+	_instructions.push_back(instr);
       }
       const std::string& Ini::Section::operator[](const std::string& key) const
       {

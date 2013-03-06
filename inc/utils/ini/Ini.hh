@@ -21,7 +21,7 @@ namespace zia
 	  class Instruction
 	  {
 	  public:
-	    Instruction(const std::string&, const std::string& = "", const std::string& = "");
+	    Instruction(const std::string&);
 	    const std::list< std::string >& args() const;
 	    const std::map< std::string, std::string >& kwargs() const;
 	    void addArg(const std::string&);
@@ -29,21 +29,15 @@ namespace zia
 	    std::string& operator[](const std::string&);
 
 	    const std::string& instr() const;
-	    const std::string& input() const;
-	    const std::string& output() const;
-	    void input(const std::string&);
-	    void output(const std::string&);
 	  protected:
 	    std::string _instr;
-	    std::string _input;
-	    std::string _output;
 	    std::list< std::string > _args;
 	    std::map< std::string, std::string > _kwargs;
 	  };
 
 	  const std::list< Instruction >& instructions() const;
 	  const std::map< std::string, std::string >& vars() const;
-	  void addInstruction(const std::string&, const std::string& = "", const std::string& = "");
+	  void addInstruction(const Instruction&);
 	  const std::string& operator[](const std::string&) const;
 	  std::string& operator[](const std::string&);
 	protected:

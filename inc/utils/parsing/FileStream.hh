@@ -15,6 +15,7 @@ namespace zia
       {
       public:
 	FileStream(const std::string&);
+	~FileStream();
 	std::string nextString();
       private:
 	std::ifstream _f;
