@@ -1,4 +1,4 @@
-#include "core/Settings.hh"
+#include "core/Settings.hpp"
 #include "utils/parsing/FileStream.hh"
 #include "utils/ini/ReadIni.hh"
 
@@ -32,12 +32,6 @@ namespace zia
 	  }
     }
 
-#include <stdlib.h>
-    template < >
-    int Settings::get< int >(const std::string& key, const std::string& section) const
-    {
-      return atoi(_ini[section][key].data());
-    }
     template < >
     const std::string& Settings::get< const std::string& >(const std::string& key, const std::string& section) const
     {

@@ -26,7 +26,7 @@ public:
 #include "core/Zia.hh"
 #include "utils/parsing/FileStream.hh"
 #include "utils/ini/ReadIni.hh"
-#include "core/Settings.hh"
+#include "core/Settings.hpp"
 
 int main()
 {
@@ -62,10 +62,7 @@ int main()
   //   {
   //     e.log();
   //   }
-  // zia::core::Settings settings("test.ini");
-  // settings.load();
 
-  // zia::core::Zia zia(4343, 5, 5);
   zia::core::Zia zia("test.ini");
   Toto t;
   t.connect("SocketStream::readable", zia::utils::bind(&Toto::slot, t));

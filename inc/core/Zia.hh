@@ -2,7 +2,7 @@
 #define ZIA_HH_
 
 #include <string>
-#include "core/Settings.hh"
+#include "core/Settings.hpp"
 #include "core/Server.hh"
 #include "core/ThreadPool.hh"
 
@@ -14,7 +14,6 @@ namespace zia
     class Zia
     {
     public:
-      // Zia(int, int, int);
       Zia(const std::string&);
       void run();
     private:
