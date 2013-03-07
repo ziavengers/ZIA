@@ -1,7 +1,7 @@
 #include <iostream>
-#include "parsing_http/TestProducterStream.hh"
-#include "parsing_http/ParserHttp.hh"
-#include "parsing_http/HttpMessage.hpp"
+#include "http/TestProducterStream.hh"
+#include "http/ParserHttp.hh"
+#include "http/HttpMessage.hpp"
 
 #include <fstream>
 

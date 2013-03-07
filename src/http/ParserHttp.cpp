@@ -1,4 +1,4 @@
-#include "parsing_http/ParserHttp.hh"
+#include "http/ParserHttp.hh"
 
 ParserHttp::ParserHttp(zia::utils::parsing::IProducterStream& stream) : ConsumerParser(stream)
 {}
