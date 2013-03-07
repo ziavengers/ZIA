@@ -5,15 +5,15 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Mon Mar  4 16:44:17 2013 Rivot Corentin
-// Last update Thu Mar  7 18:47:15 2013 Rivot Corentin
+// Last update Thu Mar  7 21:50:49 2013 Antoine Rozo
 //
 
 #ifndef NUTSMODULE_HH_
 #define NUTSMODULE_HH_
 
 
-#include <core/module/IModule.hh>
-#include <utils/bind.hpp>
+#include "core/module/Module.hh"
+#include "utils/bind.hpp"
 
 #include <iostream>
 

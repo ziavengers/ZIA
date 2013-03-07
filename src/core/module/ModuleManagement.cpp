@@ -1,12 +1,10 @@
-#include "core/module/Module.hh"
+#include "core/module/ModuleManagement.hh"
 #include "utils/Logger.hpp"
 
 namespace zia
 {
-
   namespace core
   {
-
     namespace module
     {
 
@@ -73,6 +71,7 @@ namespace zia
 	      }
 	  }
       }
+
     }
   }
 }

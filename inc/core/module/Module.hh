@@ -1,65 +1,69 @@
 #ifndef MODULE_HH_
 #define MODULE_HH_
 
-#include <list>
 #include <string>
-
-#include "IModule.hh"
-#include "utils/Exception.hpp"
-#include "utils/Library.hh"
+#include "core/Object.hpp"
 
 namespace zia
 {
-
   namespace core
   {
-
     namespace module
     {
 
-      /*
-
-	Contient les modules charges depuis un nom de fichier.
-
-      */
-
-      class	ModuleManagement
+      class IModule
       {
       public:
-	CLASS_EXCEPTION("zia::core::module::ModuleManagement: ");
-
-      public:
-
-	ModuleManagement();
-	~ModuleManagement();
-
-	/* Probablement inutile */
-	void	loadModule(IModule*) throw (Exception);
+	virtual ~IModule() { }
 
 	/*
-
-	  Charge une librairie dynamique.
-	  - extraction de createModule.
-	  - et stockage du IModule* creer dans la liste des modules.
-
+	  Module must have a name!
 	*/
 
-	void	loadModule(const std::string& path, const std::string& name = "") throw (Exception);
+	virtual void	name(const std::string&) = 0;
+	virtual const std::string&	name() const = 0;
 
-	/* Idem probablement inutile*/
-	void	unloadModule(IModule*) throw (Exception);
+	virtual void	version(int major, int minor) = 0;
 
-
-	void	unloadModule(const std::string& modName)  throw (Exception);
-
-      private:    
-	utils::Library			_lib;
-	std::list< IModule* >	_lModule;
       };
+
+      class AModule : public IModule, public zia::core::Object
+      {
+      public:
+	AModule(const std::string&, const std::string&, const std::map< std::string, std::string >&) {
+	}
+
+	virtual ~AModule() { }
+
+	virtual void	name(const std::string&) = 0;
+	virtual const std::string&	name() const = 0;
+
+	virtual void	version(int major, int minor) = 0;
+
+      protected:
+	std::string	_name;
+	int		_major;
+	int		_minor;
+
+      };
+
+      extern "C"
+      {
+      
+	/* Module must implement this function with this name! */
+	/**
+	   string s1 : Nom d'un signal
+	   string s2 : Nom d'un signal
+	 
+	   map opt : Parametre optionel
+	*/
+
+	IModule*	createModule(const std::string& s1, const std::string& s2, const std::map< std::string, std::string >&opt);
+      
+      }
 
     }
   }
 }
-
 
 #endif
