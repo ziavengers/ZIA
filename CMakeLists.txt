@@ -9,6 +9,7 @@ IF( WIN32 )
     set(ARCH windows)
 ENDIF( WIN32 )
 set(ZIA_LIBS_PATH ${ZIA_PATH}/lib/${ARCH})
+set(ZIA_MODS_PATH ${ZIA_PATH}/bin/modules/)
 set(CMAKE_CXX_FLAGS "-W -Wall -Wextra")
 
 include_directories(
@@ -33,8 +34,6 @@ add_subdirectory(src/core/)
 add_subdirectory(src/parsing_http)
 add_subdirectory(src/utils/bind_tests)
 add_subdirectory(src/core/Object_tests)
-
-
-add_subdirectory(test/)
+add_subdirectory(src/modules/test/)
 
 

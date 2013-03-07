@@ -1,6 +1,6 @@
 project(libcore)
 
-set(LIBRARY_OUTPUT_PATH ${ZIA_LIBS_PATH}/${CMAKE_BUILD_TYPE})
+set(LIBRARY_OUTPUT_PATH ${ZIA_LIBS_PATH})
 
 add_library(
 	core
@@ -10,6 +10,8 @@ add_library(
 	ThreadPool.cpp
 	Settings.cpp
 	Zia.cpp
+	module/Module.cpp
+	module/ModuleManagement.cpp
 )
 
 target_link_libraries(

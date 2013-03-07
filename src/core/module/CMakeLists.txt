@@ -1,14 +1,8 @@
 project(test_module)
 
-file(
-	GLOB
-	source_files
-	*.cpp
-)
-
 add_executable(
 	test_module
-	${source_files}
+	test_module.cpp
 )
 
 target_link_libraries(

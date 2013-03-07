@@ -1,5 +1,6 @@
 project(NutsModule)
 
+set(LIBRARY_OUTPUT_PATH ${ZIA_MODS_PATH})
 
 add_library(
 	NutsModule
