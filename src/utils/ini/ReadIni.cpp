@@ -52,10 +52,7 @@ namespace zia
 	std::string sectionName;
 	while (!readEOF())
 	  if (!readLine(ini))
-	    {
-	      std::cout << "parsing Error" << std::endl;
-	      break ;
-	    }
+	    throw Exception("Error during parsing");
 	return ini;
       }
 
@@ -84,6 +81,11 @@ namespace zia
 	if (!readUntil< char >('\n'))
 	  readUntilEOF();
 	return true;
+      }
+      bool ReadIni::readEndLine()
+      {
+	readSpaces();
+	return (read('\n') || readEOF() || readComment());
       }
 
       bool ReadIni::readWord(std::string& word)
@@ -125,6 +127,16 @@ namespace zia
 	restoreContext();
 	return false;
       }
+      bool ReadIni::readValue(std::string& value)
+      {
+	std::string tmp;
+	value = "";
+	if (readString(value))
+	  return true;
+	else if (readWord(value))
+	  return true;
+	return false;
+      }
 
       bool ReadIni::readSection(std::string& name)
       {
@@ -137,15 +149,26 @@ namespace zia
 	restoreContext();
 	return false;
       }
-
-      bool ReadIni::readValue(std::string& value)
+      bool ReadIni::readAssignation(std::string& key, std::string& value)
       {
-	std::string tmp;
-	value = "";
-	if (readString(value))
-	  return true;
-	else if (readWord(value))
-	  return true;
+	saveContext();
+	if (beginCapture("key") && readIdentifier() && endCapture("key", key) && ignore(readSpaces()) && read('=') && ignore(readSpaces()) && readValue(value))
+	  {
+	    validContext();
+	    return true;
+	  }
+	restoreContext();
+	return false;
+      }
+      bool ReadIni::readInstruction(std::string& cmd)
+      {
+	saveContext();
+	if (beginCapture("cmd") && readIdentifier() && endCapture("cmd", cmd) && ignore(readSpaces()) && read(':'))
+	  {
+	    validContext();
+	    return true;
+	  }
+	restoreContext();
 	return false;
       }
 
@@ -155,38 +178,43 @@ namespace zia
 	std::string key;
 	std::string value;
 	std::string cmd;
-	std::vector< std::string > ends(4);
-	if (readComment() || read('\n'))
-	  return true;
+
 	readSpaces();
-	if (saveContext() && readSection(sectionName))
+	if (readEndLine())
+	  return true;
+	if (readSection(sectionName) && readEndLine())
 	  {
-	    readSpaces();
-	    if (read('\n') || readEOF() || readComment())
-	      {
-		validContext();
-		_section = sectionName;
-		return true;
-	      }
+	    _section = sectionName;
+	    return true;
 	  }
-	restoreContext();
-	if (saveContext() && beginCapture("key") && readIdentifier() && endCapture("key", key) && ignore(readSpaces()) && read('=') && ignore(readSpaces()) && readValue(value))
+	else if (readAssignation(key, value) && readEndLine())
 	  {
-	    readSpaces();
-	    if (read('\n') || readEOF() || readComment())
-	      {
-		ini[_section][key] = value;
-		validContext();
-		return true;
-	      }
+	    ini[_section][key] = value;
+	    return true;
 	  }
-	restoreContext();
-	if (saveContext() && beginCapture("cmd") && readIdentifier() && endCapture("cmd", cmd) && ignore(readSpaces()) && read(':'))
+	else if (readInstruction(cmd))
 	  {
 	    Ini::Section::Instruction instr(cmd);
-	    ini[_section].addInstruction(instr);
+	    saveContext();
+	    bool breaked = false;
+	    while (!breaked && !readEndLine())
+	      {
+		readSpaces();		
+		if (readAssignation(key, value))
+		  instr[key] = value;
+		else if (readValue(cmd))
+		  instr.addArg(cmd);
+		else
+		  breaked = true;
+	      }
+	    if (!breaked)
+	      {
+		validContext();
+		ini[_section].addInstruction(instr);
+		return true;
+	      }
+	    restoreContext();
 	  }
-	restoreContext();
 	return false;
       }
 
