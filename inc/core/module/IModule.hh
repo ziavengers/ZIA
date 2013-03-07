@@ -32,6 +32,9 @@ namespace core
     class AModule : public IModule, public zia::core::Object
     {
     public:
+      AModule(const std::string&, const std::string&, const std::map< std::string, std::string >&) {
+      }
+
       virtual ~AModule() { }
 
       virtual void	name(const std::string&) = 0;
@@ -50,7 +53,14 @@ namespace core
     {
       
       /* Module must implement this function with this name! */
-      IModule*	createModule(void);            
+      /**
+	 string s1 : Nom d'un signal
+	 string s2 : Nom d'un signal
+	 
+	 map opt : Parametre optionel
+       */
+
+      IModule*	createModule(const std::string& s1, const std::string& s2, const std::map< std::string, std::string >&opt);
       
     }
 
