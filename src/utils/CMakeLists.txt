@@ -6,6 +6,7 @@ add_library(
 	utils
 	SHARED
 	Logger.cpp
+	Exception.cpp
 	register.cpp
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp

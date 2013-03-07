@@ -30,7 +30,7 @@ namespace zia
 	{
 	  return text.size();
 	}
-	size_t textLen(char c)
+	size_t textLen(char)
 	{
 	  return 1;
 	}

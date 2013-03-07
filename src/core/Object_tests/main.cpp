@@ -40,6 +40,7 @@ int main()
     }
 
   myo = ctor();
+  (void) myo;
   o.connect("huhu", zia::utils::bind(&AAA::aaa, o));
   o.emit("mysig", 1, 2);
   try

@@ -2,6 +2,7 @@
 #define IMUTEX_HH_
 
 #include "utils/NonCopyable.hh"
+#include "utils/Exception.hpp"
 
 namespace zia
 {
@@ -16,7 +17,8 @@ namespace zia
       virtual void	lock() = 0;
       virtual void	unlock() = 0;
       virtual bool	trylock() = 0;
-      
+
+      CLASS_EXCEPTION("zia::thread::IMutex: ");
     };
     
   }

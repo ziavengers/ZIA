@@ -1,7 +1,7 @@
-#include <core/module/Module.hh>
-#include <core/Object.hpp>
-
-#include <utils/bind.hpp>
+#include "core/module/Module.hh"
+#include "core/Object.hpp"
+#include "utils/bind.hpp"
+#include "utils/Logger.hpp"
 
 #include <iostream>
 

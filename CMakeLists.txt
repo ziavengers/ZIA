@@ -2,8 +2,14 @@ cmake_minimum_required(VERSION 2.8)
 project(zia)
 
 set(ZIA_PATH ${CMAKE_SOURCE_DIR})
-set(ARCH linux)
+IF( UNIX )
+    set(ARCH linux)
+ENDIF( UNIX )
+IF( WIN32 )
+    set(ARCH windows)
+ENDIF( WIN32 )
 set(ZIA_LIBS_PATH ${ZIA_PATH}/lib/${ARCH})
+set(CMAKE_CXX_FLAGS "-W -Wall -Wextra")
 
 include_directories(
 	${ZIA_PATH}/inc/

@@ -4,10 +4,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <errno.h>
+extern const char *sys_errlist[];
 
 #include "socket/Socket.hh"
-
-// Ajouter vérifs (fonctions systèmes + ptrs + dynamic_cast) & exceptions
 
 namespace zia
 {

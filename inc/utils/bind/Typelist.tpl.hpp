@@ -9,7 +9,9 @@ struct TypeList@n@ : private Storage@n@ @templates@
     return v.get();
   }
   template < typename ReturnType, typename Caller, typename List >
-    ReturnType operator()(TypeTraits<ReturnType>, Caller& caller, List& list)
+    ReturnType operator()(TypeTraits<ReturnType>, Caller& caller, List&
+			  list // IGNORE_0
+			  )
   {
     return caller(@list_params@);
   }

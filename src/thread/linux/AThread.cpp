@@ -4,10 +4,11 @@ namespace zia
 {
   namespace thread
   {
+
     void	AThread::start()
     {
       if (pthread_create(&_thread, 0, &AThread::startRoutine, this) != 0)
-	;//    throw CoreException("AThread::start fail!");
+	throw Exception("start failed");
     }
 
     void*	AThread::join()
@@ -15,7 +16,7 @@ namespace zia
       void*	ret;
 
       if (pthread_join(_thread, &ret) != 0)
-	;//    throw CoreException("AThread::join fail!");
+	throw Exception("join failed");
       return ret;
     }
 

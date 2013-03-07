@@ -62,9 +62,10 @@ namespace zia
 	_currentLevel = l;
 	return *this;
       }
-      Logger& operator<<(std::ostream& (*f)(std::ostream&))
+      Logger& operator<<(std::ostream& (*)(std::ostream&))
       {
 	log("");
+	return *this;
       }
 
 

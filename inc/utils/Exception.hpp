@@ -4,41 +4,30 @@
 #include <exception>
 #include <string>
 
-#include "Logger.hpp"
-
 #define CLASS_EXCEPTION(prefix) class Exception : public zia::utils::Exception \
   { \
 public: \
-    Exception(const std::string& s, bool autolog = false) throw() : zia::utils::Exception(prefix + s, autolog) {} \
+    Exception(const std::string& reason = "", bool autolog = false) throw() : zia::utils::Exception(prefix + reason, autolog) {} \
   }
 
 namespace zia
 {
-namespace utils
-{
-
-  class Exception : public std::exception
+  namespace utils
   {
-  public:
-    Exception(const std::string& s = "", bool autolog = false) throw() : _msg(s) {
-      if (autolog)
-	log();
-    }
-    
-    virtual ~Exception() throw() { }
 
-    void log() const throw() {
-      LOG_ERROR << _msg << std::endl;
-    }
-    const char *	what() const throw() {
-      return _msg.c_str();
-    }
+    class Exception : public std::exception
+    {
+    public:
+      Exception(const std::string& reason = "", bool autolog = false) throw();
+      virtual ~Exception() throw() { }
+      void log() const throw();
+      const char* what() const throw();
 
-  private:
-    std::string _msg;
-  };
+    private:
+      std::string _reason;
+    };
 
-}
+  }
 }
 
 #endif
