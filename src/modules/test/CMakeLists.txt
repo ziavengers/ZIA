@@ -12,3 +12,9 @@ target_link_libraries(
   utils
 )
 
+set_target_properties(
+	NutsModule
+	PROPERTIES
+	PREFIX ""
+	SUFFIX .mod
+)

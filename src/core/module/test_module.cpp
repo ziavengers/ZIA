@@ -29,7 +29,7 @@ zia::utils::Singleton< zia::core::ThreadPool >::instance()->start();
   if (ac > 2)
     mg.loadModule(av[1]);
   else
-    mg.loadModule("../../../bin/modules/libNutsModule.so");
+    mg.loadModule("../../../bin/modules/NutsModule.mod");
 
 
   Toto t;
