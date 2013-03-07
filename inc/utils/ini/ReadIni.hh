@@ -16,7 +16,7 @@ namespace zia
       class ReadIni : public parsing::ConsumerParser
       {
       public:
-	ReadIni(parsing::IProducterStream&);
+	ReadIni(parsing::IProducterStream&, const std::string& = "data");
 	Ini parse();
 
       protected:

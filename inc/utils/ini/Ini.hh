@@ -29,6 +29,7 @@ namespace zia
 	    std::string& operator[](const std::string&);
 
 	    const std::string& instr() const;
+
 	  protected:
 	    std::string _instr;
 	    std::list< std::string > _args;
@@ -40,6 +41,9 @@ namespace zia
 	  void addInstruction(const Instruction&);
 	  const std::string& operator[](const std::string&) const;
 	  std::string& operator[](const std::string&);
+
+	  void extends(const Section&);
+
 	protected:
 	  std::map< std::string, std::string > _vars;
 	  std::list< Instruction > _instructions;
@@ -48,6 +52,8 @@ namespace zia
 	const std::map< std::string, Section >& sections() const;
 	const Section& operator[](const std::string&) const;
 	Section& operator[](const std::string&);
+
+	void extends(const Ini&);
 
       protected:
 	std::map< std::string, Section > _sections;

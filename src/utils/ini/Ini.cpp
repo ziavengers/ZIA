@@ -54,6 +54,16 @@ namespace zia
       {
 	return _vars[key];
       }
+      void Ini::Section::extends(const Ini::Section& other)
+      {
+	std::list< Instruction >::const_iterator itinstr;
+	for (itinstr = other.instructions().begin(); itinstr != other.instructions().end(); ++itinstr)
+	  addInstruction(*itinstr);
+
+	std::map< std::string, std::string >::const_iterator itvars;
+	for (itvars = other.vars().begin(); itvars != other.vars().end(); ++itvars)
+	  _vars[itvars->first] = itvars->second;
+      }
 
       const std::map< std::string, Ini::Section >& Ini::sections() const
       {
@@ -66,6 +76,20 @@ namespace zia
       Ini::Section& Ini::operator[](const std::string& key)
       {
 	return _sections[key];
+      }
+      void Ini::extends(const Ini& other)
+      {
+	std::map< std::string, Section >::iterator it;
+	std::map< std::string, Section >::const_iterator ito;
+
+	for (ito = other.sections().begin(); ito != other.sections().end(); ++ito)
+	  {
+	    it = _sections.find(ito->first);
+	    if (it != _sections.end())
+	      it->second.extends(ito->second);
+	    else
+	      _sections[it->first] = it->second;
+	  }
       }
 
     }

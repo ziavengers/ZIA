@@ -43,7 +43,7 @@ namespace zia
       }
 
 
-      ReadIni::ReadIni(parsing::IProducterStream& prod) : parsing::ConsumerParser(prod)
+      ReadIni::ReadIni(parsing::IProducterStream& prod, const std::string& section) : parsing::ConsumerParser(prod), _section(section)
       {}
 
       Ini ReadIni::parse()
