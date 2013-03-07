@@ -28,8 +28,6 @@ namespace zia
 	  CRITIC
 	};
 
-      static Logger& logg;
-
       void	logname(const std::string&);
       void	severity(LogLevel);
       void	display(bool);
