@@ -43,7 +43,7 @@ namespace zia
       const std::string& getDefault(const std::string&, const std::string& key, const std::string& section = "core") const;
       const utils::ini::Ini& ini() const;
 
-      CLASS_EXCEPTION("zia::core::Setings: ");
+      CLASS_EXCEPTION("zia::core::Settings: ");
     private:
       const std::string& _filename;
       utils::ini::Ini _ini;
