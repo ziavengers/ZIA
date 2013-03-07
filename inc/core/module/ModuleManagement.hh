@@ -42,7 +42,7 @@ namespace zia
 
 	*/
 
-	void	loadModule(const std::string& path, const std::string& name = "") throw (Exception);
+	void	loadModule(const std::string& path, const std::string& sigInput, const std::string& sigOutput, const std::map< std::string, std::string >& args, const std::string& name = "") throw (Exception);
 
 	/* Idem probablement inutile*/
 	void	unloadModule(IModule*) throw (Exception);

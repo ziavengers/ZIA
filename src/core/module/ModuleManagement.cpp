@@ -25,7 +25,7 @@ namespace zia
 	_lModule.push_back(m);
       }
 
-      void	ModuleManagement::loadModule(const std::string& path, const std::string& name) throw (Exception)
+      void	ModuleManagement::loadModule(const std::string& path, const std::string& sigInput, const std::string& sigOutput, const std::map< std::string, std::string >& args, const std::string& name) throw (Exception)
       {
 	try
 	  {
@@ -35,7 +35,7 @@ namespace zia
 	      _lib.add(path, name);
 	    IModule::t_createModule fptr;
 	    fptr = _lib.getFunction< IModule::t_createModule >(path, "createModule");
-	    IModule* ty = fptr("", "", std::map< std::string, std::string >());
+	    IModule* ty = fptr(sigInput, sigOutput, args);
 	    _lModule.push_back(ty);
 	    LOG_INFO << "Load module named : " <<  path << std::endl;
 	  }

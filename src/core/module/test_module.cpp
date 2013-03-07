@@ -27,9 +27,9 @@ zia::utils::Singleton< zia::core::ThreadPool >::instance()->start();
    */
 
   if (ac > 2)
-    mg.loadModule(av[1]);
+    mg.loadModule(av[1], "in", "out", std::map< std::string, std::string >());
   else
-    mg.loadModule("../../../bin/modules/NutsModule.mod");
+    mg.loadModule("../../../bin/modules/NutsModule.mod", "in", "out", std::map< std::string, std::string >());
 
 
   Toto t;
