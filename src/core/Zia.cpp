@@ -7,7 +7,7 @@ namespace zia
   {
 
     Zia::Zia(const std::string& settingsFile) : _settings(settingsFile, true),
-						_logger(_settings.get("file", "logger")),
+						_logger(_settings.getDefault("zia.log", "file", "logger")),
 						_server(_settings.getTo< int >("port", "server"), _settings.getTo< int >("queue_size", "server")),
 						_pool(_settings.getTo< int >("nb_threads", "threadPool"))
     {

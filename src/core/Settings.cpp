@@ -36,6 +36,17 @@ namespace zia
     {
       return _ini[section][key];
     }
+    const std::string& Settings::getDefault(const std::string& defaultValue, const std::string& key, const std::string& section) const
+    {
+      try
+	{
+	  return get(key, section);
+	}
+      catch (utils::ini::Ini::Exception&)
+	{
+	  return defaultValue;
+	}
+    }
 
     const utils::ini::Ini& Settings::ini() const
     {
