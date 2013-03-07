@@ -33,9 +33,9 @@ namespace zia
 	      _lib.add(path);
 	    else
 	      _lib.add(path, name);
-	    IModule*	(*fptr)(void);
-	    fptr = _lib.getFunction< IModule* (*)(void) >(path, "createModule");
-	    IModule* ty = fptr();
+	    IModule::t_createModule fptr;
+	    fptr = _lib.getFunction< IModule::t_createModule >(path, "createModule");
+	    IModule* ty = fptr("", "", std::map< std::string, std::string >());
 	    _lModule.push_back(ty);
 	    LOG_INFO << "Load module named : " <<  path << std::endl;
 	  }

@@ -25,6 +25,8 @@ namespace zia
 
 	virtual void	version(int major, int minor) = 0;
 
+	typedef IModule* (*t_createModule)(const std::string&, const std::string&, const std::map< std::string, std::string >&);
+
       };
 
       class AModule : public IModule, public zia::core::Object
@@ -48,20 +50,20 @@ namespace zia
 
       };
 
-      extern "C"
-      {
+      // extern "C"
+      // {
       
-	/* Module must implement this function with this name! */
-	/**
-	   string s1 : Nom d'un signal
-	   string s2 : Nom d'un signal
+      // 	/* Module must implement this function with this name! */
+      // 	/**
+      // 	   string s1 : Nom d'un signal
+      // 	   string s2 : Nom d'un signal
 	 
-	   map opt : Parametre optionel
-	*/
+      // 	   map opt : Parametre optionel
+      // 	*/
 
-	IModule*	createModule(const std::string& s1, const std::string& s2, const std::map< std::string, std::string >&opt);
+      // 	IModule*	createModule(const std::string& s1, const std::string& s2, const std::map< std::string, std::string >&opt);
       
-      }
+      // }
 
     }
   }
