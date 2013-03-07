@@ -8,6 +8,7 @@ add_library(
 	Object.cpp
 	Server.cpp
 	ThreadPool.cpp
+	Settings.cpp
 	Zia.cpp
 )
 
