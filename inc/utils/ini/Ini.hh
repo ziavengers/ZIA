@@ -4,6 +4,7 @@
 #include <map>
 #include <list>
 #include <string>
+#include "utils/Exception.hpp"
 
 namespace zia
 {
@@ -54,6 +55,8 @@ namespace zia
 	Section& operator[](const std::string&);
 
 	void extends(const Ini&);
+
+	CLASS_EXCEPTION("zia::utils::ini::Ini: ");
 
       protected:
 	std::map< std::string, Section > _sections;

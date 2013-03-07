@@ -11,8 +11,8 @@ namespace zia
     //   utils::Singleton< ThreadPool >::instance(&_pool);
     // }
     Zia::Zia(const std::string& settingsFile) : _settings(settingsFile, true),
-						_server(_settings.get< int >("port"), _settings.get< int >("queueSize")),
-						_pool(_settings.get< int >("nbThreads"))
+						_server(_settings.get< int >("port", "server"), _settings.get< int >("queue_size", "server")),
+						_pool(_settings.get< int >("nb_threads", "threadPool"))
     {
       utils::Singleton< ThreadPool >::instance(&_pool);
     }

@@ -23,7 +23,14 @@ namespace zia
       }
       const std::string& Ini::Section::Instruction::operator[](const std::string& key) const
       {
-	return _kwargs.at(key);
+	try
+	  {
+	    return _kwargs.at(key);
+	  }
+	catch (...)
+	  {
+	    throw Exception("Can't find value " + key);
+	  }
       }
       std::string& Ini::Section::Instruction::operator[](const std::string& key)
       {
@@ -48,7 +55,14 @@ namespace zia
       }
       const std::string& Ini::Section::operator[](const std::string& key) const
       {
-	return _vars.at(key);
+	try
+	  {
+	    return _vars.at(key);
+	  }
+	catch (...)
+	  {
+	    throw Exception("Can't find value " + key);
+	  }
       }
       std::string& Ini::Section::operator[](const std::string& key)
       {
@@ -71,7 +85,14 @@ namespace zia
       }
       const Ini::Section& Ini::operator[](const std::string& key) const
       {
-	return _sections.at(key);
+	try
+	  {
+	    return _sections.at(key);
+	  }
+	catch (...)
+	  {
+	    throw Exception("Can't find section " + key);
+	  }
       }
       Ini::Section& Ini::operator[](const std::string& key)
       {

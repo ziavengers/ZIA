@@ -38,6 +38,11 @@ namespace zia
     {
       return atoi(_ini[section][key].data());
     }
+    template < >
+    const std::string& Settings::get< const std::string& >(const std::string& key, const std::string& section) const
+    {
+      return _ini[section][key];
+    }
 
     const utils::ini::Ini& Settings::ini() const
     {
