@@ -5,7 +5,6 @@
 #include <string>
 
 #include "IModule.hh"
-#include "utils/Logger.hh"
 #include "utils/Exception.hpp"
 #include "utils/Library.hh"
 

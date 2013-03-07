@@ -1,5 +1,6 @@
 #include "core/Server.hh"
 #include "thread/Locker.hh"
+#include "utils/Logger.hpp"
 
 #include <stdlib.h>
 
@@ -69,6 +70,7 @@ namespace zia
       network::Socket::Select select;
       std::list< SocketStream* >::iterator it;
 
+      LOG_INFO << "Starting server on port " << _port << std::endl;
       try
 	{
 	  while (1)

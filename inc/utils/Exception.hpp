@@ -4,7 +4,7 @@
 #include <exception>
 #include <string>
 
-#include "Logger.hh"
+#include "Logger.hpp"
 
 #define CLASS_EXCEPTION(prefix) class Exception : public zia::utils::Exception \
   { \
@@ -28,7 +28,7 @@ namespace utils
     virtual ~Exception() throw() { }
 
     void log() const throw() {
-      LOG_ERROR(_msg);
+      LOG_ERROR << _msg << std::endl;
     }
     const char *	what() const throw() {
       return _msg.c_str();

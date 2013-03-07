@@ -1,4 +1,5 @@
-#include <core/module/Module.hh>
+#include "core/module/Module.hh"
+#include "utils/Logger.hpp"
 
 namespace zia
 {
@@ -22,7 +23,7 @@ namespace zia
       {
 	if (!m)
 	  throw utils::Exception("ModuleManagement::loadModule : null pointer");
-	zia::log << "Add module named " << m->name();
+	LOG_INFO << "Add module named " << m->name() << std::endl;
 	_lModule.push_back(m);
       }
 
@@ -38,7 +39,7 @@ namespace zia
 	    fptr = _lib.getFunction< IModule* (*)(void) >(path, "createModule");
 	    IModule* ty = fptr();
 	    _lModule.push_back(ty);
-	    LOG_INFO(std::string("Load module named : ") + path);
+	    LOG_INFO << "Load module named : " <<  path << std::endl;
 	  }
 	catch (utils::Exception& e)
 	  {
@@ -65,7 +66,7 @@ namespace zia
 	  {
 	    if ((*it)->name() == modName)
 	      {
-		LOG_INFO(std::string("Unload module named : ") + modName);
+		LOG_INFO << "Unload module named : " << modName << std::endl;
 		_lModule.erase(it);
 		_lib.close(modName);
 		break;

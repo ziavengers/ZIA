@@ -20,16 +20,16 @@ namespace zia
       utils::parsing::FileStream fs(_filename);
       _ini = utils::ini::ReadIni(fs, "core").parse();
 
-      const utils::ini::Ini::Section& moduleSection = _ini["modules"];
-      std::list< utils::ini::Ini::Section::Instruction >::const_iterator it;
-      for (it = moduleSection.instructions().begin(); it != moduleSection.instructions().end(); ++it)
-	if (it->instr() == "add")
-	  {
-	    std::list< std::string >::const_iterator itarg;
-	    for (itarg = it->args().begin(); itarg != it->args().end(); ++itarg)
-	      std::cout << *itarg << " ";
-	    std::cout << std::endl;
-	  }
+      // const utils::ini::Ini::Section& moduleSection = _ini["modules"];
+      // std::list< utils::ini::Ini::Section::Instruction >::const_iterator it;
+      // for (it = moduleSection.instructions().begin(); it != moduleSection.instructions().end(); ++it)
+      // 	if (it->instr() == "add")
+      // 	  {
+      // 	    std::list< std::string >::const_iterator itarg;
+      // 	    for (itarg = it->args().begin(); itarg != it->args().end(); ++itarg)
+      // 	      std::cout << *itarg << " ";
+      // 	    std::cout << std::endl;
+      // 	  }
     }
 
     template < >
