@@ -26,11 +26,15 @@ namespace zia
       class	ModuleManagement
       {
       public:
+	CLASS_EXCEPTION("zia::core::module::ModuleManagement: ");
+
+      public:
+
 	ModuleManagement();
 	~ModuleManagement();
 
 	/* Probablement inutile */
-	void	loadModule(IModule*) throw (utils::Exception);
+	void	loadModule(IModule*) throw (Exception);
 
 	/*
 
@@ -40,13 +44,13 @@ namespace zia
 
 	*/
 
-	void	loadModule(const std::string& path, const std::string& name = "") throw (utils::Exception);
+	void	loadModule(const std::string& path, const std::string& name = "") throw (Exception);
 
 	/* Idem probablement inutile*/
-	void	unloadModule(IModule*) throw (utils::Exception);
+	void	unloadModule(IModule*) throw (Exception);
 
 
-	void	unloadModule(const std::string& modName)  throw (utils::Exception);
+	void	unloadModule(const std::string& modName)  throw (Exception);
 
       private:    
 	utils::Library			_lib;

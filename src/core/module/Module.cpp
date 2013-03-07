@@ -19,15 +19,15 @@ namespace zia
     
       }
 
-      void	ModuleManagement::loadModule(IModule* m) throw (utils::Exception)
+      void	ModuleManagement::loadModule(IModule* m) throw (Exception)
       {
 	if (!m)
-	  throw utils::Exception("ModuleManagement::loadModule : null pointer");
+	  throw Exception("loadModule: null pointer");
 	LOG_INFO << "Add module named " << m->name() << std::endl;
 	_lModule.push_back(m);
       }
 
-      void	ModuleManagement::loadModule(const std::string& path, const std::string& name) throw (utils::Exception)
+      void	ModuleManagement::loadModule(const std::string& path, const std::string& name) throw (Exception)
       {
 	try
 	  {
@@ -47,18 +47,18 @@ namespace zia
 	  }
 	catch (...)
 	  {
-	    throw utils::Exception("ModuleManagement::loadModule(std::string) : Unknow error catched");
+	    throw Exception("loadModule: Unknow error catched");
 	  }
       }
 
-      void	ModuleManagement::unloadModule(IModule* m) throw (utils::Exception)
+    void	ModuleManagement::unloadModule(IModule* m) throw (Exception)
       {
 	if (!m)
-	  throw utils::Exception("ModuleManagement::loadModule : null pointer");
+	  throw Exception("unloadModule: null pointer");
 	unloadModule(m->name());
       }
 
-      void	ModuleManagement::unloadModule(const std::string& modName) throw (utils::Exception)
+      void	ModuleManagement::unloadModule(const std::string& modName) throw (Exception)
       {
 	std::list< IModule* >::iterator	it;
 
