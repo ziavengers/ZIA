@@ -3,6 +3,7 @@
 
 #include <string>
 #include "core/Settings.hpp"
+#include "utils/Logger.hpp"
 #include "core/Server.hh"
 #include "core/ThreadPool.hh"
 
@@ -18,6 +19,7 @@ namespace zia
       void run();
     private:
       Settings _settings;
+      utils::Logger _logger;
       Server _server;
       ThreadPool _pool;
       

@@ -7,9 +7,11 @@ namespace zia
   {
 
     Zia::Zia(const std::string& settingsFile) : _settings(settingsFile, true),
-						_server(_settings.get< int >("port", "server"), _settings.get< int >("queue_size", "server")),
-						_pool(_settings.get< int >("nb_threads", "threadPool"))
+						_logger(_settings.get("file", "logger")),
+						_server(_settings.getTo< int >("port", "server"), _settings.getTo< int >("queue_size", "server")),
+						_pool(_settings.getTo< int >("nb_threads", "threadPool"))
     {
+      utils::Singleton< utils::Logger >::instance(&_logger);
       utils::Singleton< ThreadPool >::instance(&_pool);
     }
 

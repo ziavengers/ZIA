@@ -32,8 +32,7 @@ namespace zia
       // 	  }
     }
 
-    template < >
-    const std::string& Settings::get< const std::string& >(const std::string& key, const std::string& section) const
+    const std::string& Settings::get(const std::string& key, const std::string& section) const
     {
       return _ini[section][key];
     }

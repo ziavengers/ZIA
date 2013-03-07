@@ -16,7 +16,7 @@ namespace zia
       Settings(const std::string&, bool = false);
       void load();
       template < typename T >
-      T get(const std::string& key, const std::string& section = "core") const
+      T getTo(const std::string& key, const std::string& section = "core") const
       {
 	T val;
 	const std::string& s(_ini[section][key]);
@@ -26,6 +26,7 @@ namespace zia
 	  throw Exception("can't convert \"" + s + "\" to type " + getTypeName(T));
 	return val;
       }
+      const std::string& get(const std::string& key, const std::string& section) const;
       const utils::ini::Ini& ini() const;
 
       CLASS_EXCEPTION("zia::core::Setings: ");
