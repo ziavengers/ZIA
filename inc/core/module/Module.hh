@@ -30,8 +30,7 @@ namespace zia
       class AModule : public IModule, public zia::core::Object
       {
       public:
-	AModule(const std::string&, const std::string&, const std::map< std::string, std::string >&) {
-	}
+	AModule(const std::string&, const std::string&);
 
 	virtual ~AModule() { }
 
@@ -44,6 +43,8 @@ namespace zia
 	std::string	_name;
 	int		_major;
 	int		_minor;
+	std::string	_sigInput;
+	std::string	_sigOutput;
 
       };
 
