@@ -29,11 +29,8 @@ add_subdirectory(src/socket)
 add_subdirectory(src/thread)
 add_subdirectory(src/utils)
 add_subdirectory(src/core)
-add_subdirectory(src/core/module)
-add_subdirectory(src/http)
+#add_subdirectory(src/http)
 
-add_subdirectory(src/utils/bind_tests)
-add_subdirectory(src/core/Object_tests)
-add_subdirectory(src/modules/test/)
+add_subdirectory(src/tests)
 
 

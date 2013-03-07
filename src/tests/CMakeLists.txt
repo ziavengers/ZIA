@@ -1,0 +1,5 @@
+add_subdirectory(bind)
+add_subdirectory(http)
+add_subdirectory(module)
+add_subdirectory(objects)
+add_subdirectory(zia)
