@@ -31,6 +31,6 @@ add_subdirectory(src/utils)
 add_subdirectory(src/http)
 add_subdirectory(src/core)
 
+add_subdirectory(src/modules)
+
 add_subdirectory(src/tests)
-
-
