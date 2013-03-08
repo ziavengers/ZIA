@@ -10,10 +10,12 @@ namespace zia
     {
     public:
       Random();
-      int get() const;
+      unsigned int get() const;
+      unsigned int get(unsigned int) const;
     };
 
-    int rand();
+    unsigned int rand();
+    unsigned int rand(unsigned int);
 
   }
 }

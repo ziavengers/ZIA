@@ -13,14 +13,22 @@ namespace zia
     {
       srand(time(0));
     }
-    int Random::get() const
+    unsigned int Random::get() const
     {
-      return rand();
+      return ::rand();
+    }
+    unsigned int Random::get(unsigned int max) const
+    {
+      return (get() % max);
     }
 
-    int rand()
+    unsigned int rand()
     {
       return Singleton< Random >::instance()->get();
+    }
+    unsigned int rand(unsigned int max)
+    {
+      return Singleton< Random >::instance()->get(max);
     }
 
   }

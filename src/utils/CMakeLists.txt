@@ -9,6 +9,7 @@ add_library(
 	Exception.cpp
 	register.cpp
 	random.cpp
+	uuid.cpp
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp
 	parsing/FileStream.cpp

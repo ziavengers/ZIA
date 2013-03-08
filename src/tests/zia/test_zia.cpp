@@ -27,6 +27,7 @@ public:
 #include "utils/parsing/FileStream.hh"
 #include "utils/ini/ReadIni.hh"
 #include "core/Settings.hpp"
+#include "utils/uuid.hh"
 
 int main()
 {
@@ -64,6 +65,8 @@ int main()
   //   }
 
   zia::core::Zia zia("test.ini");
+  // zia::utils::uuid::uuid4 u;
+  // LOG_DEBUG << u.str() << std::endl;
   Toto t;
   t.connect("SocketStream::readable", zia::utils::bind(&Toto::slot, t));
   zia.run();
