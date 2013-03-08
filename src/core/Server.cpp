@@ -95,7 +95,7 @@ namespace zia
       	      	{
 		  LOG_INFO << "Closing connection:\t" << *it << std::endl;
       	      	  _clients.remove(*it);
-      	      	  delete *it;
+		  (*it)->deleteLater();
       	      	}
 
 	      select.run();
