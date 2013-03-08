@@ -6,15 +6,17 @@ namespace zia
   namespace utils
   {
 
-    Exception::Exception(const std::string& reason, bool autolog) throw() : _reason(reason)
-    {
-      if (autolog)
-	log();
-    }
+    Exception::Exception(const std::string& reason, log::level level) throw() :
+      _reason(reason), _level(level), _logged(false)
+    {}
 
-    void Exception::log() const throw()
+    void Exception::log() throw()
     {
-      LOG_ERROR << _reason << std::endl;
+      if (!_logged)
+	{
+	  LOG(_level) << _reason << std::endl;
+	  _logged = true;
+	}
     }
 
     const char* Exception::what() const throw()

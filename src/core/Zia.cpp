@@ -13,7 +13,6 @@ namespace zia
 	      _settings.getDefaultTo< int >(5, "queue_size", "server")),
       _pool(_settings.getDefaultTo< int >(5, "nb_threads", "threadPool"))
     {
-      utils::Singleton< utils::Logger >::instance(&_logger);
       utils::Singleton< ThreadPool >::instance(&_pool);
       std::map< std::string, utils::log::level > logLevels;
       logLevels["debug"] = utils::log::DEBUG;
