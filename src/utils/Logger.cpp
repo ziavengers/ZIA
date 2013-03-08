@@ -10,7 +10,8 @@ namespace zia
 
     Logger::Logger(const std::string& filename, log::level sev) :
       _display(true), _sev(sev), _currentLevel(log::INFO),
-      _filename(filename), _file(_filename.c_str(), std::ios::out | std::ios::trunc)
+      _filename(filename), _file(_filename.c_str(), std::ios::out | std::ios::trunc),
+      _mutex()
     {
       _color[log::DEFAULT] = "\033[0m";
       _color[log::DEBUG] = "\033[36m";

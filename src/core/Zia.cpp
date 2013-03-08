@@ -29,6 +29,9 @@ namespace zia
       try
 	{
 	  _pool.start();
+	  std::list< Settings::ModuleInfo >::const_iterator it;
+	  for (it = _settings.modulesInfos().begin(); it != _settings.modulesInfos().end(); ++it)
+	    it->load();
 	  _server.run();
 	}
       catch (utils::Exception& e)

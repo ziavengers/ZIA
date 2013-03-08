@@ -9,6 +9,8 @@
 #include "LogLevel.hh"
 #include "Singleton.hpp"
 #include "NonCopyable.hh"
+#include "thread/Mutex.hh"
+#include "thread/Locker.hh"
 
 namespace zia
 {
@@ -25,6 +27,7 @@ namespace zia
       template < typename T >
       void log(T v, log::level level = log::INFO, bool endl = true)
       {
+	thread::Locker lock(_mutex);
 	if (_sev > level)
 	  return ;
 	if (_display)
@@ -69,6 +72,7 @@ namespace zia
       }
       Logger& operator<<(log::level l)
       {
+	thread::Locker lock(_mutex);
 	_currentLevel = l;
 	return *this;
       }
@@ -89,6 +93,7 @@ namespace zia
       log::level	_currentLevel;
       std::string	_filename;
       std::ofstream	_file;  
+      thread::Mutex	_mutex;
       std::map< log::level, std::string >		_color;
     };
 
