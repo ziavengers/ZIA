@@ -37,27 +37,7 @@ namespace zia
 	      std::cout << std::endl;
 	  }
 	if (_file.is_open())
-	  {	   
-	    switch (level)
-	      {
-	      case log::DEBUG:
-		_file << "DEBUG: ";
-		break;
-	      case log::INFO:
-		_file << "INFO: ";
-		break;
-	      case log::WARNING:
-		_file << "WARNING: ";
-		break;
-	      case log::ERROR:
-		_file << "ERROR: ";
-		break;
-	      case log::CRITICAL:
-		_file << "CRITICAL: ";
-		break;
-	      default:
-		break;
-	      }
+	  {
 	    _file << v;
 	    if (endl)
 	      _file << std::endl;
@@ -70,10 +50,30 @@ namespace zia
       	log(v, _currentLevel, false);
       	return *this;
       }
-      Logger& operator<<(log::level l)
+      Logger& operator<<(log::level level)
       {
 	thread::Locker lock(_mutex);
-	_currentLevel = l;
+	_currentLevel = level;
+	switch (level)
+	  {
+	  case log::DEBUG:
+	    _file << "DEBUG:\t";
+	    break;
+	  case log::INFO:
+	    _file << "INFO:\t";
+	    break;
+	  case log::WARNING:
+	    _file << "WARNING:\t";
+	    break;
+	  case log::ERROR:
+	    _file << "ERROR:\t";
+	    break;
+	  case log::CRITICAL:
+	    _file << "CRITICAL:\t";
+	    break;
+	  default:
+	    break;
+	  }
 	return *this;
       }
       Logger& operator<<(std::ostream& (*)(std::ostream&))
