@@ -1,6 +1,7 @@
 #include "core/Server.hh"
 #include "thread/Locker.hh"
 #include "utils/Logger.hpp"
+#include "utils/uuid.hh"
 
 #include <stdlib.h>
 
@@ -111,7 +112,7 @@ namespace zia
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::READ))
 		    {
 		      (*it)->readBuff();
-		      (*it)->emit("SocketStream::readable");
+		      (*it)->contextEmit(utils::uuid::uuid4().str(), "SocketStream::readable");
 		    }
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::WRITE))
 		    (*it)->writeBuff();
