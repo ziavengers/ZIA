@@ -32,7 +32,7 @@ namespace zia
     }
     void Server::SocketStream::writeBuff()
     {
-      if (_buffWrite.size())
+      if (_socket && _buffWrite.size())
 	{
 	  thread::Locker lock(_writeMutex);
 	  ssize_t len = _socket->write(_buffWrite.data(), _buffWrite.size());
@@ -42,7 +42,7 @@ namespace zia
     std::string Server::SocketStream::nextString()
     {
       if (!_socket)
-	throw Exception("end of stream");
+      	throw Exception("end of stream");
       thread::Locker lock(_readMutex);
       std::string s = _strings.front();
       _strings.pop();
@@ -91,10 +91,20 @@ namespace zia
 		  else
 		    toDelete.push_back(*it);
 		}
+      	      for (it = toDelete.begin(); it != toDelete.end(); ++it)
+      	      	{
+		  LOG_DEBUG << "Closing connection:\t" << *it << std::endl;
+      	      	  _clients.remove(*it);
+      	      	  delete *it;
+      	      	}
+
 	      select.run();
 
       	      if (select.isSet(&_server, network::ISocket::Select::READ))
-      		_clients.push_back(new SocketStream(_server.accept()));
+		{
+		  _clients.push_back(new SocketStream(_server.accept()));
+		  LOG_DEBUG << "Getting new connection:\t" << _clients.back() << std::endl;
+		}
 
       	      for (it = _clients.begin(); it != _clients.end(); ++it)
 		{
@@ -106,12 +116,6 @@ namespace zia
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::WRITE))
 		    (*it)->writeBuff();
 		}
-
-      	      for (it = toDelete.begin(); it != toDelete.end(); ++it)
-      	      	{
-      	      	  _clients.remove(*it);
-      	      	  delete *it;
-      	      	}
 	    }
 	}
       catch (network::ISocket::Select::Exception& e)

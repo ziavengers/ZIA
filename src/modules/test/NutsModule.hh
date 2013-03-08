@@ -1,13 +1,3 @@
-//
-// NutsModule.hh for hh in /home/nuts/local/ZIA/test
-// 
-// Made by Rivot Corentin (nuts)
-// Login   <corentin.rivot@gmail.com>
-// 
-// Started on  Mon Mar  4 16:44:17 2013 Rivot Corentin
-// Last update Fri Mar  8 11:12:53 2013 Antoine Rozo
-//
-
 #ifndef NUTSMODULE_HH_
 #define NUTSMODULE_HH_
 
@@ -23,7 +13,8 @@ public:
   // NutsModule(const std::string& s1, const std::string& s2) : AModule(s1, s2) {
   //   _name = "NutsModule";
   NutsModule(const std::string& s1, const std::string& s2) : AModule(s1, s2, "NutsModule") {
-    this->connect("test", zia::utils::bind(&NutsModule::test, *this));
+    // this->connect("test", zia::utils::bind(&NutsModule::test, *this));
+    this->connect(s1, zia::utils::bind(&NutsModule::test, *this));
   }
 
   ~NutsModule() { }

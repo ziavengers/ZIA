@@ -27,7 +27,7 @@ namespace zia
       {
 	if (_sev > level)
 	  return ;
-	if (_display && _file.is_open())
+	if (_display)
 	  {
 	    std::cout << _color[level] << v << _color[log::DEFAULT];
 	    if (endl)
@@ -54,7 +54,7 @@ namespace zia
       }
       Logger& operator<<(std::ostream& (*)(std::ostream&))
       {
-	log("");
+	log("", _currentLevel);
 	return *this;
       }
 

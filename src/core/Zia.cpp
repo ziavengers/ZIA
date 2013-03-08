@@ -8,12 +8,11 @@ namespace zia
 
     Zia::Zia(const std::string& settingsFile) :
       _settings(settingsFile, true),
-      _logger(_settings.getDefault("zia.log", "file", "logger")),
+      _logger(_settings.getDefault("out.log", "file", "logger")),
       _server(_settings.getTo< int >("port", "server"),
 	      _settings.getDefaultTo< int >(5, "queue_size", "server")),
       _pool(_settings.getDefaultTo< int >(5, "nb_threads", "threadPool"))
     {
-      utils::Singleton< ThreadPool >::instance(&_pool);
       std::map< std::string, utils::log::level > logLevels;
       logLevels["debug"] = utils::log::DEBUG;
       logLevels["info"] = utils::log::INFO;
@@ -21,6 +20,8 @@ namespace zia
       logLevels["error"] = utils::log::ERROR;
       logLevels["critical"] = utils::log::CRITICAL;
       _logger.severity(logLevels[_settings.getDefault("info", "severity", "logger")]);
+      utils::Singleton< utils::Logger >::instance(&_logger);
+      utils::Singleton< ThreadPool >::instance(&_pool);
     }
 
     void Zia::run()
