@@ -16,7 +16,7 @@ public:
 
 int	main(int ac, char **av)
 {
-  zia::utils::Singleton < zia::utils::Logger >::instance(new zia::utils::Logger("out.log", zia::utils::Logger::DEBUG));
+  zia::utils::Singleton < zia::utils::Logger >::instance(new zia::utils::Logger("out.log", zia::utils::log::DEBUG));
 
   zia::core::module::ModuleManagement mg;
 

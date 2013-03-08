@@ -15,12 +15,12 @@ namespace zia
     {
       utils::Singleton< utils::Logger >::instance(&_logger);
       utils::Singleton< ThreadPool >::instance(&_pool);
-      std::map< std::string, utils::Logger::LogLevel > logLevels;
-      logLevels["debug"] = utils::Logger::DEBUG;
-      logLevels["info"] = utils::Logger::INFO;
-      logLevels["warning"] = utils::Logger::WARNING;
-      logLevels["error"] = utils::Logger::ERROR;
-      logLevels["critic"] = utils::Logger::CRITIC;
+      std::map< std::string, utils::log::level > logLevels;
+      logLevels["debug"] = utils::log::DEBUG;
+      logLevels["info"] = utils::log::INFO;
+      logLevels["warning"] = utils::log::WARNING;
+      logLevels["error"] = utils::log::ERROR;
+      logLevels["critical"] = utils::log::CRITICAL;
       _logger.severity(logLevels[_settings.getDefault("info", "severity", "logger")]);
     }
 

@@ -8,15 +8,16 @@ namespace zia
   namespace utils
   {
 
-    Logger::Logger(const std::string& filename, LogLevel sev) : _display(true), _sev(sev), _currentLevel(INFO),
-								_filename(filename), _file(_filename.c_str(), std::ios::out | std::ios::trunc)
+    Logger::Logger(const std::string& filename, log::level sev) :
+      _display(true), _sev(sev), _currentLevel(log::INFO),
+      _filename(filename), _file(_filename.c_str(), std::ios::out | std::ios::trunc)
     {
-      _color[DEFAULT] = "\033[0m";
-      _color[DEBUG] = "\033[36m";
-      _color[INFO] = "\033[33m";
-      _color[WARNING] = "\033[34m";
-      _color[ERROR] = "\033[31m";
-      _color[CRITIC] = "\033[31;1m";
+      _color[log::DEFAULT] = "\033[0m";
+      _color[log::DEBUG] = "\033[36m";
+      _color[log::INFO] = "\033[33m";
+      _color[log::WARNING] = "\033[34m";
+      _color[log::ERROR] = "\033[31m";
+      _color[log::CRITICAL] = "\033[31;1m";
       _file << "New log:" << std::endl;
     }
 
@@ -34,7 +35,7 @@ namespace zia
       _filename = s;
     }
 
-    void	Logger::severity(Logger::LogLevel l)
+    void	Logger::severity(log::level l)
     {
       _sev = l;
     }

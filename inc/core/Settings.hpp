@@ -13,6 +13,18 @@ namespace zia
     class Settings
     {
     public:
+      class ModuleInfo
+      {
+      public:
+	ModuleInfo(const std::string&, const std::string&, const std::string&, const std::map< std::string, std::string >&);
+	void load() const;
+      private:
+	const std::string& _url;
+	const std::string& _sigInput;
+	const std::string& _sigOutput;
+	const std::map< std::string, std::string >& _args;
+      };
+
       Settings(const std::string&, bool = false);
       void load();
 
@@ -42,11 +54,13 @@ namespace zia
       const std::string& get(const std::string& key, const std::string& section = "core") const;
       const std::string& getDefault(const std::string&, const std::string& key, const std::string& section = "core") const;
       const utils::ini::Ini& ini() const;
+      const std::list< ModuleInfo >& modulesInfos() const;
 
       CLASS_EXCEPTION("zia::core::Settings: ");
     private:
       const std::string& _filename;
       utils::ini::Ini _ini;
+      std::list< ModuleInfo > _modulesInfos;
     };
 
   }
