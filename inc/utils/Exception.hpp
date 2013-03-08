@@ -29,7 +29,13 @@ namespace zia
       std::string _reason;
       log::level _level;
       bool _logged;
+    };
 
+    class Interrupt : public Exception
+    {
+    public:
+      Interrupt() : Exception("Interrupt", log::INFO)
+      {}
     };
 
   }

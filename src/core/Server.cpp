@@ -3,7 +3,13 @@
 #include "utils/Logger.hpp"
 #include "utils/uuid.hh"
 
-#include <stdlib.h>
+#include <cstdlib>
+#include <signal.h>
+
+void sigpass(int sig)
+{
+  signal(sig, sigpass);
+}
 
 namespace zia
 {
@@ -74,7 +80,8 @@ namespace zia
       LOG_INFO << "Starting server on port " << _port << std::endl;
       try
 	{
-	  while (1)
+	  sigpass(SIGINT);
+	  while (true)
 	    {
 	      select.zero(network::ISocket::Select::READ);
 	      select.zero(network::ISocket::Select::WRITE);
@@ -120,6 +127,10 @@ namespace zia
 	    }
 	}
       catch (network::ISocket::Select::Exception& e)
+	{
+	  e.log();
+	}
+      catch (utils::Interrupt& e)
 	{
 	  e.log();
 	}
