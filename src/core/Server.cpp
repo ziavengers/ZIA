@@ -68,6 +68,14 @@ namespace zia
 
     Server::Server(int port, int queueSize) : Object(), _port(port), _queueSize(queueSize), _server(), _clients()
     {}
+    Server::~Server()
+    {
+      while (_clients.size())
+	{
+	  delete _clients.front();
+	  _clients.pop_front();
+	}
+    }
 
     void Server::run()
     {

@@ -36,6 +36,7 @@ namespace zia
       };
 
       Server(int, int);
+      ~Server();
       void run();
     private:
       int _port;

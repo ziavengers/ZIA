@@ -19,6 +19,8 @@ namespace zia
 
       pe = getprotobyname("TCP");
       _fd = socket(AF_INET, SOCK_STREAM, pe->p_proto);
+      int on = 1;
+      setsockopt(_fd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
       _sin.sin_family = AF_INET;
     }
 
