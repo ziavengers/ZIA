@@ -5,7 +5,7 @@ namespace zia
   namespace utils
   {
 
-    std::list< TypeNames::IRegistered* > TypeNames::_types;
+    TypeNames::RegisteredList TypeNames::_types;
 
   }
 }

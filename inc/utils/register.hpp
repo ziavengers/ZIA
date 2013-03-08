@@ -29,6 +29,7 @@ namespace zia
       class IRegistered
       {
       public:
+	virtual ~IRegistered() {}
 	virtual const char* type() const = 0;
       };
 
@@ -44,7 +45,20 @@ namespace zia
 	  return _name;
 	}
       };
-      static std::list< IRegistered* > _types;
+
+      class RegisteredList : public std::list< IRegistered* >
+      {
+      public:
+	~RegisteredList()
+	{
+	  while (size())
+	    {
+	      delete front();
+	      pop_front();
+	    }
+	}
+      };
+      static RegisteredList _types;
 
     public:
       template < typename T >
@@ -65,6 +79,8 @@ namespace zia
 
   }
 }
+
+#include "utils/Singleton.hpp"
 
 #define registerType(T) zia::utils::TypeNames::register_< T >(#T)
 #define getTypeName(T) zia::utils::TypeNames::get< T >()
