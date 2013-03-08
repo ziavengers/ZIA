@@ -93,7 +93,7 @@ namespace zia
 		}
       	      for (it = toDelete.begin(); it != toDelete.end(); ++it)
       	      	{
-		  LOG_DEBUG << "Closing connection:\t" << *it << std::endl;
+		  LOG_INFO << "Closing connection:\t" << *it << std::endl;
       	      	  _clients.remove(*it);
       	      	  delete *it;
       	      	}
@@ -103,7 +103,7 @@ namespace zia
       	      if (select.isSet(&_server, network::ISocket::Select::READ))
 		{
 		  _clients.push_back(new SocketStream(_server.accept()));
-		  LOG_DEBUG << "Getting new connection:\t" << _clients.back() << std::endl;
+		  LOG_INFO << "Getting new connection:\t" << _clients.back() << std::endl;
 		}
 
       	      for (it = _clients.begin(); it != _clients.end(); ++it)
