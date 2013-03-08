@@ -8,6 +8,7 @@ add_library(
 	Logger.cpp
 	Exception.cpp
 	register.cpp
+	random.cpp
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp
 	parsing/FileStream.cpp
