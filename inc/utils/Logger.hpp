@@ -34,7 +34,27 @@ namespace zia
 	      std::cout << std::endl;
 	  }
 	if (_file.is_open())
-	  {
+	  {	   
+	    switch (level)
+	      {
+	      case log::DEBUG:
+		_file << "DEBUG: ";
+		break;
+	      case log::INFO:
+		_file << "INFO: ";
+		break;
+	      case log::WARNING:
+		_file << "WARNING: ";
+		break;
+	      case log::ERROR:
+		_file << "ERROR: ";
+		break;
+	      case log::CRITICAL:
+		_file << "CRITICAL: ";
+		break;
+	      default:
+		break;
+	      }
 	    _file << v;
 	    if (endl)
 	      _file << std::endl;

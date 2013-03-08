@@ -1,6 +1,7 @@
 #include "core/ThreadPool.hh"
 #include "core/Object.hpp"
 #include "thread/Locker.hh"
+#include "utils/Logger.hpp"
 
 namespace zia
 {
@@ -35,6 +36,7 @@ namespace zia
       thread::Locker lock(_eventsMutex);
       _events.push(s_event(sender, receiver, context, c));
       _eventsCond.signal();
+      LOG_DEBUG << "One event was pushed to the ThreadPool" << std::endl;
     }
     ThreadPool::s_event ThreadPool::pop()
     {
@@ -42,6 +44,7 @@ namespace zia
       thread::Locker lock(_eventsMutex);
       s_event e = _events.front();
       _events.pop();
+      LOG_DEBUG << "One event was poped from the ThreadPool" << std::endl;
       return e;
     }
 
