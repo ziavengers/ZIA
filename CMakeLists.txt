@@ -10,7 +10,7 @@ IF( WIN32 )
 ENDIF( WIN32 )
 set(ZIA_LIBS_PATH ${ZIA_PATH}/lib/${ARCH})
 set(ZIA_MODS_PATH ${ZIA_PATH}/bin/modules/)
-set(CMAKE_CXX_FLAGS "-W -Wall -Wextra -g")
+set(CMAKE_CXX_FLAGS "-W -Wall -Wextra")
 
 include_directories(
 	${ZIA_PATH}/inc/
