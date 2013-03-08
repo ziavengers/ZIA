@@ -8,7 +8,7 @@
 
 void sigpass(int sig)
 {
-  signal(sig, sigpass);
+  throw zia::utils::Interrupt();
 }
 
 namespace zia
@@ -80,7 +80,7 @@ namespace zia
       LOG_INFO << "Starting server on port " << _port << std::endl;
       try
 	{
-	  sigpass(SIGINT);
+	  signal(SIGINT, sigpass);
 	  while (true)
 	    {
 	      select.zero(network::ISocket::Select::READ);

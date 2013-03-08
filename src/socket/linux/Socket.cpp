@@ -120,9 +120,6 @@ namespace zia
 		 0) < 0) // Ajouter gestion du timeout
       {
 	std::string reason(sys_errlist[errno]);
-	if (errno == EINTR)
-	  throw utils::Interrupt();
-	else
 	  throw Exception("run: " + reason);
       }
     }
