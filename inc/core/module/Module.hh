@@ -23,7 +23,7 @@ namespace zia
 	virtual void	name(const std::string&) = 0;
 	virtual const std::string&	name() const = 0;
 
-	virtual void	version(int major, int minor) = 0;
+	// virtual void	version(int major, int minor) = 0;
 
 	typedef IModule* (*t_createModule)(const std::string&, const std::string&, const std::map< std::string, std::string >&);
 
@@ -32,19 +32,19 @@ namespace zia
       class AModule : public IModule, public zia::core::Object
       {
       public:
-	AModule(const std::string&, const std::string&);
+	AModule(const std::string& sigInput, const std::string& sigOutput, const std::string& name = "");
 
 	virtual ~AModule() { }
 
-	virtual void	name(const std::string&) = 0;
-	virtual const std::string&	name() const = 0;
+	void	name(const std::string&);
+	const std::string&	name() const;
 
-	virtual void	version(int major, int minor) = 0;
+	// virtual void	version(int major, int minor) = 0;
 
       protected:
 	std::string	_name;
-	int		_major;
-	int		_minor;
+	// int		_major;
+	// int		_minor;
 	std::string	_sigInput;
 	std::string	_sigOutput;
 

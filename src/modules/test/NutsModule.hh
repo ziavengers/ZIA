@@ -5,7 +5,7 @@
 // Login   <corentin.rivot@gmail.com>
 // 
 // Started on  Mon Mar  4 16:44:17 2013 Rivot Corentin
-// Last update Thu Mar  7 22:00:50 2013 Antoine Rozo
+// Last update Fri Mar  8 11:12:53 2013 Antoine Rozo
 //
 
 #ifndef NUTSMODULE_HH_
@@ -20,8 +20,9 @@
 class	NutsModule : public zia::core::module::AModule
 {
 public:
-  NutsModule(const std::string& s1, const std::string& s2) : AModule(s1, s2) {
-    _name = "NutsModule";
+  // NutsModule(const std::string& s1, const std::string& s2) : AModule(s1, s2) {
+  //   _name = "NutsModule";
+  NutsModule(const std::string& s1, const std::string& s2) : AModule(s1, s2, "NutsModule") {
     this->connect("test", zia::utils::bind(&NutsModule::test, *this));
   }
 
@@ -32,9 +33,9 @@ public:
     std::cout << "TEST called" << std::endl;
   }
 
-  void	name(const std::string& name) { _name = name; }
-  const std::string&        name() const { return _name; }
-  void	version(int major, int minor) { _minor = minor; _major = major; };
+  // void	name(const std::string& name) { _name = name; }
+  // const std::string&        name() const { return _name; }
+  // void	version(int major, int minor) { _minor = minor; _major = major; };
 
 };
 
