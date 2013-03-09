@@ -1,5 +1,5 @@
-#ifndef OBJECT_HPP_
-#define OBJECT_HPP_
+#ifndef CORE_OBJECT_OBJECT_HPP_
+#define CORE_OBJECT_OBJECT_HPP_
 
 #include <map>
 #include <string>

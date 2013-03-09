@@ -1,5 +1,5 @@
-#ifndef ENABLEIF_HPP_
-#define ENABLEIF_HPP_
+#ifndef UTILS_ENABLEIF_HPP_
+#define UTILS_ENABLEIF_HPP_
 
 
 template < bool C, typename T=void* >

@@ -1,5 +1,5 @@
-#ifndef THREADPOOL_HH_
-#define THREADPOOL_HH_
+#ifndef CORE_THREADPOOL_HH_
+#define CORE_THREADPOOL_HH_
 
 #include <vector>
 #include <queue>

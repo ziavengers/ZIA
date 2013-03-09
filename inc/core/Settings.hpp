@@ -1,5 +1,5 @@
-#ifndef SETTINGS_HPP_
-#define SETTINGS_HPP_
+#ifndef CORE_SETTINGS_HPP_
+#define CORE_SETTINGS_HPP_
 
 #include <sstream>
 #include "utils/ini/Ini.hh"

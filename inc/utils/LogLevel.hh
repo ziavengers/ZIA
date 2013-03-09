@@ -1,5 +1,5 @@
-#ifndef LOGLEVEL_HH_
-#define LOGLEVEL_HH_
+#ifndef UTILS_LOGLEVEL_HH_
+#define UTILS_LOGLEVEL_HH_
 
 namespace zia
 {

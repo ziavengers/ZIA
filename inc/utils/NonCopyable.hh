@@ -1,5 +1,5 @@
-#ifndef		NONCOPYABLE_HH_
-#define	NONCOPYABLE_HH_
+#ifndef	UTILS_NONCOPYABLE_HH_
+#define	UTILS_NONCOPYABLE_HH_
 
 namespace zia
 {

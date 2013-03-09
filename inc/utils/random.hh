@@ -1,5 +1,5 @@
-#ifndef RANDOM_HH_
-#define RANDOM_HH_
+#ifndef UTILS_RANDOM_HH_
+#define UTILS_RANDOM_HH_
 
 namespace zia
 {

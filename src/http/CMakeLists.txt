@@ -5,7 +5,9 @@ set(LIBRARY_OUTPUT_PATH ${ZIA_LIBS_PATH})
 add_library(
 	http
 	SHARED
-	HttpMessage.cpp
+	Message.cpp
+	Request.cpp
+	Response.cpp
 	ParserHttp.cpp
 )
 

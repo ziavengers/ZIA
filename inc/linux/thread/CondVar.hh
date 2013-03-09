@@ -1,5 +1,5 @@
-#ifndef CONDVAR_HH_
-#define CONDVAR_HH_
+#ifndef THREAD_CONDVAR_HH_
+#define THREAD_CONDVAR_HH_
 
 #include <pthread.h>
 #include <sys/time.h>

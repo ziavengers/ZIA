@@ -1,5 +1,5 @@
-#ifndef READINI_HH_
-#define READINI_HH_
+#ifndef UTILS_INI_READINI_HH_
+#define UTILS_INI_READINI_HH_
 
 #include <string>
 #include "utils/parsing/ConsumerParser.hpp"

@@ -1,5 +1,5 @@
-#ifndef ISOCKET_HH_
-#define ISOCKET_HH_
+#ifndef SOCKET_ISOCKET_HH_
+#define SOCKET_ISOCKET_HH_
 
 #include <string>
 #include "utils/Exception.hpp"

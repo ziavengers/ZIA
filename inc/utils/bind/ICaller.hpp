@@ -1,5 +1,5 @@
-#ifndef ICALLER_HPP_
-#define ICALLER_HPP_
+#ifndef UTILS_BIND_ICALLER_HPP_
+#define UTILS_BIND_ICALLER_HPP_
 
 namespace zia {
   namespace utils {

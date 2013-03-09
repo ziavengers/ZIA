@@ -1,5 +1,5 @@
-#ifndef IMUTEX_HH_
-#define IMUTEX_HH_
+#ifndef THREAD_IMUTEX_HH_
+#define THREAD_IMUTEX_HH_
 
 #include "utils/NonCopyable.hh"
 #include "utils/Exception.hpp"

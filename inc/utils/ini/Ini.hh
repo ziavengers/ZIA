@@ -1,5 +1,5 @@
-#ifndef INI_HH_
-#define INI_HH_
+#ifndef UTILS_INI_INI_HH_
+#define UTILS_INI_INI_HH_
 
 #include <map>
 #include <list>

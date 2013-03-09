@@ -1,5 +1,5 @@
-#ifndef ITHREAD_HH_
-#define ITHREAD_HH_
+#ifndef THREAD_ITHREAD_HH_
+#define THREAD_ITHREAD_HH_
 
 #include "utils/Exception.hpp"
 

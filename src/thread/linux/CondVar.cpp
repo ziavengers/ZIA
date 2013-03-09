@@ -25,7 +25,9 @@ namespace zia
       gettimeofday(&tv, NULL);
       ts.tv_sec = tv.tv_sec + time;
       ts.tv_nsec = time;
+      pthread_mutex_lock(&_mutex);
       ret = pthread_cond_timedwait(&_cond, &_mutex, &ts);
+      pthread_mutex_unlock(&_mutex);
       return (ret == 0);
     }
     void    CondVar::signal()

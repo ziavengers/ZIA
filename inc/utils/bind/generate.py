@@ -31,4 +31,4 @@ transforms = [
 print('Generation bind for %d parameters' % N)
 for fin, fout, module in transforms:
     print('%s -> %s' % (path.join(getcwd(), fin), path.join(getcwd(), fout)))
-    tpl_to_file(fin, fout, __import__(module).getargs, N, ('zia', 'utils'))
+    tpl_to_file(fin, fout, __import__(module).getargs, N, 'UTILS_BIND_', ('zia', 'utils'))

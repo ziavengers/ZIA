@@ -1,5 +1,5 @@
-#ifndef STOCKCALLBACK_HPP_
-#define STOCKCALLBACK_HPP_
+#ifndef UTILS_STOCKCALLBACK_HPP_
+#define UTILS_STOCKCALLBACK_HPP_
 
 namespace zia
 {

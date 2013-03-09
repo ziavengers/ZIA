@@ -1,5 +1,5 @@
-#ifndef MODULE_HH_
-#define MODULE_HH_
+#ifndef CORE_MODULE_MODULE_HH_
+#define CORE_MODULE_MODULE_HH_
 
 #include <string>
 #include "core/Object.hpp"

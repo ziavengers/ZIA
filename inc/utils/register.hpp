@@ -1,5 +1,5 @@
-#ifndef REGISTER_HPP_
-#define REGISTER_HPP_
+#ifndef UTILS_REGISTER_HPP_
+#define UTILS_REGISTER_HPP_
 
 #include <list>
 

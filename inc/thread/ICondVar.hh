@@ -1,5 +1,5 @@
-#ifndef ICONDVAR_HH_
-#define ICONDVAR_HH_
+#ifndef THREAD_ICONDVAR_HH_
+#define THREAD_ICONDVAR_HH_
 
 namespace zia
 {

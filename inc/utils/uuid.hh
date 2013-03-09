@@ -1,5 +1,5 @@
-#ifndef UUID_HH_
-#define UUID_HH_
+#ifndef UTILS_UUID_HH_
+#define UTILS_UUID_HH_
 
 #include <string>
 
