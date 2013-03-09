@@ -1,4 +1,4 @@
-#include "utils/Library.hh"
+#include "utils/Library.hpp"
 
 namespace zia
 {
@@ -6,9 +6,7 @@ namespace zia
   {
 
     Library::Library()
-    {
-      // ...
-    }
+    {}
 
     Library::~Library()
     {
@@ -24,7 +22,7 @@ namespace zia
 
       void*	tmp = ::dlopen(path.c_str(), RTLD_LAZY);
       if (tmp == 0)
-	throw Exception(std::string(::dlerror()), log::CRITICAL);
+	throw Exception(::dlerror(), log::CRITICAL);
       
       if (name.empty())
 	_mlib[path] = tmp;

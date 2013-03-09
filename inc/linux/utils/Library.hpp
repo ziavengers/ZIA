@@ -1,5 +1,5 @@
-#ifndef UTILS_LIBRARY_HH_
-#define UTILS_LIBRARY_HH_
+#ifndef UTILS_LIBRARY_HPP_
+#define UTILS_LIBRARY_HPP_
 
 #include <map>
 #include <string>
@@ -33,11 +33,11 @@ namespace zia
       {
 	void	*tmp = _mlib[s];
 	if (tmp == 0)
-	  throw Exception(std::string("Library::get : Impossible de charger la fonction :") + funcName + std::string(" depuis ") + s);
+	  throw Exception("get : Can't load function " + funcName + " from " + s);
 	
 	T	fptr = reinterpret_cast< T >(::dlsym(tmp, funcName.c_str()));
 	if (!fptr)
-	  throw Exception(std::string("Library::get : Impossible de charger la fonction :") + funcName + std::string(" depuis ") + s);
+	  throw Exception("get : Can't load function " + funcName + " from " + s);
 	return fptr;
       }      
 

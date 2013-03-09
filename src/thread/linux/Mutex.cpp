@@ -19,13 +19,13 @@ namespace zia
     void	Mutex::lock()
     {
       if (pthread_mutex_lock(&_mutex) != 0)
-	throw Exception("lock failed");
+	throw Exception("lock: failed");
     }
 
     void	Mutex::unlock()
     {
       if (pthread_mutex_unlock(&_mutex) != 0)
-	throw Exception("lock failed");
+	throw Exception("unlock: failed");
     }
 
     bool	Mutex::trylock()
