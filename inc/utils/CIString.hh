@@ -24,29 +24,34 @@ namespace zia
       template <class InputIterator>
       CIString(InputIterator first, InputIterator last) : std::string(first, last) {}
 
+      size_t find(const CIString& str, size_t pos = 0) const;
       size_t find(const std::string& str, size_t pos = 0) const;
       size_t find(const char* s, size_t pos = 0) const;
       size_t find(const char* s, size_t pos, size_t n) const;
       size_t find(char c, size_t pos = 0) const;
 
 
+      size_t find_first_of(const CIString& str, size_t pos = 0) const;
       size_t find_first_of(const std::string& str, size_t pos = 0) const;
       size_t find_first_of(const char* s, size_t pos = 0) const;
       size_t find_first_of(const char* s, size_t pos, size_t n) const;
       size_t find_first_of(char c, size_t pos = 0) const;
 
+      size_t find_last_of(const CIString& str, size_t pos = npos) const;
       size_t find_last_of(const std::string& str, size_t pos = npos) const;
       size_t find_last_of(const char* s, size_t pos = npos) const;
       size_t find_last_of(const char* s, size_t pos, size_t n) const;
       size_t find_last_of(char c, size_t pos = npos) const;
 
 
+      size_t find_first_not_of(const CIString& str, size_t pos = 0) const;
       size_t find_first_not_of(const std::string& str, size_t pos = 0) const;
       size_t find_first_not_of(const char* s, size_t pos = 0) const;
       size_t find_first_not_of(const char* s, size_t pos, size_t n) const;
       size_t find_first_not_of(char c, size_t pos = 0) const;
 
 
+      size_t find_last_not_of(const CIString& str, size_t pos = npos) const;
       size_t find_last_not_of(const std::string& str, size_t pos = npos) const;
       size_t find_last_not_of(const char* s, size_t pos = npos) const;
       size_t find_last_not_of(const char* s, size_t pos, size_t n) const;

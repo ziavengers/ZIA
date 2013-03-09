@@ -5,6 +5,7 @@ set(LIBRARY_OUTPUT_PATH ${ZIA_LIBS_PATH})
 add_library(
 	utils
 	SHARED
+	CIString.cpp
 	Logger.cpp
 	Exception.cpp
 	register.cpp
