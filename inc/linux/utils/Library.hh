@@ -18,6 +18,10 @@ namespace zia
     {
     public:
 
+      CLASS_EXCEPTION("zia::utils::Library: ");
+
+    public:
+
       explicit Library();
       ~Library();
 
@@ -34,7 +38,7 @@ namespace zia
 	T	fptr = reinterpret_cast< T >(::dlsym(tmp, funcName.c_str()));
 	if (!fptr)
 	  throw Exception(std::string("Library::get : Impossible de charger la fonction :") + funcName + std::string(" depuis ") + s);
-	return fptr;	  
+	return fptr;
       }      
 
     private:

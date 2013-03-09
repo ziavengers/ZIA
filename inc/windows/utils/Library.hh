@@ -19,6 +19,11 @@ namespace zia
     class Library : public NonCopyable
     {
     public:
+
+      CLASS_EXCEPTION("zia::utils::Library: ");
+
+    public:
+
       explicit Library();
 
       ~Library();

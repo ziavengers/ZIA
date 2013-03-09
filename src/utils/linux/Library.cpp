@@ -24,7 +24,7 @@ namespace zia
 
       void*	tmp = ::dlopen(path.c_str(), RTLD_LAZY);
       if (tmp == 0)
-	throw Exception(std::string("Library:: Impossible de charger la librairie ") + path + std::string(::dlerror()), log::CRITICAL);
+	throw Exception(std::string(::dlerror()), log::CRITICAL);
       
       if (name.empty())
 	_mlib[path] = tmp;
