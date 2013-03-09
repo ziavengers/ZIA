@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <signal.h>
 
-void sigpass(int sig)
+void sigpass(int)
 {
   throw zia::utils::Interrupt();
 }
