@@ -13,8 +13,6 @@ namespace zia
     namespace parsing
     {
 
-      // Ajouter méthodes endAllCaptures(), restoreAllContexts(), et validAllContexts() ?
-
       size_t findIgnoreCase(const std::string&, const std::string&);
 
       class ConsumerParser

@@ -16,6 +16,7 @@ namespace zia
       public:
 	virtual ~IProducterStream() {}
 	virtual std::string nextString() = 0;
+	virtual void close() = 0;
 	
 	CLASS_EXCEPTION("zia::utils::parsing::IProducerStream: ");
       };

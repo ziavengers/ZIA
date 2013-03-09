@@ -60,6 +60,11 @@ namespace zia
       thread::Locker lock(_writeMutex);
       _buffWrite += s;
     }
+    void Server::SocketStream::close()
+    {
+      delete _socket;
+      _socket = 0;
+    }
     network::ISocket* Server::SocketStream::socket()
     {
       return _socket;

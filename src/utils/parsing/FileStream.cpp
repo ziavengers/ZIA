@@ -20,7 +20,7 @@ namespace zia
 
       std::string FileStream::nextString()
       {
-	if (_f.eof())
+	if (!_f.is_open() || _f.eof())
 	  throw Exception("end of stream");
 	if (_f.fail() || _f.bad())
 	  throw Exception("error");
@@ -28,6 +28,11 @@ namespace zia
 	_f.read(_buff, readSize);
 	_buff[_f.gcount()] = 0;
 	return std::string(_buff);
+      }
+
+      void FileStream::close()
+      {
+	_f.close();
       }
 
     }

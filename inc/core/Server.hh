@@ -25,6 +25,7 @@ namespace zia
 	void writeBuff();
 	std::string nextString();
 	void write(const std::string&);
+	void close();
 	network::ISocket* socket();
       private:
 	network::ISocket* _socket;

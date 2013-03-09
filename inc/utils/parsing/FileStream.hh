@@ -17,6 +17,7 @@ namespace zia
 	FileStream(const std::string&);
 	~FileStream();
 	std::string nextString();
+	void close();
       private:
 	std::ifstream _f;
 	static const size_t readSize = 512;
