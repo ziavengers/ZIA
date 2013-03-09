@@ -6,7 +6,7 @@
 
 #include "Module.hh"
 #include "utils/Exception.hpp"
-#include "utils/Library.hh"
+#include "utils/Library.hpp"
 
 namespace zia
 {
