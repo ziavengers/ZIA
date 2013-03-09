@@ -1,5 +1,5 @@
-#ifndef MODULEMANAGEMENT_HH_
-#define MODULEMANAGEMENT_HH_
+#ifndef CORE_MODULE_MODULEMANAGEMENT_HH_
+#define CORE_MODULE_MODULEMANAGEMENT_HH_
 
 #include <list>
 #include <string>

@@ -1,5 +1,5 @@
-#ifndef ATHREAD_HH_
-#define ATHREAD_HH_
+#ifndef THREAD_ATHREAD_HH_
+#define THREAD_ATHREAD_HH_
 
 #pragma once
 

@@ -1,5 +1,5 @@
-#ifndef IPRODUCTERSTREAM_HH_
-#define IPRODUCTERSTREAM_HH_
+#ifndef UTILS_PARSING_IPRODUCTERSTREAM_HH_
+#define UTILS_PARSING_IPRODUCTERSTREAM_HH_
 
 #include <string>
 #include "utils/Exception.hpp"

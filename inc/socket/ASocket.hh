@@ -1,5 +1,5 @@
-#ifndef ASOCKET_HH_
-#define ASOCKET_HH_
+#ifndef SOCKET_ASOCKET_HH_
+#define SOCKET_ASOCKET_HH_
 
 #include <string>
 #include "ISocket.hh"

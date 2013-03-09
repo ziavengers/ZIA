@@ -1,5 +1,5 @@
-#ifndef CONSUMERPARSER_HPP_
-#define CONSUMERPARSER_HPP_
+#ifndef UTILS_PARSING_CONSUMERPARSER_HPP_
+#define UTILS_PARSING_CONSUMERPARSER_HPP_
 
 #include <map>
 #include <stack>

@@ -1,5 +1,5 @@
-#ifndef FILEPRODUCTERSTREAM_HH_
-#define FILEPRODUCTERSTREAM_HH_
+#ifndef UTILS_PARSING_FILESTREAM_HH_
+#define UTILS_PARSING_FILESTREAM_HH_
 
 #include <fstream>
 #include "IProducterStream.hh"

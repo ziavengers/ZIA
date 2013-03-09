@@ -40,4 +40,4 @@ transforms = [
 print('Generation Object::emit for %d parameters' % N)
 for fin, fout, getargs in transforms:
     print('%s -> %s' % (path.join(getcwd(), fin), path.join(getcwd(), fout)))
-    tpl_to_file(fin, fout, getargs, N)
+    tpl_to_file(fin, fout, getargs, N, 'CORE_OBJECT_')

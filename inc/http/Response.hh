@@ -1,5 +1,5 @@
-#ifndef RESPONSE_HH_
-#define RESPONSE_HH_
+#ifndef HTTP_RESPONSE_HH_
+#define HTTP_RESPONSE_HH_
 
 #include "Message.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef SINGLETON_HPP_
-#define SINGLETON_HPP_
+#ifndef UTILS_SINGLETON_HPP_
+#define UTILS_SINGLETON_HPP_
 
 #include "thread/Locker.hh"
 

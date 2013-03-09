@@ -1,5 +1,5 @@
-#ifndef SERVER_HH_
-#define SERVER_HH_
+#ifndef CORE_SERVER_HH_
+#define CORE_SERVER_HH_
 
 #include <list>
 #include <queue>

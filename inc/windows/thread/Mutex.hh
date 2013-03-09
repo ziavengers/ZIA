@@ -1,5 +1,5 @@
-#ifndef MUTEX_HH_
-#define MUTEX_HH_
+#ifndef THREAD_MUTEX_HH_
+#define THREAD_MUTEX_HH_
 
 #pragma once
 

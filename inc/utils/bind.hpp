@@ -1,5 +1,5 @@
-#ifndef BIND_HPP_
-#define BIND_HPP_
+#ifndef UTILS_BIND_HPP_
+#define UTILS_BIND_HPP_
 
 #include <string>
 #include "utils/register.hpp"

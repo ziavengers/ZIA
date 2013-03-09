@@ -1,5 +1,5 @@
-#ifndef PARSERHTTP_HH_
-#define PARSERHTTP_HH_
+#ifndef HTTP_PARSERHTTP_HH_
+#define HTTP_PARSERHTTP_HH_
 
 #include "utils/parsing/ConsumerParser.hpp"
 

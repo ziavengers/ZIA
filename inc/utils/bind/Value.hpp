@@ -1,5 +1,5 @@
-#ifndef VALUE_HPP_
-#define VALUE_HPP_
+#ifndef UTILS_BIND_VALUE_HPP_
+#define UTILS_BIND_VALUE_HPP_
 
 namespace zia {
   namespace utils {

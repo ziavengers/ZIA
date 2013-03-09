@@ -1,5 +1,5 @@
-#ifndef REQUEST_HH_
-#define REQUEST_HH_
+#ifndef HTTP_REQUEST_HH_
+#define HTTP_REQUEST_HH_
 
 #include "Message.hpp"
 

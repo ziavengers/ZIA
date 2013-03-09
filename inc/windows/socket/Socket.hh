@@ -1,5 +1,5 @@
-#ifndef SOCKET_HH_
-#define SOCKET_HH_
+#ifndef SOCKET_SOCKET_HH_
+#define SOCKET_SOCKET_HH_
 
 #include <windows.h>
 #include "socket/ASocket.hh"

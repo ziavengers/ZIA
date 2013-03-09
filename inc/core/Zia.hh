@@ -1,5 +1,5 @@
-#ifndef ZIA_HH_
-#define ZIA_HH_
+#ifndef CORE_ZIA_HH_
+#define CORE_ZIA_HH_
 
 #include <string>
 #include "core/Settings.hpp"

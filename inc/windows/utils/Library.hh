@@ -1,5 +1,5 @@
-#ifndef LIBRARY_HH_
-#define LIBRARY_HH_
+#ifndef UTILS_LIBRARY_HH_
+#define UTILS_LIBRARY_HH_
 
 #include <map>
 #include <string>

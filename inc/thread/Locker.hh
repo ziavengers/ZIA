@@ -1,5 +1,5 @@
-#ifndef LOCKER_HH_
-#define LOCKER_HH_
+#ifndef THREAD_LOCKER_HH_
+#define THREAD_LOCKER_HH_
 
 #include "thread/Mutex.hh"
 
