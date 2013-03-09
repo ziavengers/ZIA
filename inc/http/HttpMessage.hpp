@@ -62,7 +62,7 @@ namespace zia
       class HttpReply : public HttpMessage
       {// http reply modelisation
 	
-      public:
+      private:
 	int _reply_code; //TOFIX : private
       };
     }
