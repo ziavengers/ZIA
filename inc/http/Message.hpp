@@ -7,6 +7,7 @@
 
 #include "ParserHttp.hh"
 #include "utils/parsing/IProducterStream.hh"
+#include "utils/register.hpp"
 
 namespace zia
 {
@@ -33,6 +34,7 @@ namespace zia
 	stream << _crlf;
 	stream << _data;
       }
+      TYPENAME(zia::http::Message);
       Header header;
     protected:
       std::string _data;

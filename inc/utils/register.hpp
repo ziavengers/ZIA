@@ -3,6 +3,12 @@
 
 #include <list>
 
+#define TYPENAME(c)				\
+  static const char* typeName()				\
+  {							\
+    return #c;						\
+  }
+
 namespace zia
 {
   namespace utils

@@ -31,8 +31,8 @@ namespace zia
       {
       public:
 	AModule(const std::string& sigInput, const std::string& sigOutput, const std::string& name = "");
-
 	virtual ~AModule() { }
+	TYPENAME(zia::core::module::Module);
 
 	void	name(const std::string&);
 	const std::string&	name() const;

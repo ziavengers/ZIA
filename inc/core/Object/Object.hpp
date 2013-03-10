@@ -31,6 +31,8 @@ namespace zia
       {
 	disconnect();
       }
+      TYPENAME(zia::core::Object);
+
       size_t connect(const std::string& name, const utils::StockCallback& slot, const std::string& context = "*")
       {
 	thread::Locker lock(_slotsMutex);

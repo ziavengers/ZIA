@@ -13,6 +13,7 @@ namespace zia
     public:
       Response(const std::string& statusCode, const std::string& status, const std::string& version = _httpVersion);
       std::string statusLine() const;
+      TYPENAME(zia::http::Response);
     private:
       std::string _statusCode;
       std::string _status;

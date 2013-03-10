@@ -13,6 +13,7 @@ namespace zia
     public:
       Request(const std::string& method, const std::string& url = "/", const std::string& version = _httpVersion);
       std::string statusLine() const;
+      TYPENAME(zia::http::Request);
     private:
       std::string _method;
       std::string _url;

@@ -22,6 +22,7 @@ namespace zia
       {
       public:
 	SocketStream(network::ISocket*, int);
+	TYPENAME(zia::core::Server::SocketStream);
 	void readBuff();
 	void writeBuff();
 	std::string nextString();
@@ -41,6 +42,7 @@ namespace zia
 
       Server(int, int, int, const std::string&, const std::string&);
       ~Server();
+      TYPENAME(zia::core::Server);
       void run();
     private:
       int _port;

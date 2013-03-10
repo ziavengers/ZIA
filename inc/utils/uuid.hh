@@ -3,6 +3,8 @@
 
 #include <string>
 
+#include "utils/register.hpp"
+
 namespace zia
 {
   namespace utils
@@ -22,6 +24,7 @@ namespace zia
       public:
 	UUID4();
 	const std::string& str() const;
+	TYPENAME(zia::utils::uuid::UUID4);
       private:
 	static const int _nbBytes = 16;
 	static const char* _hexa;
