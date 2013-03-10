@@ -14,6 +14,7 @@ add_library(
 	${ARCH}/Library.cpp
 	parsing/ConsumerParser.cpp
 	parsing/FileStream.cpp
+	parsing/StringStream.cpp
 	ini/Ini.cpp
 	ini/ReadIni.cpp
 )
