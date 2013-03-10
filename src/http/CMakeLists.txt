@@ -8,7 +8,7 @@ add_library(
 	Message.cpp
 	Request.cpp
 	Response.cpp
-	ParserHttp.cpp
+	RequestParser.cpp
 )
 
 target_link_libraries(

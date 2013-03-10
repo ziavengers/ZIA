@@ -1,8 +1,8 @@
 #include <iostream>
 #include "TestProducterStream.hh"
-#include "http/ParserHttp.hh"
 #include "http/Request.hh"
 #include "http/Response.hh"
+#include "http/RequestParser.hh"
 
 #include <fstream>
 

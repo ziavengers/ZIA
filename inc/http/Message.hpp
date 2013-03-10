@@ -5,7 +5,6 @@
 #include <string>
 #include <iostream>
 
-#include "ParserHttp.hh"
 #include "utils/parsing/IProducterStream.hh"
 #include "utils/register.hpp"
 
