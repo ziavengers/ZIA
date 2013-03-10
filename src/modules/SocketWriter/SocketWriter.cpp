@@ -8,7 +8,6 @@ SocketWriter::SocketWriter(const std::string& input, const std::string& output) 
 
 void SocketWriter::slot(zia::core::Server::SocketStream* stream)
 {
-  LOG_INFO << "context: " << context() << std::endl;
   if (stream)
     stream->write("merci\n");
 }

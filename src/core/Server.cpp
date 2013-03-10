@@ -137,18 +137,36 @@ namespace zia
 		{
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::READ))
 		    {
-		      (*it)->readBuff();
-		      (*it)->contextEmit((*it)->uuid().str(), _sigReadClient);
+		      LOG_DEBUG << "Read on client\t" << *it << std::endl;
+		      try
+			{
+			  (*it)->readBuff();
+			  (*it)->contextEmit((*it)->uuid().str(), _sigReadClient);
+			}
+		      catch (network::ISocket::Exception& e)
+			{
+			  e.log();
+			}
 		    }
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::WRITE))
-		    (*it)->writeBuff();
+		    {
+		      try
+			{
+			  (*it)->writeBuff();
+			}
+		      catch (network::ISocket::Exception& e)
+			{
+			  LOG_CRITICAL << "aaa" << std::endl;
+			  e.log();
+			}
+		    }
 		}
 	    }
 	}
       catch (network::ISocket::Select::Exception& e)
-	{
-	  e.log();
-	}
+      	{
+      	  e.log();
+      	}
       catch (utils::Interrupt& e)
 	{
 	  e.log();

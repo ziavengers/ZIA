@@ -45,7 +45,7 @@ namespace zia
       void push(Object*, Object*, const std::string&, const utils::StockCallback&);
       s_event pop();
 
-      void wait(int = 1);
+      // void wait(int = 1);
 
     private:
       std::vector< Thread > _threads;

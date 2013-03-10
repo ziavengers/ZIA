@@ -14,7 +14,8 @@ void SocketReader::slot()
     {
       try
 	{
-	  LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
+	  // LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
+	  stream->nextString();
 	  contextEmit(context(), _sigOutput, stream);
 	}
       catch (zia::utils::parsing::IProducterStream::Exception& e)
@@ -32,6 +33,7 @@ SocketManager::SocketManager(const std::string& input, const std::string& output
 
 void SocketManager::slot(const std::string& readSig)
 {
+  LOG_INFO << "\033[32mConnexion\033[0m" << std::endl;
   SocketReader* reader = new SocketReader(context(), readSig, _sigOutput);
   (void) reader;
 }

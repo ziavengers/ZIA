@@ -48,15 +48,15 @@ namespace zia
       return e;
     }
 
-    void ThreadPool::wait(int seconds)
-    {
-      while (1)
-	{
-	  if (_eventsCond.timedWait(seconds))
-	    _eventsCond.signal();
-	  else
-	    return ;
-	}
-    }
+    // void ThreadPool::wait(int seconds)
+    // {
+    //   while (1)
+    // 	{
+    // 	  if (_eventsCond.timedWait(seconds))
+    // 	    _eventsCond.signal();
+    // 	  else
+    // 	    return ;
+    // 	}
+    // }
   }
 }
