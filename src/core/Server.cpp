@@ -98,6 +98,7 @@ namespace zia
       try
 	{
 	  signal(SIGINT, sigpass);
+	  signal(SIGPIPE, SIG_IGN);
 	  while (true)
 	    {
 	      select.zero(network::ISocket::Select::READ);
@@ -146,6 +147,7 @@ namespace zia
 		      catch (network::ISocket::Exception& e)
 			{
 			  e.log();
+			  (*it)->close();
 			}
 		    }
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::WRITE))
@@ -156,8 +158,8 @@ namespace zia
 			}
 		      catch (network::ISocket::Exception& e)
 			{
-			  LOG_CRITICAL << "aaa" << std::endl;
 			  e.log();
+			  (*it)->close();
 			}
 		    }
 		}
