@@ -47,7 +47,7 @@ namespace zia
     }
     std::string Server::SocketStream::nextString()
     {
-      if (!_socket)
+      if (!_socket && !_strings.size())
       	throw Exception("end of stream");
       thread::Locker lock(_readMutex);
       std::string s = _strings.front();
@@ -58,6 +58,10 @@ namespace zia
     {
       thread::Locker lock(_writeMutex);
       _buffWrite += s;
+    }
+    bool Server::SocketStream::closed() const
+    {
+      return (!_socket && !_strings.size());
     }
     void Server::SocketStream::close()
     {
@@ -114,7 +118,7 @@ namespace zia
 		      select.set(s, network::ISocket::Select::READ);
 		      select.set(s, network::ISocket::Select::WRITE);
 		    }
-		  else
+		  else if ((*it)->closed())
 		    toDelete.push_back(*it);
 		}
       	      for (it = toDelete.begin(); it != toDelete.end(); ++it)

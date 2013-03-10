@@ -14,8 +14,8 @@ void SocketReader::slot()
     {
       try
 	{
-	  // LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
-	  stream->nextString();
+	  LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
+	  // stream->nextString();
 	  contextEmit(context(), _sigOutput, stream);
 	}
       catch (zia::utils::parsing::IProducterStream::Exception& e)
