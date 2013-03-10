@@ -50,12 +50,14 @@ namespace zia
 
 	inline bool peek(char c)
 	{
-	  readBlockIfEmpty();
+	  if (!readBlockIfEmpty())
+	    return false;
 	  return (_ignoreCase ? toupper(_buff[0]) == toupper(c) : _buff[0] == c);
 	}
 	inline bool peek(const std::string& s)
 	{
-	  readBlockIfEmpty(s.size());
+	  if (!readBlockIfEmpty(s.size()))
+	    return false;
 	  return (_ignoreCase ? findIgnoreCase(_buff, s) == 0 : _buff.find(s) == 0);
 	}
 	template < typename T >
@@ -130,8 +132,8 @@ namespace zia
 
 	inline bool beginCapture(std::string tag)
 	{
-	  if (!readBlockIfEmpty())
-	    return false;
+	  // if (!readBlockIfEmpty())
+	  //   return false;
 	  _tags[tag] = "";
 	  return true;
 	}
@@ -143,7 +145,8 @@ namespace zia
 	    return false;
 	  out = it->second;
 	  _tags.erase(it);
-	  return (out.size() > 0);
+	  // return (out.size() > 0);
+	  return true;
 	}
 
       private:

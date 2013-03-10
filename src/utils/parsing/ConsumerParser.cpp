@@ -18,7 +18,7 @@ namespace zia
 	      _cache.top() += s;
 	    return true;
 	  }
-	catch (...)
+	catch (IProducterStream::Exception& e)
 	  {
 	    return false;
 	  }
@@ -35,7 +35,8 @@ namespace zia
 
       bool ConsumerParser::readRange(char a, char b)
       {
-	readBlockIfEmpty();
+	if (!readBlockIfEmpty())
+	  return false;
 	if(_buff[0] >= a && _buff[0] <= b)
 	  {
 	    appendText(_buff[0]);

@@ -11,6 +11,8 @@ class	SocketReader : public zia::core::module::AModule
 public:
   SocketReader(const std::string& context, const std::string& input, const std::string& output);
   void	slot();
+private:
+  std::string _data;
 };
 
 class	SocketManager : public zia::core::module::AModule

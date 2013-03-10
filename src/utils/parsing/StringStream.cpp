@@ -11,6 +11,8 @@ namespace zia
       {}
       std::string StringStream::nextString()
       {
+	if (!_data.size())
+	  throw Exception("end of stream");
 	std::string s;
 	if (!_portionSize)
 	  {

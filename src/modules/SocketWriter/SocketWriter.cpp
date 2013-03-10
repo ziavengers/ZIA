@@ -1,5 +1,6 @@
 #include "SocketWriter.hh"
 #include "utils/Logger.hpp"
+#include "http/Response.hh"
 
 SocketWriter::SocketWriter(const std::string& input, const std::string& output) : zia::core::module::AModule(input, output, "SocketWriter")
 {
@@ -9,7 +10,15 @@ SocketWriter::SocketWriter(const std::string& input, const std::string& output) 
 void SocketWriter::slot(zia::core::Server::SocketStream* stream)
 {
   if (stream)
-    stream->write("merci\n");
+    {
+      zia::http::Response resp("200", "OK", "HTTP");
+      resp.header["Content-Size"] = "3";
+      resp.header["Content-Type"] = "text/html";
+      resp.data() = "ZIA";
+      resp.write(std::cout);
+      std::cout << std::endl;
+      resp.write(*stream);
+    }
 }
 
 extern "C"

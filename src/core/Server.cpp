@@ -59,6 +59,11 @@ namespace zia
       thread::Locker lock(_writeMutex);
       _buffWrite += s;
     }
+    Server::SocketStream& Server::SocketStream::operator<<(const std::string& s)
+    {
+      write(s);
+      return *this;
+    }
     bool Server::SocketStream::closed() const
     {
       return (!_socket && !_strings.size());

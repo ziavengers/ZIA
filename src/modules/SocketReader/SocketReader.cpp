@@ -1,8 +1,10 @@
 #include "SocketReader.hh"
 #include "core/Server.hh"
 #include "utils/Logger.hpp"
+#include "utils/parsing/StringStream.hh"
+#include "http/RequestParser.hh"
 
-SocketReader::SocketReader(const std::string& context, const std::string& input, const std::string& output) : zia::core::module::AModule(input, output, "SocketReader")
+SocketReader::SocketReader(const std::string& context, const std::string& input, const std::string& output) : zia::core::module::AModule(input, output, "SocketReader"), _data()
 {
   this->connect(input, zia::utils::bind(&SocketReader::slot, *this), context);
 }
@@ -14,9 +16,30 @@ void SocketReader::slot()
     {
       try
 	{
-	  LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
+	  // LOG_INFO << "\033[32mRead:\033[0m " << stream->nextString();
 	  // stream->nextString();
-	  contextEmit(context(), _sigOutput, stream);
+	  _data += stream->nextString();
+	  // if (_data.find("\r\n\r\n") != std::string::npos)
+	  if (_data.find("\n\n") != std::string::npos ||
+	      _data.find("\r\r") != std::string::npos ||
+	      _data.find("\r\n\r\n") != std::string::npos)
+	    {
+	      zia::utils::parsing::StringStream ss(_data);
+	      LOG_INFO << "Parsing" << std::endl;
+	      try
+	      	{
+		  zia::http::Request request = zia::http::RequestParser(ss).readHttp();
+		  request.write(std::cout);
+		  LOG_INFO << "End parsing" << std::endl;
+	      	}
+	      catch (zia::http::RequestParser::Exception& e)
+	      	{
+		  e.log();
+		}
+	      _data = "";
+	      contextEmit(context(), _sigOutput, stream);
+	    }
+	  // contextEmit(context(), _sigOutput, stream);
 	}
       catch (zia::utils::parsing::IProducterStream::Exception& e)
 	{
