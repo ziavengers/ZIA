@@ -1,7 +1,6 @@
 #include "core/Server.hh"
 #include "thread/Locker.hh"
 #include "utils/Logger.hpp"
-#include "utils/uuid.hh"
 
 #include <cstdlib>
 #include <signal.h>
@@ -16,7 +15,7 @@ namespace zia
   namespace core
   {
 
-    Server::SocketStream::SocketStream(network::ISocket* socket) : _socket(socket), _strings(), _buffWrite(), _readMutex(), _writeMutex()
+    Server::SocketStream::SocketStream(network::ISocket* socket, int readSize) : _socket(socket), _readSize(readSize), _strings(), _uuid(), _buffWrite(), _readMutex(), _writeMutex()
     {}
     void Server::SocketStream::readBuff()
     {
@@ -69,9 +68,14 @@ namespace zia
     {
       return _socket;
     }
+    const utils::uuid::uuid4& Server::SocketStream::uuid() const
+    {
+      return _uuid;
+    }
 
 
-    Server::Server(int port, int queueSize) : Object(), _port(port), _queueSize(queueSize), _server(), _clients()
+    Server::Server(int port, int readSize, int queueSize, const std::string& sigNewClient, const std::string& sigReadClient) :
+      Object(), _port(port), _readSize(readSize), _queueSize(queueSize), _server(), _clients(), _sigNewClient(sigNewClient), _sigReadClient(sigReadClient)
     {}
     Server::~Server()
     {
@@ -123,8 +127,10 @@ namespace zia
 
       	      if (select.isSet(&_server, network::ISocket::Select::READ))
 		{
-		  _clients.push_back(new SocketStream(_server.accept()));
-		  LOG_INFO << "Getting new connection:\t" << _clients.back() << std::endl;
+		  SocketStream* client = new SocketStream(_server.accept(), _readSize);
+		  _clients.push_back(client);
+		  LOG_INFO << "Getting new connection:\t" << client << std::endl;
+		  client->contextEmit(client->uuid().str(), _sigNewClient, _sigReadClient.data());
 		}
 
       	      for (it = _clients.begin(); it != _clients.end(); ++it)
@@ -132,7 +138,7 @@ namespace zia
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::READ))
 		    {
 		      (*it)->readBuff();
-		      (*it)->contextEmit(utils::uuid::uuid4().str(), "SocketStream::readable");
+		      (*it)->contextEmit((*it)->uuid().str(), _sigReadClient);
 		    }
 		  if ((*it)->socket() && select.isSet((*it)->socket(), network::ISocket::Select::WRITE))
 		    (*it)->writeBuff();

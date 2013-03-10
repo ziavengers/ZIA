@@ -10,7 +10,10 @@ namespace zia
       _settings(settingsFile, true),
       _logger(_settings.getDefault("out.log", "file", "logger")),
       _server(_settings.getTo< int >("port", "server"),
-	      _settings.getDefaultTo< int >(5, "queue_size", "server")),
+	      _settings.getDefaultTo< int >(1024, "read_size", "server"),
+	      _settings.getDefaultTo< int >(5, "queue_size", "server"),
+	      _settings.get("sig_new_client", "server"),
+	      _settings.get("sig_read_client", "server")),
       _pool(_settings.getDefaultTo< int >(5, "nb_threads", "threadPool"))
     {
       std::map< std::string, utils::log::level > logLevels;
