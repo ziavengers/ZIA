@@ -46,12 +46,12 @@ namespace zia
     
     size_t CIString::find(char c, size_t pos) const
     {
-      size_t retmax, j, ret;
+      size_t retmax, ret;
 
       if (pos > this->size())
 	return std::string::npos;
       retmax = this->size() - 1;
-      for (ret = pos, j = 0; ret <= retmax; ++ret)
+      for (ret = pos; ret <= retmax; ++ret)
 	{
 	  if (toupper(this->data()[ret]) == toupper(c))
 	    return ret;
@@ -159,13 +159,13 @@ namespace zia
     
     size_t CIString::find_last_of(char c, size_t pos) const
     {
-      int j, ret;
+      int ret;
 
       if (pos != std::string::npos)
 	ret = pos;
       else
 	ret = this->size();
-      for (ret = pos, j = 0; ret >= 0; --ret)
+      for (ret = pos; ret >= 0; --ret)
 	{
 	  if (toupper(this->data()[ret]) == toupper(c))
 	    return ret;
@@ -217,12 +217,12 @@ namespace zia
 
     size_t CIString::find_first_not_of(char c, size_t pos) const
     {
-      size_t retmax, j, ret;
+      size_t retmax, ret;
 
       if (pos > this->size())
 	return std::string::npos;
       retmax = this->size() - 1;
-      for (ret = pos, j = 0; ret <= retmax; ++ret)
+      for (ret = pos; ret <= retmax; ++ret)
 	{
 	  if (toupper(this->data()[ret]) != toupper(c))
 	    return ret;
@@ -277,13 +277,13 @@ namespace zia
 
     size_t CIString::find_last_not_of(char c, size_t pos) const
     {
-      int j, ret;
+      int ret;
 
       if (pos != std::string::npos)
 	ret = pos;
       else
 	ret = this->size() - 1;
-      for (j = 0; ret >= 0; --ret)
+      for (; ret >= 0; --ret)
 	{
 	  if (toupper(this->data()[ret]) != toupper(c))
 	    return ret;

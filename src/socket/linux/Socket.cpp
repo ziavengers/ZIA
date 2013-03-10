@@ -96,7 +96,7 @@ namespace zia
       getsockname(_fd, reinterpret_cast<struct sockaddr*>(&_sin), reinterpret_cast<socklen_t*>(&sin_size));
     }
 
-    void Socket::errnoThrow(const std::string& func) throw(Exception)
+    void Socket::errnoThrow(const std::string& func) const throw(Exception)
     {
       std::string reason(sys_errlist[errno]);
       throw Exception(func + ": " + reason);

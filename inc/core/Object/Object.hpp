@@ -89,11 +89,11 @@ namespace zia
       #include "build/emit.hpp"
 
     protected:
-      Object* sender()
+      Object* sender() const
       {
 	return _sender;
       }
-      const std::string& context()
+      const std::string& context() const
       {
 	return _context;
       }

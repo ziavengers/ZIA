@@ -24,11 +24,11 @@ namespace zia
       private:
 	bool readBlock();
 	bool readBlockIfEmpty(size_t = 1);
-	size_t textLen(const std::string& text)
+	size_t textLen(const std::string& text) const
 	{
 	  return text.size();
 	}
-	size_t textLen(char)
+	size_t textLen(char) const
 	{
 	  return 1;
 	}
@@ -43,7 +43,7 @@ namespace zia
 	}
 
       protected:
-	inline bool ignore(bool)
+	inline bool ignore(bool) const
 	{
 	  return true;
 	}

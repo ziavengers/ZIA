@@ -48,7 +48,7 @@ namespace zia
       Socket(int, const struct sockaddr_in&);
       int associate(const char*, int, t_associate_func);
       void reloadSin();
-      void errnoThrow(const std::string&) throw(Exception);
+      void errnoThrow(const std::string&) const throw(Exception);
 
     protected:
       int _fd;
