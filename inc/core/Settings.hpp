@@ -61,6 +61,7 @@ namespace zia
       const std::string& _filename;
       utils::ini::Ini _ini;
       std::list< ModuleInfo > _modulesInfos;
+      static std::string _nullSig;
     };
 
   }

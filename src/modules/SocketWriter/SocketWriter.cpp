@@ -11,9 +11,10 @@ void SocketWriter::slot(zia::core::Server::SocketStream* stream)
 {
   if (stream)
     {
-      zia::http::Response resp("200", "OK", "HTTP");
+      zia::http::Response resp("200", "OK", "HTTP/1.1");
       resp.header["Content-Size"] = "3";
       resp.header["Content-Type"] = "text/html";
+      resp.header["Connection"] = "keep-alive";
       resp.data() = "ZIA";
       resp.write(std::cout);
       std::cout << std::endl;

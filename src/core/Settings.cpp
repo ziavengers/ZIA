@@ -19,6 +19,8 @@ namespace zia
       utils::Singleton< module::ModuleManagement >::instance()->loadModule(_url, _sigInput.substr(1), _sigOutput.substr(1), _args);
     }
 
+    std::string Settings::_nullSig = "null";
+
     Settings::Settings(const std::string& filename, bool autoload) : _filename(filename), _modulesInfos()
     {
       if (autoload)
@@ -48,8 +50,13 @@ namespace zia
 		else if (!sigOutput && (*itargs)[0] == '>')
 		  sigOutput = &*itargs;
 	      }
-	    if (url && sigInput && sigOutput)
-	      _modulesInfos.push_back(ModuleInfo(*url, *sigInput, *sigOutput, it->kwargs()));
+	    // if (url && sigInput && sigOutput)
+	    //   _modulesInfos.push_back(ModuleInfo(*url, *sigInput, *sigOutput, it->kwargs()));
+	    if (url)
+	      _modulesInfos.push_back(ModuleInfo(*url,
+	    					 (sigInput ? *sigInput : _nullSig),
+	    					 (sigOutput ? *sigOutput : _nullSig),
+	    					 it->kwargs()));
 	    else
 	      throw Exception("load: Incomplete add instruction");
 	  }
